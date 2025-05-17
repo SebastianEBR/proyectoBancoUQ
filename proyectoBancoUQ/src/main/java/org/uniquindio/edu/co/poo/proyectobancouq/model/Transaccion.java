@@ -1,4 +1,4 @@
-package org.uniquindio.edu.co.poo.proyectofinalbanco.model;
+package org.uniquindio.edu.co.poo.proyectobancouq.model;
 
 import java.time.LocalDate;
 import java.util.Optional;
@@ -91,7 +91,7 @@ public class Transaccion {
             throw new Exception("❌ El monto a depositar debe ser positivo.");
         }
 
-        cuentaBancaria.setSaldo();
+        //cuentaBancaria.setSaldo();
         return true; // Depósito exitoso
 
     }

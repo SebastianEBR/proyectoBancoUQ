@@ -1,4 +1,4 @@
-package org.uniquindio.edu.co.poo.proyectofinalbanco.model;
+package org.uniquindio.edu.co.poo.proyectobancouq.model;
 
 import java.util.ArrayList;
 import java.util.Optional;
