@@ -1,4 +1,4 @@
-package org.uniquindio.edu.co.poo.proyectobancouq;
+package org.uniquindio.edu.co.poo.proyectobancouq.app;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
