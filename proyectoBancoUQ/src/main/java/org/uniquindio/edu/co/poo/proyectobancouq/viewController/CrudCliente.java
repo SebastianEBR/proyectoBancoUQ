@@ -1,5 +1,5 @@
 package org.uniquindio.edu.co.poo.proyectobancouq.viewController;
 
-public class crudCliente {
+public class CrudCliente {
 
 }
