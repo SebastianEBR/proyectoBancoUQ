@@ -7,7 +7,7 @@ import java.util.List;
 public class Reporte {
 
     // atributos
-    private TipoTransferencia tipoReporte;
+    private TipoTransaccion tipoReporte;
     private LocalDate fechaReporte;
 
     // conexion con otras clases
@@ -22,11 +22,11 @@ public class Reporte {
                 '}';
     }
 
-    public TipoTransferencia getTipoReporte() {
+    public TipoTransaccion getTipoReporte() {
         return tipoReporte;
     }
 
-    public void setTipoReporte(TipoTransferencia tipoReporte) {
+    public void setTipoReporte(TipoTransaccion tipoReporte) {
         this.tipoReporte = tipoReporte;
     }
 
@@ -46,7 +46,7 @@ public class Reporte {
         this.listTransacciones = listTransacciones;
     }
 
-    public Reporte(TipoTransferencia tipoReporte, LocalDate fechaReporte) {
+    public Reporte(TipoTransaccion tipoReporte, LocalDate fechaReporte) {
         this.tipoReporte = tipoReporte;
         this.fechaReporte = fechaReporte;
         this.listTransacciones = new ArrayList<>();

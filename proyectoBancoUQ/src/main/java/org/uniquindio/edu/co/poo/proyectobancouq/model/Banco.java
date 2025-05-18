@@ -197,16 +197,39 @@ public class Banco {
 
     // CRUD de transaccion
     // metodo para registrar una transaccion
-    public boolean registrarTransaccion(Transaccion transaccion) throws Exception {
+    // Metodo para depósitos y retiros
+    public boolean registrarTransaccion(Transaccion transaccion, String numeroCuenta, double cantidad) throws Exception {
         Optional<Transaccion> transaccionAux = buscarTransaccion(transaccion.getCodigo());
-        if(transaccionAux.isPresent()){
-            throw new Exception("Ya existe una transaccion con ese codigo");
-        } else {
-            // seguir aca
+        if (transaccionAux.isPresent()) {
+            throw new Exception("Ya existe una transacción con ese código");
+        }
+
+        if (transaccion.getTipoTransaccion().equals(TipoTransaccion.DEPOSITO)) {
+            transaccion.deposito(numeroCuenta, cantidad);
+        } else if (transaccion.getTipoTransaccion().equals(TipoTransaccion.RETIRO)) {
+            transaccion.retiro(numeroCuenta, cantidad);
+        }
+
+        listTransacciones.add(transaccion);
+        return true;
+    }
+
+    // Metodo para transferencias (requiere `numeroCuenta2`)
+    public boolean registrarTransaccion(Transaccion transaccion, String numeroCuenta, double cantidad, String numeroCuenta2) throws Exception {
+        Optional<Transaccion> transaccionAux = buscarTransaccion(transaccion.getCodigo());
+        if (transaccionAux.isPresent()) {
+            throw new Exception("Ya existe una transacción con ese código");
+        }
+
+        if (transaccion.getTipoTransaccion().equals(TipoTransaccion.TRANSFERENCIA)) {
+            transaccion.transferir(numeroCuenta, numeroCuenta2, cantidad);
             listTransacciones.add(transaccion);
             return true;
+        } else {
+            throw new Exception("Este método solo acepta transferencias.");
         }
     }
+
 
     // metodo para ver la info de una transaccion
     public String verInfoTransaccion(String numeroTransaccion) throws Exception {
