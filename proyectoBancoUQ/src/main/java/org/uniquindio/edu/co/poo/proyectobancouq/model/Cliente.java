@@ -25,7 +25,7 @@ public class Cliente extends Usuario{
 
     @Override
     public String toString(){
-        return "Client: "        +
+        return "Cliente: "        +
                 super.toString() +
                 "\n Cuentas: " + listCuentaBancaria;
     }

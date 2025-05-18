@@ -86,12 +86,11 @@ public class Transaccion {
 
     // metodos para movimientos financieros en las cuentas bancarias
     //metodo para deposito
-    public boolean deposito(CuentaBancaria cuentaBancaria, float cantidad) throws Exception {
+    public boolean deposito(CuentaBancaria cuentaBancaria, double cantidad) throws Exception {
         if (cantidad <= 0) {
             throw new Exception("❌ El monto a depositar debe ser positivo.");
         }
-
-        //cuentaBancaria.setSaldo();
+        cuentaBancaria.setSaldo(cuentaBancaria.getSaldo() + cantidad);
         return true; // Depósito exitoso
 
     }

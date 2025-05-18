@@ -50,11 +50,10 @@ public abstract class Usuario{
     }
 
     @Override
-    public String toString(){
-        return "\n"           +
+    public String toString() {
+        return "\n" +
                 "\n Nombre: " + nombre +
-                "\n ID: "     + id     +
-                "\n Email: "  + password;
-
+                "\n ID: " + id +
+                "\n Email: " + email;
     }
 }
