@@ -1,10 +1,11 @@
 package org.uniquindio.edu.co.poo.proyectobancouq.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class Banco {
+public class Banco{
 
     // atributos
     private String nombre;
@@ -121,14 +122,13 @@ public class Banco {
 
     // metodo para eliminar un usuario
     public boolean eliminarUsuario(String id){
-        boolean eliminado = true;
         Optional<Usuario> usuarioAux = buscarUsuario(id);
         if(usuarioAux.isPresent()){
             listUsuarios.remove(usuarioAux.get());
         }else {
-            eliminado = false;
+            return false;
         }
-        return eliminado;
+        return true;
     }
 
     // metodo para buscar usuarios
@@ -140,13 +140,16 @@ public class Banco {
     // CRUD relacionado de cuentas Bancarias
     // metodo para registrar una cuenta
     public boolean registrarCuenta(CuentaBancaria newCuenta) throws Exception {
-        Optional<CuentaBancaria> cuentaAux = buscarCuenta(newCuenta.getNumeroCuenta());
-        if(cuentaAux.isPresent()){
-            throw new Exception("Ya existe una cuenta con ese numero de cuenta");
-        }else{
-            listCuentasBancarias.add(newCuenta); //agregar nuevo cuenta a Banco
-            return true; // registro exitoso
+        if (!buscarUsuario(newCuenta.getCliente().getId()).isPresent()) {
+            throw new Exception("❌ No se encontró un cliente asociado a la cuenta.");
         }
+
+        if (buscarCuenta(newCuenta.getNumeroCuenta()).isPresent()) {
+            throw new Exception("❌ Ya existe una cuenta con ese número.");
+        }
+
+        listCuentasBancarias.add(newCuenta);
+        return true;
     }
 
     //metodo para ver la informacion de una cuenta
@@ -198,37 +201,26 @@ public class Banco {
     // CRUD de transaccion
     // metodo para registrar una transaccion
     // Metodo para depósitos y retiros
-    public boolean registrarTransaccion(Transaccion transaccion, String numeroCuenta, double cantidad) throws Exception {
-        Optional<Transaccion> transaccionAux = buscarTransaccion(transaccion.getCodigo());
-        if (transaccionAux.isPresent()) {
+    public boolean registrarTransaccion(Transaccion transaccion, String numeroCuenta, String... numeroCuenta2) throws Exception {
+        if (buscarTransaccion(transaccion.getCodigo()).isPresent()) {
             throw new Exception("Ya existe una transacción con ese código");
         }
 
-        if (transaccion.getTipoTransaccion().equals(TipoTransaccion.DEPOSITO)) {
-            transaccion.deposito(numeroCuenta, cantidad);
+        if (transaccion.getTipoTransaccion().equals(TipoTransaccion.TRANSFERENCIA)) {
+            if (numeroCuenta2.length == 0) {
+                throw new Exception("❌ Se requiere una cuenta destino para la transferencia.");
+            }
+            transaccion.transferir(numeroCuenta, numeroCuenta2[0], transaccion.getMonto());
+        } else if (transaccion.getTipoTransaccion().equals(TipoTransaccion.DEPOSITO)) {
+            transaccion.deposito(numeroCuenta, transaccion.getMonto());
         } else if (transaccion.getTipoTransaccion().equals(TipoTransaccion.RETIRO)) {
-            transaccion.retiro(numeroCuenta, cantidad);
+            transaccion.retiro(numeroCuenta, transaccion.getMonto());
         }
 
         listTransacciones.add(transaccion);
         return true;
     }
 
-    // Metodo para transferencias (requiere `numeroCuenta2`)
-    public boolean registrarTransaccion(Transaccion transaccion, String numeroCuenta, double cantidad, String numeroCuenta2) throws Exception {
-        Optional<Transaccion> transaccionAux = buscarTransaccion(transaccion.getCodigo());
-        if (transaccionAux.isPresent()) {
-            throw new Exception("Ya existe una transacción con ese código");
-        }
-
-        if (transaccion.getTipoTransaccion().equals(TipoTransaccion.TRANSFERENCIA)) {
-            transaccion.transferir(numeroCuenta, numeroCuenta2, cantidad);
-            listTransacciones.add(transaccion);
-            return true;
-        } else {
-            throw new Exception("Este método solo acepta transferencias.");
-        }
-    }
 
 
     // metodo para ver la info de una transaccion

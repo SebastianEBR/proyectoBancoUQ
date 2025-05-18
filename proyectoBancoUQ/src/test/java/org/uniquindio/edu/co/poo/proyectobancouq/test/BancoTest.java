@@ -78,8 +78,8 @@ class BancoTest {
 
     @Test
     void testRegistrarTransaccion() throws Exception {
-        Transaccion transaccion = new Transaccion("TX001", LocalDate.now(), 2000f, "Depostito", TipoTransferencia.TRANSFERENCIA, banco);
-        boolean registrada = banco.registrarTransaccion(transaccion);
+        Transaccion transaccion = new Transaccion("TX001", LocalDate.now(), "2000", "Depostito", TipoTransaccion.TRANSFERENCIA, banco);
+        boolean registrada = banco.registrarTransaccion(transaccion, "12", 5000);
 
         assertTrue(registrada);
         assertEquals(1, banco.getListTransacciones().size());
@@ -87,8 +87,8 @@ class BancoTest {
 
     @Test
     void testEliminarTransaccion() throws Exception {
-        Transaccion transaccion = new Transaccion("TX002", LocalDate.now(), 50.0f, "Depostito", TipoTransferencia.TRANSFERENCIA, banco);
-        banco.registrarTransaccion(transaccion);
+        Transaccion transaccion = new Transaccion("TX002", LocalDate.now(), "50.0", "Depostito", TipoTransaccion.TRANSFERENCIA, banco);
+        banco.registrarTransaccion(transaccion, "12", 5000);
         boolean eliminada = banco.eliminarTransaccion("TX002");
 
         assertTrue(eliminada);

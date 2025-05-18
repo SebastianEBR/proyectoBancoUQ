@@ -1,27 +1,41 @@
 package org.uniquindio.edu.co.poo.proyectobancouq.model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Optional;
 
-public class Transaccion {
+public class Transaccion implements IValidarDatos {
 
     // atributos de la clase
     private String    codigo;
     private LocalDate fecha;
-    private float     monto;
+    private double    monto;
     private String    descripcion;
 
     private Banco banco; // referencia al banco que administra las cuentas
     // conexion con clase enum
     private TipoTransaccion tipoTransaccion;
 
-    public Transaccion(String codigo, LocalDate fecha, float monto, String descripcion, TipoTransaccion tipoTransaccion, Banco banco) {
-        this.codigo = codigo;
-        this.fecha = fecha;
-        this.monto = monto;
-        this.descripcion = descripcion;
-        this.tipoTransaccion = tipoTransaccion;
-        this.banco = banco;
+    public Transaccion(String codigo, LocalDate fecha, String monto, String descripcion, TipoTransaccion tipoTransaccion, Banco banco) throws Exception {
+        if (validarDatos(codigo, fecha, monto, descripcion, tipoTransaccion)) {
+            double montoDouble = Double.parseDouble(monto);
+            this.codigo = codigo;
+            this.fecha = fecha;
+            this.monto = montoDouble;
+            this.descripcion = descripcion;
+            this.tipoTransaccion = tipoTransaccion;
+            this.banco = banco;
+        }
+    }
+
+    // 🔹 Metodo auxiliar para validar que el monto es un número
+    private boolean esNumeroValido(String montoTexto) {
+        try {
+            Double.parseDouble(montoTexto); // ✅ Usa `Double.parseDouble()` para mayor precisión
+            return true;
+        } catch (NumberFormatException e) {
+            return false; // ❌ Si contiene letras o caracteres inválidos, retorna falso
+        }
     }
 
     public String getCodigo() {
@@ -40,7 +54,7 @@ public class Transaccion {
         this.fecha = fecha;
     }
 
-    public float getMonto() {
+    public double getMonto() {
         return monto;
     }
 
@@ -154,4 +168,26 @@ public class Transaccion {
 
     // metodo para generar los reportes
 
+    // metodo para validar que los datos sean correctos antes de instanciar transccion
+    @Override
+    public boolean validarDatos(String codigo, LocalDate fecha, String monto, String descripcion, TipoTransaccion tipoTransaccion) throws Exception {
+        if (!esNumeroValido(monto)) {
+            throw new Exception("❌ El monto debe ser un número válido, sin letras ni símbolos.");
+        }
+        double montoDouble = Double.parseDouble(monto);
+
+        if (codigo == null || codigo.isEmpty()) {
+            throw new Exception("❌ El código de la transacción no puede estar vacío.");
+        }
+        if (montoDouble <= 0) {
+            throw new Exception("❌ El monto debe ser mayor a cero.");
+        }
+        if (fecha == null) {
+            throw new Exception("❌ La fecha no puede ser nula.");
+        }
+        if (tipoTransaccion == null) {
+            throw new Exception("❌ Tipo de transacción inválido.");
+        }
+        return true;
+    }
 }
