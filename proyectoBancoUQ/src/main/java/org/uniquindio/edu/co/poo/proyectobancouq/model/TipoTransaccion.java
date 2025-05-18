@@ -1,14 +1,14 @@
 package org.uniquindio.edu.co.poo.proyectobancouq.model;
 
-public enum TipoTransferencia {
+public enum TipoTransaccion {
 
     DEPOSITO(0),
     RETIRO(1),
-    TRANSFERENCIA(3);
+    TRANSFERENCIA(2);
 
     private final int valor;
 
-    TipoTransferencia(int valor) {
+    TipoTransaccion(int valor) {
         this.valor = valor;
     }
 

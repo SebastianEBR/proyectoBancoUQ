@@ -13,14 +13,14 @@ public class Transaccion {
 
     private Banco banco; // referencia al banco que administra las cuentas
     // conexion con clase enum
-    private TipoTransferencia tipoTransferencia;
+    private TipoTransaccion tipoTransaccion;
 
-    public Transaccion(String codigo, LocalDate fecha, float monto, String descripcion, TipoTransferencia tipoTransferencia, Banco banco) {
+    public Transaccion(String codigo, LocalDate fecha, float monto, String descripcion, TipoTransaccion tipoTransaccion, Banco banco) {
         this.codigo = codigo;
         this.fecha = fecha;
         this.monto = monto;
         this.descripcion = descripcion;
-        this.tipoTransferencia = tipoTransferencia;
+        this.tipoTransaccion = tipoTransaccion;
         this.banco = banco;
     }
 
@@ -56,12 +56,12 @@ public class Transaccion {
         this.descripcion = descripcion;
     }
 
-    public TipoTransferencia getTipoTransferencia() {
-        return tipoTransferencia;
+    public TipoTransaccion getTipoTransaccion() {
+        return tipoTransaccion;
     }
 
-    public void setTipoTransferencia(TipoTransferencia tipoTransferencia) {
-        this.tipoTransferencia = tipoTransferencia;
+    public void setTipoTransaccion(TipoTransaccion tipoTransaccion) {
+        this.tipoTransaccion = tipoTransaccion;
     }
 
     public Banco getBanco() {
@@ -79,25 +79,27 @@ public class Transaccion {
                 "\n fecha: "             + fecha       +
                 "\n monto: "             + monto       +
                 "\n descripcion: "       + descripcion +
-                "\n tipoTransferencia: " + tipoTransferencia;
+                "\n tipoTransaccion: " + tipoTransaccion;
     }
 
 
 
     // metodos para movimientos financieros en las cuentas bancarias
     //metodo para deposito
-    public boolean deposito(CuentaBancaria cuentaBancaria, double cantidad) throws Exception {
+    public boolean deposito(String numeroCuentaBancaria, double cantidad) throws Exception {
         if (cantidad <= 0) {
             throw new Exception("❌ El monto a depositar debe ser positivo.");
         }
-        cuentaBancaria.setSaldo(cuentaBancaria.getSaldo() + cantidad);
+        Optional<CuentaBancaria> cuenta = banco.buscarCuenta(numeroCuentaBancaria);
+        cuenta.ifPresent(cuentaBancaria -> cuentaBancaria.setSaldo(cuentaBancaria.getSaldo() + cantidad));
+
         return true; // Depósito exitoso
 
     }
 
 
     // metodo para retiro
-    public boolean retiro(String numCuentaBancaria, float cantidad) throws Exception {
+    public boolean retiro(String numCuentaBancaria, double cantidad) throws Exception {
         if (cantidad <= 0) {
             throw new Exception("❌ El monto a depositar debe ser positivo.");
         }
@@ -126,7 +128,7 @@ public class Transaccion {
 
 
     // metodo para hacer transferencias entre cuentas
-    public boolean transferir(String numCuentaBancaria1, String numCuentaBancaria2, float cantidad) throws Exception {
+    public boolean transferir(String numCuentaBancaria1, String numCuentaBancaria2, double cantidad) throws Exception {
         if (cantidad <= 0) {
             throw new Exception("❌ La cantidad a transferir debe ser positiva.");
         }

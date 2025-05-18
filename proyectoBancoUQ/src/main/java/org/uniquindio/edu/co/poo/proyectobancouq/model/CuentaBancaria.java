@@ -42,6 +42,6 @@ public abstract class CuentaBancaria {
         return "CuentaBancaria: "       +
                 "\n numero de cuenta: " + numeroCuenta +
                 "\n saldo: "            + saldo        +
-                "\n cliente: "          + cliente;
+                "\n cliente: "          + cliente.getNombre();
     }
 }
