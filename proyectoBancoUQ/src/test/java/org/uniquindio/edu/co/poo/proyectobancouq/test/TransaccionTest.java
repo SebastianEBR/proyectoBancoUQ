@@ -32,7 +32,7 @@ class TransaccionTest {
 
     @Test
     void testRegistrarTransaccion() throws Exception {
-        Transaccion transaccion = new Transaccion("TX001", LocalDate.now(), 2000f, "Depósito", TipoTransferencia.TRANSFERENCIA, banco);
+        Transaccion transaccion = new Transaccion("TX001", LocalDate.now(), "2000f", "Depósito", TipoTransaccion.TRANSFERENCIA, banco);
         boolean registrada = banco.registrarTransaccion(transaccion);
 
         assertTrue(registrada);
@@ -41,7 +41,7 @@ class TransaccionTest {
 
     @Test
     void testDeposito() throws Exception {
-        Transaccion transaccion = new Transaccion("TX002", LocalDate.now(), 1000f, "Depósito", TipoTransferencia.DEPOSITO, banco);
+        Transaccion transaccion = new Transaccion("TX002", LocalDate.now(), "1000f", "Depósito", TipoTransaccion.DEPOSITO, banco);
         boolean exitoso = transaccion.deposito(cuentaOrigen, 1000f);
 
         assertTrue(exitoso);
@@ -50,7 +50,7 @@ class TransaccionTest {
 
     @Test
     void testRetiroExitoso() throws Exception {
-        Transaccion transaccion = new Transaccion("TX003", LocalDate.now(), 1500f, "Retiro", TipoTransferencia.RETIRO, banco);
+        Transaccion transaccion = new Transaccion("TX003", LocalDate.now(), "1500f", "Retiro", TipoTransaccion.RETIRO, banco);
         boolean exitoso = transaccion.retiro("1001", 1500f);
 
         assertTrue(exitoso);
@@ -59,7 +59,7 @@ class TransaccionTest {
 
     @Test
     void testRetiroFallidoSaldoInsuficiente() {
-        Transaccion transaccion = new Transaccion("TX004", LocalDate.now(), 6000f, "Retiro", TipoTransferencia.RETIRO, banco);
+        Transaccion transaccion = new Transaccion("TX004", LocalDate.now(), "6000f", "Retiro", TipoTransaccion.RETIRO, banco);
         Exception exception = assertThrows(Exception.class, () -> transaccion.retiro("1001", 6000f));
 
         assertEquals("❌ Saldo insuficiente en la cuenta origen.", exception.getMessage());
@@ -67,7 +67,7 @@ class TransaccionTest {
 
     @Test
     void testTransferenciaExitosa() throws Exception {
-        Transaccion transaccion = new Transaccion("TX005", LocalDate.now(), 2000f, "Transferencia", TipoTransferencia.TRANSFERENCIA, banco);
+        Transaccion transaccion = new Transaccion("TX005", LocalDate.now(), 2000f, "Transferencia", TipoTransaccion.TRANSFERENCIA, banco);
         boolean exitosa = transaccion.transferir("1001", "1002", 2000f);
 
         assertTrue(exitosa);
