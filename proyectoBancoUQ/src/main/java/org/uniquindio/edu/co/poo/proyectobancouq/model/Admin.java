@@ -28,4 +28,5 @@ public class Admin extends Usuario {
                 super.toString() +
                 "\n Codigo: "    + codigo;
     }
+
 }
