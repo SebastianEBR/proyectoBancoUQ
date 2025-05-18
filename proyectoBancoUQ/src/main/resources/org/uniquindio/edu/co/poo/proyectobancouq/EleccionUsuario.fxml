@@ -13,9 +13,9 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #2C3E50;;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.uniquindio.edu.co.poo.proyectobancouq.viewController.EleccionUsuario">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #1E1E1E;;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.uniquindio.edu.co.poo.proyectobancouq.viewController.EleccionUsuario">
    <children>
-      <Pane prefHeight="87.0" prefWidth="600.0" style="-fx-background-color: #E67E22;">
+      <Pane prefHeight="87.0" prefWidth="600.0" style="-fx-background-color: #2C2C2E;;">
          <children>
             <Label layoutX="130.0" layoutY="12.0" prefHeight="64.0" prefWidth="341.0" text="Seleccion de Usuario" textFill="WHITE" wrapText="true">
                <font>
@@ -37,7 +37,7 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button alignment="CENTER_RIGHT" mnemonicParsing="false" prefHeight="58.0" prefWidth="157.0" style="-fx-background-color: #E67E22; -fx-text-fill: white; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, black, 5, 0, 2, 2);" text="Cliente" textFill="WHITE" textOverrun="CLIP">
+            <Button fx:id="btnCliente" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#irACLiente" prefHeight="58.0" prefWidth="157.0" style="-fx-background-color: #2ECC71;; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, black, 5, 0, 2, 2);;" text="Cliente" textOverrun="CLIP">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
@@ -52,7 +52,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="78.0" prefWidth="226.0" style="-fx-background-color: #E67E22;; -fx-text-fill: white; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, black, 5, 0, 2, 2);" text="Administrador" textFill="#ffe6e6" GridPane.rowIndex="2">
+            <Button fx:id="btnAdmin" mnemonicParsing="false" onAction="#IrAAdmin" prefHeight="78.0" prefWidth="226.0" style="-fx-background-color: #2ECC71;; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, black, 5, 0, 2, 2);;" text="Administrador" GridPane.rowIndex="2">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
@@ -64,7 +64,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="66.0" prefWidth="158.0" style="-fx-background-color: #E67E22; -fx-text-fill: white; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, black, 5, 0, 2, 2);" text="Cajero" textFill="#ffe6e6" GridPane.rowIndex="1">
+            <Button fx:id="btnCajero" mnemonicParsing="false" onAction="#IrACaejro" prefHeight="66.0" prefWidth="158.0" style="-fx-background-color: #2ECC71;; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, black, 5, 0, 2, 2);;" text="Cajero" GridPane.rowIndex="1">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
