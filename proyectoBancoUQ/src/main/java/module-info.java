@@ -4,7 +4,8 @@ module org.uniquindio.edu.co.poo.proyectobancouq {
 
     requires org.controlsfx.controls;
 
+    exports org.uniquindio.edu.co.poo.proyectobancouq.viewController;
     opens org.uniquindio.edu.co.poo.proyectobancouq to javafx.fxml;
-    exports org.uniquindio.edu.co.poo.proyectobancouq;
+    opens org.uniquindio.edu.co.poo.proyectobancouq.viewController to javafx.fxml;
     opens org.uniquindio.edu.co.poo.proyectobancouq.app to javafx.graphics;
 }
