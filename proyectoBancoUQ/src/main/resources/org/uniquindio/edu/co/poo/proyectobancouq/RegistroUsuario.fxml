@@ -2,6 +2,7 @@
 
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
@@ -14,11 +15,11 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="784.0" prefWidth="871.0" style="-fx-background-color: #1E1E1E;;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.uniquindio.edu.co.poo.proyectobancouq.RegistroCliente">
+<AnchorPane prefHeight="784.0" prefWidth="871.0" style="-fx-background-color: #1E1E1E;;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.uniquindio.edu.co.poo.proyectobancouq.registroUsuario">
    <children>
       <Pane prefHeight="113.0" prefWidth="871.0" style="-fx-background-color: #2C2C2E;;">
          <children>
-            <Label alignment="CENTER" layoutX="273.0" layoutY="17.0" text="Registro Nuevo Cliente" textFill="WHITE" underline="true">
+            <Label alignment="CENTER" layoutX="273.0" layoutY="17.0" text="Registro Nuevo Usuario" textFill="WHITE" underline="true">
                <font>
                   <Font name="System Bold" size="30.0" />
                </font>
@@ -36,6 +37,7 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
             <Label prefHeight="31.0" prefWidth="170.0" text="Nombre" textFill="WHITE" underline="true" GridPane.rowIndex="1">
@@ -78,6 +80,12 @@
                   <Cursor fx:constant="TEXT" />
                </cursor>
             </TextField>
+            <Label prefHeight="31.0" prefWidth="170.0" text="Cargo" textFill="WHITE" underline="true" GridPane.rowIndex="4">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="cbCargo" prefHeight="26.0" prefWidth="199.0" style="-fx-background-color: #2C2C2E; -fx-border-color: #2ECC71; -fx-border-radius: 6; -fx-background-radius: 6;" GridPane.columnIndex="1" GridPane.rowIndex="4" />
          </children>
       </GridPane>
       <GridPane layoutX="584.0" layoutY="179.0" prefHeight="169.0" prefWidth="170.0">
@@ -89,12 +97,12 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button fx:id="btnRegistrar" mnemonicParsing="false" onAction="#RegistrarCliente" prefHeight="31.0" prefWidth="154.0" style="-fx-background-color: #2ECC71;; -fx-text-fill: black; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, black, 5, 0, 2, 2);;" text="Registrar">
+            <Button fx:id="btnRegistrar" mnemonicParsing="false" onAction="#RegistrarUsuario" prefHeight="31.0" prefWidth="154.0" style="-fx-background-color: #2ECC71;; -fx-text-fill: black; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, black, 5, 0, 2, 2);;" text="Registrar">
                <font>
                   <Font name="System Bold" size="17.0" />
                </font>
             </Button>
-            <Button fx:id="btnLimpiar" mnemonicParsing="false" onAction="#LimpiarRanuras" prefHeight="31.0" prefWidth="154.0" style="-fx-background-color: #2ECC71;; -fx-text-fill: black; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, black, 5, 0, 2, 2);;" text="LImpiar" GridPane.rowIndex="1">
+            <Button fx:id="btnLimpiar" mnemonicParsing="false" onAction="#LimpiarUsuario" prefHeight="31.0" prefWidth="154.0" style="-fx-background-color: #2ECC71;; -fx-text-fill: black; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, black, 5, 0, 2, 2);;" text="LImpiar" GridPane.rowIndex="1">
                <font>
                   <Font name="System Bold" size="17.0" />
                </font>
@@ -102,7 +110,7 @@
          </children>
       </GridPane>
       <Separator layoutY="402.0" opacity="0.25" prefHeight="1.0" prefWidth="871.0" style="-fx-background-color: #2ECC71 #2ECC71;" />
-      <TableView fx:id="tableClientes" layoutX="42.0" layoutY="417.0" prefHeight="218.0" prefWidth="805.0" style="-fx-background-color: #1E1E1E;; -fx-border-color: #2ECC71;; -fx-border-width: 2; -fx-table-cell-border-color: transparent;;">
+      <TableView fx:id="tableClientes" layoutX="42.0" layoutY="417.0" prefHeight="218.0" prefWidth="805.0" style="-fx-background-color: #1E1E1E; -fx-border-color: #2ECC71; -fx-border-width: 2; -fx-table-cell-border-color: transparent;">
         <columns>
           <TableColumn fx:id="colID" prefWidth="202.40001678466797" text="Identificacion" />
           <TableColumn fx:id="colNombres" prefWidth="271.2000427246094" text="Nombre" />
@@ -119,17 +127,17 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button fx:id="btnBuscar" mnemonicParsing="false" onAction="#BuscarCliente" prefHeight="31.0" prefWidth="154.0" style="-fx-background-color: #2ECC71;; -fx-text-fill: black; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, black, 5, 0, 2, 2);;" text="Busacar">
+            <Button fx:id="btnBuscar" mnemonicParsing="false" onAction="#BuscarUsuario" prefHeight="31.0" prefWidth="154.0" style="-fx-background-color: #2ECC71;; -fx-text-fill: black; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, black, 5, 0, 2, 2);;" text="Busacar">
                <font>
                   <Font name="System Bold" size="17.0" />
                </font>
             </Button>
-            <Button fx:id="btnEliminar" mnemonicParsing="false" onAction="#EliminarCleiente" prefHeight="31.0" prefWidth="154.0" style="-fx-background-color: #2ECC71;; -fx-text-fill: black; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, black, 5, 0, 2, 2);;" text="Eliminar" GridPane.columnIndex="2">
+            <Button fx:id="btnEliminar" mnemonicParsing="false" onAction="#EliminarUsuario" prefHeight="31.0" prefWidth="154.0" style="-fx-background-color: #2ECC71;; -fx-text-fill: black; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, black, 5, 0, 2, 2);;" text="Eliminar" GridPane.columnIndex="2">
                <font>
                   <Font name="System Bold" size="17.0" />
                </font>
             </Button>
-            <Button fx:id="btnEditar" mnemonicParsing="false" onAction="#EditarCliente" prefHeight="31.0" prefWidth="154.0" style="-fx-background-color: #2ECC71;; -fx-text-fill: black; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, black, 5, 0, 2, 2);;" text="Editar" GridPane.columnIndex="1">
+            <Button fx:id="btnEditar" mnemonicParsing="false" onAction="#EditarUsuario" prefHeight="31.0" prefWidth="154.0" style="-fx-background-color: #2ECC71;; -fx-text-fill: black; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, black, 5, 0, 2, 2);;" text="Editar" GridPane.columnIndex="1">
                <font>
                   <Font name="System Bold" size="17.0" />
                </font>
