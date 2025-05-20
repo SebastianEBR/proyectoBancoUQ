@@ -14,7 +14,6 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="784.0" prefWidth="871.0" style="-fx-background-color: #1E1E1E;;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.uniquindio.edu.co.poo.proyectobancouq.RegistroCliente">
    <children>
       <Pane prefHeight="113.0" prefWidth="871.0" style="-fx-background-color: #2C2C2E;;">
@@ -59,22 +58,22 @@
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <TextField promptText="Numero de identificacion" style="-fx-background-color: #2C2C2E; -fx-text-fill: #2ECC71; -fx-border-color: #2ECC71; -fx-border-radius: 5; -fx-background-radius: 5;" GridPane.columnIndex="1">
+            <TextField fx:id="txtNumIdentificacion" promptText="Numero de identificacion" style="-fx-background-color: #2C2C2E; -fx-text-fill: #2ECC71; -fx-border-color: #2ECC71; -fx-border-radius: 5; -fx-background-radius: 5;" GridPane.columnIndex="1">
                <cursor>
                   <Cursor fx:constant="TEXT" />
                </cursor>
             </TextField>
-            <TextField promptText="Nombre Completo" style="-fx-background-color: #2C2C2E; -fx-text-fill: #2ECC71; -fx-border-color: #2ECC71; -fx-border-radius: 5; -fx-background-radius: 5;" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <TextField fx:id="txtNombre" promptText="Nombre Completo" style="-fx-background-color: #2C2C2E; -fx-text-fill: #2ECC71; -fx-border-color: #2ECC71; -fx-border-radius: 5; -fx-background-radius: 5;" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <cursor>
                   <Cursor fx:constant="TEXT" />
                </cursor>
             </TextField>
-            <TextField promptText="Correo Elctronico" style="-fx-background-color: #2C2C2E; -fx-text-fill: #2ECC71; -fx-border-color: #2ECC71; -fx-border-radius: 5; -fx-background-radius: 5;" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <TextField fx:id="txtCorreoElectronico" promptText="Correo Elctronico" style="-fx-background-color: #2C2C2E; -fx-text-fill: #2ECC71; -fx-border-color: #2ECC71; -fx-border-radius: 5; -fx-background-radius: 5;" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <cursor>
                   <Cursor fx:constant="TEXT" />
                </cursor>
             </TextField>
-            <TextField promptText="Nueva Clave del Cliente" style="-fx-background-color: #2C2C2E; -fx-text-fill: #2ECC71; -fx-border-color: #2ECC71; -fx-border-radius: 5; -fx-background-radius: 5;" GridPane.columnIndex="1" GridPane.rowIndex="3">
+            <TextField fx:id="txtClave" promptText="Nueva Clave del Cliente" style="-fx-background-color: #2C2C2E; -fx-text-fill: #2ECC71; -fx-border-color: #2ECC71; -fx-border-radius: 5; -fx-background-radius: 5;" GridPane.columnIndex="1" GridPane.rowIndex="3">
                <cursor>
                   <Cursor fx:constant="TEXT" />
                </cursor>
@@ -90,12 +89,12 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="154.0" style="-fx-background-color: #2ECC71;; -fx-text-fill: black; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, black, 5, 0, 2, 2);;" text="Registrar">
+            <Button fx:id="btnRegistrar" mnemonicParsing="false" onAction="#RegistrarCliente" prefHeight="31.0" prefWidth="154.0" style="-fx-background-color: #2ECC71;; -fx-text-fill: black; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, black, 5, 0, 2, 2);;" text="Registrar">
                <font>
                   <Font name="System Bold" size="17.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="154.0" style="-fx-background-color: #2ECC71;; -fx-text-fill: black; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, black, 5, 0, 2, 2);;" text="LImpiar" GridPane.rowIndex="1">
+            <Button fx:id="btnLimpiar" mnemonicParsing="false" onAction="#LimpiarRanuras" prefHeight="31.0" prefWidth="154.0" style="-fx-background-color: #2ECC71;; -fx-text-fill: black; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, black, 5, 0, 2, 2);;" text="LImpiar" GridPane.rowIndex="1">
                <font>
                   <Font name="System Bold" size="17.0" />
                </font>
@@ -103,11 +102,11 @@
          </children>
       </GridPane>
       <Separator layoutY="402.0" opacity="0.25" prefHeight="1.0" prefWidth="871.0" style="-fx-background-color: #2ECC71 #2ECC71;" />
-      <TableView layoutX="42.0" layoutY="417.0" prefHeight="218.0" prefWidth="805.0" style="-fx-background-color: #1E1E1E;; -fx-border-color: #2ECC71;; -fx-border-width: 2; -fx-table-cell-border-color: transparent;;">
+      <TableView fx:id="tableClientes" layoutX="42.0" layoutY="417.0" prefHeight="218.0" prefWidth="805.0" style="-fx-background-color: #1E1E1E;; -fx-border-color: #2ECC71;; -fx-border-width: 2; -fx-table-cell-border-color: transparent;;">
         <columns>
-          <TableColumn prefWidth="202.40001678466797" text="Identificacion" />
-          <TableColumn prefWidth="271.2000427246094" text="Nombre" />
-            <TableColumn prefWidth="329.5999755859375" text="Correo ELectronico" />
+          <TableColumn fx:id="colID" prefWidth="202.40001678466797" text="Identificacion" />
+          <TableColumn fx:id="colNombres" prefWidth="271.2000427246094" text="Nombre" />
+            <TableColumn fx:id="colCorreo" prefWidth="329.5999755859375" text="Correo ELectronico" />
         </columns>
       </TableView>
       <GridPane alignment="CENTER" layoutX="76.0" layoutY="665.0" prefHeight="60.0" prefWidth="718.0">
@@ -120,17 +119,17 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="154.0" style="-fx-background-color: #2ECC71;; -fx-text-fill: black; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, black, 5, 0, 2, 2);;" text="Busacar">
+            <Button fx:id="btnBuscar" mnemonicParsing="false" onAction="#BuscarCliente" prefHeight="31.0" prefWidth="154.0" style="-fx-background-color: #2ECC71;; -fx-text-fill: black; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, black, 5, 0, 2, 2);;" text="Busacar">
                <font>
                   <Font name="System Bold" size="17.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="154.0" style="-fx-background-color: #2ECC71;; -fx-text-fill: black; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, black, 5, 0, 2, 2);;" text="Eliminar" GridPane.columnIndex="2">
+            <Button fx:id="btnEliminar" mnemonicParsing="false" onAction="#EliminarCleiente" prefHeight="31.0" prefWidth="154.0" style="-fx-background-color: #2ECC71;; -fx-text-fill: black; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, black, 5, 0, 2, 2);;" text="Eliminar" GridPane.columnIndex="2">
                <font>
                   <Font name="System Bold" size="17.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="154.0" style="-fx-background-color: #2ECC71;; -fx-text-fill: black; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, black, 5, 0, 2, 2);;" text="Editar" GridPane.columnIndex="1">
+            <Button fx:id="btnEditar" mnemonicParsing="false" onAction="#EditarCliente" prefHeight="31.0" prefWidth="154.0" style="-fx-background-color: #2ECC71;; -fx-text-fill: black; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, black, 5, 0, 2, 2);;" text="Editar" GridPane.columnIndex="1">
                <font>
                   <Font name="System Bold" size="17.0" />
                </font>

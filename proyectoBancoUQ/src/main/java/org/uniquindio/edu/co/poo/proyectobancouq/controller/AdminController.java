@@ -21,4 +21,13 @@ public class AdminController {
     void actualizarCajero(Usuario cajero) {
         bancoAsociado.actualizarUsuario(cajero);
     }
+
+    public void iniciarSesion(String id, String password) {
+        Usuario usuario = bancoAsociado.validarCredenciales(id, password);
+        if (usuario != null) {
+            System.out.println("Bienvenido, " + usuario.getNombre());
+        } else {
+            System.out.println("Credenciales incorrectas.");
+        }
+    }
 }

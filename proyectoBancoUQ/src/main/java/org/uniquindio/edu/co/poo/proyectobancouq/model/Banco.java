@@ -248,5 +248,15 @@ public class Banco{
         return listTransacciones.stream().filter(transaccion -> transaccion.getCodigo().equals(codigoTransaccion)).findFirst();
     }
 
+    // metodo para validad las credenciales en el login
+    public Usuario validarCredenciales(String id, String password) {
+        for (Usuario usuario : listUsuarios) {
+            if (usuario.getId().equals(id) && usuario.getPassword().equals(password)) {
+                return usuario; // Devuelve el usuario si las credenciales son correctas
+            }
+        }
+        return null; // Retorna null si no encuentra coincidencias
+    }
+
 }
 
