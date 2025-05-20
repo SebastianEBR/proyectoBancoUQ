@@ -37,7 +37,7 @@ class BancoTest {
 
     @Test
     void testBuscarUsuario() throws Exception {
-        Cliente cliente = new Cliente("Carlos", "1002", "@gmail", "1234");
+        Cliente cliente = new Cliente("1002", "Carlos", "@gmail", "1234");
         banco.registrarUsuario(cliente);
         Optional<Usuario> usuarioEncontrado = banco.buscarUsuario("1002");
 
@@ -47,7 +47,7 @@ class BancoTest {
 
     @Test
     void testEliminarUsuario() throws Exception {
-        Cliente cliente = new Cliente("Ana", "1003", "@gmail", "1234");
+        Cliente cliente = new Cliente("1003", "Ana", "@gmail", "1234");
         banco.registrarUsuario(cliente);
         boolean eliminado = banco.eliminarUsuario("1003");
 
@@ -57,7 +57,7 @@ class BancoTest {
 
     @Test
     void testRegistrarCuenta() throws Exception {
-        Cliente cliente = new Cliente("Ana", "1004", "@gmail", "1234");
+        Cliente cliente = new Cliente("1004", "Ana", "@gmail", "1234");
         CuentaAhorros cuenta = new CuentaAhorros("12345", 20000, cliente);
         boolean registrada = banco.registrarCuenta(cuenta);
 
@@ -67,7 +67,7 @@ class BancoTest {
 
     @Test
     void testEliminarCuenta() throws Exception {
-        Cliente cliente = new Cliente("Ana", "1005", "@gmail", "1234");
+        Cliente cliente = new Cliente("1005", "Ana", "@gmail", "1234");
         CuentaAhorros cuenta = new CuentaAhorros("67890", 100000, cliente);
         banco.registrarCuenta(cuenta);
         boolean eliminada = banco.eliminarCuenta("67890");
@@ -79,7 +79,7 @@ class BancoTest {
     @Test
     void testRegistrarTransaccion() throws Exception {
         Transaccion transaccion = new Transaccion("TX001", LocalDate.now(), "2000", "Depostito", TipoTransaccion.TRANSFERENCIA, banco);
-        boolean registrada = banco.registrarTransaccion(transaccion, "12", 5000);
+        boolean registrada = banco.registrarTransaccion(transaccion, "12");
 
         assertTrue(registrada);
         assertEquals(1, banco.getListTransacciones().size());
@@ -88,7 +88,7 @@ class BancoTest {
     @Test
     void testEliminarTransaccion() throws Exception {
         Transaccion transaccion = new Transaccion("TX002", LocalDate.now(), "50.0", "Depostito", TipoTransaccion.TRANSFERENCIA, banco);
-        banco.registrarTransaccion(transaccion, "12", 5000);
+        banco.registrarTransaccion(transaccion, "12");
         boolean eliminada = banco.eliminarTransaccion("TX002");
 
         assertTrue(eliminada);

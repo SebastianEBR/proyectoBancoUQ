@@ -1,11 +1,15 @@
 package org.uniquindio.edu.co.poo.proyectobancouq.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public abstract class Usuario{
     // atributos
     private String id;
     private String nombre;
     private String email;
     private String password;
+    private List<CuentaBancaria> listCuentaBancaria;
 
 
     // Constructor
@@ -14,6 +18,7 @@ public abstract class Usuario{
         this.password = password;
         this.id       = id;
         this.email    = email;
+        this.listCuentaBancaria = new ArrayList<>();
     }
 
 
