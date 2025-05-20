@@ -10,25 +10,23 @@ public class CajeroController {
         this.bancoAsociado = bancoAsociado;
     }
 
-    void agregarCliente(Usuario nuevoCliente) throws Exception {
-        bancoAsociado.registrarUsuario(nuevoCliente);
+    //Metodo para que el cajero pueda iniciar sesion.
+    //    //Sebas, no hay necesidad de que el controller imprima algo,
+    //    // eso lo hace el viewcontroller.
+    public Usuario CajeroiniciarSesion(String id, String password) {
+        return bancoAsociado.validarCredenciales(id, password);
     }
 
-    void eliminarCajero(Usuario cliente) {
-        bancoAsociado.eliminarUsuario(cliente.getId());
+    //Metodos relacionados a la gestion de clientes
+    public boolean agregarCliente(Usuario nuevoCliente) throws Exception {
+        return bancoAsociado.registrarUsuario(nuevoCliente);
     }
 
-    void actualizarCajero(Usuario cliente) {
-        bancoAsociado.actualizarUsuario(cliente);
+    public boolean eliminarCliente(Usuario cliente) {
+        return bancoAsociado.eliminarUsuario(cliente.getId());
     }
 
-
-    public void iniciarSesion(String id, String password) {
-        Usuario usuario = bancoAsociado.validarCredenciales(id, password);
-        if (usuario != null) {
-            System.out.println("Bienvenido, " + usuario.getNombre());
-        } else {
-            System.out.println("Credenciales incorrectas.");
-        }
+    public boolean actualizarCliente(Usuario cliente) {
+        return bancoAsociado.actualizarUsuario(cliente);
     }
 }

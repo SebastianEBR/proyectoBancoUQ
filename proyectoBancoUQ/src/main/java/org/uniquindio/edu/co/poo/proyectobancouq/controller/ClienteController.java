@@ -1,6 +1,8 @@
 package org.uniquindio.edu.co.poo.proyectobancouq.controller;
 
 import org.uniquindio.edu.co.poo.proyectobancouq.model.Banco;
+import org.uniquindio.edu.co.poo.proyectobancouq.model.CuentaBancaria;
+import org.uniquindio.edu.co.poo.proyectobancouq.model.Transaccion;
 import org.uniquindio.edu.co.poo.proyectobancouq.model.Usuario;
 
 public class ClienteController {
@@ -10,16 +12,33 @@ public class ClienteController {
         this.bancoAsociado = bancoAsociado;
     }
 
-    void verInfoCuenta(String numeroCuenta) {
-        bancoAsociado.verInfoCuenta(numeroCuenta);
+    // Metodo para que el cliente pueda iniciar sesion
+    //Sebas, no hay necesidad de que el controller imprima algo,
+    //eso lo hace el viewcontroller.
+    public Usuario clienteIniciarSesion(String id, String password) {
+        return bancoAsociado.validarCredenciales(id, password);
     }
 
-    public void iniciarSesion(String id, String password) {
-        Usuario usuario = bancoAsociado.validarCredenciales(id, password);
-        if (usuario != null) {
-            System.out.println("Bienvenido, " + usuario.getNombre());
-        } else {
-            System.out.println("Credenciales incorrectas.");
-        }
+    //Metodos relacionados a la gestion de cuentas
+    public boolean registrarCuenta(CuentaBancaria nuevaCuenta) throws Exception {
+        return bancoAsociado.registrarCuenta(nuevaCuenta);
+    }
+
+
+    public String verInfoCuenta(String numeroCuenta) {
+        return bancoAsociado.verInfoCuenta(numeroCuenta);
+    }
+
+    //Metodos relacionados a las transacciones
+    public boolean registrarTransaccion(Transaccion transaccion, String numeroCuenta, String... numeroCuenta2) throws Exception {
+        return bancoAsociado.registrarTransaccion(transaccion, numeroCuenta, numeroCuenta2);
+    }
+
+    public boolean eliminarTransaccion(String numeroTransaccion) {
+        return bancoAsociado.eliminarTransaccion(numeroTransaccion);
+    }
+
+    public String verInfoTransaccion(String numeroTransaccion) throws Exception {
+        return bancoAsociado.verInfoTransaccion(numeroTransaccion);
     }
 }

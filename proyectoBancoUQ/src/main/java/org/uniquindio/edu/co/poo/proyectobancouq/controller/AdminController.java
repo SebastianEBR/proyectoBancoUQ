@@ -10,24 +10,23 @@ public class AdminController {
         this.bancoAsociado = bancoAsociado;
     }
 
-    void registrarCajero(Usuario nuevoCajero) throws Exception {
-        bancoAsociado.registrarUsuario(nuevoCajero);
+    //Metodo para que el Administrador pueda iniciar sesion.
+    //Sebas, no hay necesidad de que el controller imprima algo,
+    //eso lo hace el viewcontroller.
+    public Usuario AdmininiciarSesion(String id, String password) {
+        return bancoAsociado.validarCredenciales(id, password);
     }
 
-    void eliminarCajero(Usuario cajero) {
-        bancoAsociado.eliminarUsuario(cajero.getId());
+    //Metodos relacionados a la gestion de cajeros
+    public boolean registrarCajero(Usuario nuevoCajero) throws Exception {
+        return bancoAsociado.registrarUsuario(nuevoCajero);
     }
 
-    void actualizarCajero(Usuario cajero) {
-        bancoAsociado.actualizarUsuario(cajero);
+    public boolean eliminarCajero(Usuario cajero) {
+        return bancoAsociado.eliminarUsuario(cajero.getId());
     }
 
-    public void iniciarSesion(String id, String password) {
-        Usuario usuario = bancoAsociado.validarCredenciales(id, password);
-        if (usuario != null) {
-            System.out.println("Bienvenido, " + usuario.getNombre());
-        } else {
-            System.out.println("Credenciales incorrectas.");
-        }
+    public boolean actualizarCajero(Usuario cajero) {
+        return bancoAsociado.actualizarUsuario(cajero);
     }
 }
