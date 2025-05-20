@@ -59,7 +59,7 @@ class BancoTest {
     void testRegistrarCuenta() throws Exception {
         Cliente cliente = new Cliente("1004", "Ana", "@gmail", "1234");
         CuentaAhorros cuenta = new CuentaAhorros("12345", 20000, cliente);
-        boolean registrada = banco.registrarCuenta(cuenta);
+        boolean registrada = banco.registrarCuenta(cuenta, cliente);
 
         assertTrue(registrada);
         assertEquals(1, banco.getListCuentasBancarias().size());
@@ -69,7 +69,7 @@ class BancoTest {
     void testEliminarCuenta() throws Exception {
         Cliente cliente = new Cliente("1005", "Ana", "@gmail", "1234");
         CuentaAhorros cuenta = new CuentaAhorros("67890", 100000, cliente);
-        banco.registrarCuenta(cuenta);
+        banco.registrarCuenta(cuenta, cliente);
         boolean eliminada = banco.eliminarCuenta("67890");
 
         assertTrue(eliminada);

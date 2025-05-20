@@ -81,14 +81,18 @@ public class Banco{
 
     // CRUD de usuarios
     // metodo para registrar usuarios
-    public boolean registrarUsuario(Usuario newUsuario) throws Exception {
+    public boolean registrarUsuario(Usuario newUsuario, CuentaBancaria newCuenta) throws Exception {
         Optional<Usuario> usuarioAux = buscarUsuario(newUsuario.getId());
+        if(newUsuario instanceof Cliente){
+            registrarCuenta(newCuenta);
+        }
         if(usuarioAux.isPresent()){
             throw new Exception("Ya existe un usuario con ese ID");
         }else{
-            listUsuarios.add(newUsuario); //agregar nuevo usuarioCliente a Banco
-            return true; // registro exitoso
+            listUsuarios.add(newUsuario);//agregar nuevo usuarioCliente a Banco
         }
+
+        return true; // registro exitoso
     }
 
     //metodo para ver la informacion de un usuario
@@ -140,9 +144,6 @@ public class Banco{
     // CRUD relacionado de cuentas Bancarias
     // metodo para registrar una cuenta
     public boolean registrarCuenta(CuentaBancaria newCuenta) throws Exception {
-        if (!buscarUsuario(newCuenta.getCliente().getId()).isPresent()) {
-            throw new Exception("❌ No se encontró un cliente asociado a la cuenta.");
-        }
 
         if (buscarCuenta(newCuenta.getNumeroCuenta()).isPresent()) {
             throw new Exception("❌ Ya existe una cuenta con ese número.");

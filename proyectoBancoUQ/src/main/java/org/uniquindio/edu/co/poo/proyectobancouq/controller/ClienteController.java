@@ -1,9 +1,6 @@
 package org.uniquindio.edu.co.poo.proyectobancouq.controller;
 
-import org.uniquindio.edu.co.poo.proyectobancouq.model.Banco;
-import org.uniquindio.edu.co.poo.proyectobancouq.model.CuentaBancaria;
-import org.uniquindio.edu.co.poo.proyectobancouq.model.Transaccion;
-import org.uniquindio.edu.co.poo.proyectobancouq.model.Usuario;
+import org.uniquindio.edu.co.poo.proyectobancouq.model.*;
 
 public class ClienteController {
     private Banco bancoAsociado;
@@ -20,8 +17,8 @@ public class ClienteController {
     }
 
     //Metodos relacionados a la gestion de cuentas
-    public boolean registrarCuenta(CuentaBancaria nuevaCuenta) throws Exception {
-        return bancoAsociado.registrarCuenta(nuevaCuenta);
+    public boolean registrarCuenta(CuentaBancaria newCuenta , Cliente cliente) throws Exception {
+        return bancoAsociado.registrarCuenta(newCuenta, cliente);
     }
 
 

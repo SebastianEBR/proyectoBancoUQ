@@ -23,8 +23,8 @@ class TransaccionTest {
         cuentaDestino = new CuentaCorriente("1002", 3000, cliente2);
 
         try {
-            banco.registrarCuenta(cuentaOrigen);
-            banco.registrarCuenta(cuentaDestino);
+            banco.registrarCuenta(cuentaOrigen, cliente);
+            banco.registrarCuenta(cuentaDestino, cliente2);
         } catch (Exception e) {
             fail("Error al registrar cuentas: " + e.getMessage());
         }
