@@ -13,7 +13,7 @@ public class CajeroController {
     //Metodo para que el cajero pueda iniciar sesion.
     //    //Sebas, no hay necesidad de que el controller imprima algo,
     //    // eso lo hace el viewcontroller.
-    public Usuario CajeroiniciarSesion(String id, String password) {
+    public Usuario CajeroIniciarSesion(String id, String password) {
         return bancoAsociado.validarCredenciales(id, password);
     }
 
