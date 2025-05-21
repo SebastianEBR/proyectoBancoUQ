@@ -29,4 +29,8 @@ public class Cliente extends Usuario{
                 super.toString() +
                 "\n Cuentas: " + listCuentaBancaria;
     }
+
+    public void agregarCuenta(CuentaBancaria newCuentaBancaria) {
+        this.listCuentaBancaria.add(newCuentaBancaria);
+    }
 }

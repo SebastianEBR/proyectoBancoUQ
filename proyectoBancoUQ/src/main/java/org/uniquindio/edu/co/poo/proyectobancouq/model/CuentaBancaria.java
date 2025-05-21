@@ -7,10 +7,9 @@ public abstract class CuentaBancaria {
     // conexion con otras clases
     private Cliente cliente;
 
-    public CuentaBancaria(String numeroCuenta, double saldo, Cliente cliente) {
+    public CuentaBancaria(String numeroCuenta, double saldo) {
         this.numeroCuenta = numeroCuenta;
         this.saldo = saldo;
-        this.cliente = cliente;
     }
 
     public String getNumeroCuenta() {

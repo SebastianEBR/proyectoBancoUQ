@@ -81,18 +81,28 @@ public class Banco{
 
     // CRUD de usuarios
     // metodo para registrar usuarios
-    public boolean registrarUsuario(Usuario newUsuario, CuentaBancaria newCuenta) throws Exception {
+    public boolean registrarUsuario(Usuario newUsuario) throws Exception {
         Optional<Usuario> usuarioAux = buscarUsuario(newUsuario.getId());
-        if(newUsuario instanceof Cliente){
-            registrarCuenta(newCuenta);
-        }
         if(usuarioAux.isPresent()){
             throw new Exception("Ya existe un usuario con ese ID");
-        }else{
-            listUsuarios.add(newUsuario);//agregar nuevo usuarioCliente a Banco
         }
-
+        listUsuarios.add(newUsuario);//agregar nuevo usuarioCliente a Banco
         return true; // registro exitoso
+    }
+
+    // (sobrecarga) metodo especial para cuando es un cliente
+    public boolean registrarUsuario(Cliente newCliente, CuentaBancaria newCuentaBancaria) throws Exception {
+        Optional<Usuario> usuarioAux = buscarUsuario(newCliente.getId());
+        if(usuarioAux.isPresent()){
+            throw new Exception("Ya existe un Cliente con ese ID");
+        }
+        registrarCuenta(newCuentaBancaria);          // ✅ Se registra la cuenta en el banco
+        newCuentaBancaria.setCliente(newCliente);    // ✅ Se asigna el cliente a la cuenta
+        newCliente.agregarCuenta(newCuentaBancaria); // ✅ Cliente vincula la cuenta en su lista
+        listUsuarios.add(newCliente);                // ✅ Finalmente, agregamos el cliente al banco
+
+
+        return true;
     }
 
     //metodo para ver la informacion de un usuario
@@ -232,16 +242,6 @@ public class Banco{
         } else {
             throw new Exception("No se encontró una transaccion con ese numero");
         }
-    }
-
-    // metodo para eliminar una transaccion
-    public boolean eliminarTransaccion(String numeroTransaccion){
-        Optional<Transaccion> transaccionAux = buscarTransaccion(numeroTransaccion);
-        if(transaccionAux.isPresent()){
-            listTransacciones.remove(transaccionAux.get());
-            return true;
-        }
-        return false;
     }
 
     // metodo para buscar transaccion
