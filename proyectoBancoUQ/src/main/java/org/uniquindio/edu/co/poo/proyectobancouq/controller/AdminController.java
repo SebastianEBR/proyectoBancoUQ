@@ -1,6 +1,7 @@
 package org.uniquindio.edu.co.poo.proyectobancouq.controller;
 
 import org.uniquindio.edu.co.poo.proyectobancouq.model.Banco;
+import org.uniquindio.edu.co.poo.proyectobancouq.model.Transaccion;
 import org.uniquindio.edu.co.poo.proyectobancouq.model.Usuario;
 
 public class AdminController {
@@ -29,4 +30,14 @@ public class AdminController {
     public boolean actualizarCajero(Usuario cajero) {
         return bancoAsociado.actualizarUsuario(cajero);
     }
+
+    //Metodos relacionados a la gestion de transacciones
+    public void monitorearTransacciones(Transaccion transaccion){
+        bancoAsociado.monitorearTransacciones(transaccion);
+    }
+
+    public String generarReporteAvanzado(String tipoReporte) throws Exception {
+        return bancoAsociado.generarReporteAvanzado(tipoReporte);
+    }
+
 }
