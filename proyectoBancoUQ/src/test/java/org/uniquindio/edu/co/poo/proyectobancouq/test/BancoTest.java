@@ -11,77 +11,93 @@ import static org.junit.jupiter.api.Assertions.*;
 class BancoTest {
 
     private Banco banco;
+    private Cliente cliente1;
+    private Admin cliente2;
+    private Cliente cliente3;
+    private CuentaBancaria cuenta1;
+    private CuentaBancaria cuenta2;
+    private Transaccion transaccion1;
+    private Transaccion transaccion2;
+    private Transaccion transaccion3;
 
     @BeforeEach
-    void setUp() {
+    void setUp() throws Exception {
         banco = new Banco("Banco UQ", "123456");
+        cliente1 = new Cliente("101", "Juan", "@gmail", "1234");
+        cliente2 = new Admin("101", "Sebas", "@gmail", "1234", "02");
+        cliente3 = new Cliente("102", "PP", "@gmail", "1234");
+        cuenta1 = new CuentaAhorros("147", 5000);
+        cuenta2 = new CuentaCorriente("145", 5000);
+        transaccion1 = new Transaccion("TX001", LocalDate.now(), "2000", "Depostito", TipoTransaccion.DEPOSITO, banco);
+        transaccion2 = new Transaccion("TX002", LocalDate.now(), "2000", "retirio", TipoTransaccion.RETIRO, banco);
+        transaccion3 = new Transaccion("TX001", LocalDate.now(), "2000", "trnasferencia", TipoTransaccion.TRANSFERENCIA, banco);
     }
 
     @Test
     // test para el metodo registrarUsuario con Cliente
     void testRegistrarUsuario() throws Exception {
-        Cliente cliente = new Cliente("Juan", "1001", "@gmail", "1234");
-        boolean registrado = banco.registrarUsuario(cliente);
+        boolean registrado = banco.registrarUsuario(cliente1, cuenta1);
         assertTrue(registrado);
         assertEquals(1, banco.getListUsuarios().size());
     }
 
     @Test
     void testRegistrarUsuarioDuplicado() {
-        Cliente cliente = new Cliente("Juan", "1001", "@gmail", "1234");
-        assertDoesNotThrow(() -> banco.registrarUsuario(cliente));
+        assertDoesNotThrow(() -> banco.registrarUsuario(cliente1));
 
-        Exception exception = assertThrows(Exception.class, () -> banco.registrarUsuario(cliente));
+        Exception exception = assertThrows(Exception.class, () -> banco.registrarUsuario(cliente2));
         assertEquals("Ya existe un usuario con ese ID", exception.getMessage());
     }
 
     @Test
     void testBuscarUsuario() throws Exception {
-        Cliente cliente = new Cliente("1002", "Carlos", "@gmail", "1234");
-        banco.registrarUsuario(cliente);
-        Optional<Usuario> usuarioEncontrado = banco.buscarUsuario("1002");
+        banco.registrarUsuario(cliente1);
+        Optional<Usuario> usuarioEncontrado = banco.buscarUsuario("101");
 
         assertTrue(usuarioEncontrado.isPresent());
-        assertEquals("Carlos", usuarioEncontrado.get().getNombre());
+        assertEquals("Juan", usuarioEncontrado.get().getNombre());
     }
 
     @Test
     void testEliminarUsuario() throws Exception {
-        Cliente cliente = new Cliente("1003", "Ana", "@gmail", "1234");
-        banco.registrarUsuario(cliente);
-        boolean eliminado = banco.eliminarUsuario("1003");
+        banco.registrarUsuario(cliente3);
+        boolean eliminado = banco.eliminarUsuario("102");
 
         assertTrue(eliminado);
-        assertTrue(banco.buscarUsuario("1003").isEmpty());
+        assertTrue(banco.buscarUsuario("102").isEmpty());
     }
 
     @Test
     void testRegistrarCuenta() throws Exception {
-        Cliente cliente = new Cliente("1004", "Ana", "@gmail", "1234");
-        CuentaAhorros cuenta = new CuentaAhorros("12345", 20000);
-        boolean registrada = banco.registrarCuenta(cuenta);
+
+        boolean registrada = banco.registrarCuenta(cuenta1);
+        banco.registrarCuenta(cuenta2);
 
         assertTrue(registrada);
-        assertEquals(1, banco.getListCuentasBancarias().size());
+        assertEquals(2, banco.getListCuentasBancarias().size());
     }
 
     @Test
-    void testEliminarCuenta() throws Exception {
-        Cliente cliente = new Cliente("1005", "Ana", "@gmail", "1234");
-        CuentaAhorros cuenta = new CuentaAhorros("67890", 100000);
-        banco.registrarCuenta(cuenta);
-        boolean eliminada = banco.eliminarCuenta("67890");
+    void testAgregarCuentaCliente() throws Exception {
+        banco.agregarCuentaCliente(cuenta2, cliente1);
 
-        assertTrue(eliminada);
-        assertTrue(banco.buscarCuenta("67890").isEmpty());
+        assertTrue(banco.buscarCuenta("145").isPresent());
+        assertTrue(cliente1.getListCuentaBancaria().contains(cuenta2));
+        assertEquals(cliente1, cuenta2.getCliente());
     }
 
     @Test
     void testRegistrarTransaccion() throws Exception {
-        Transaccion transaccion = new Transaccion("TX001", LocalDate.now(), "2000", "Depostito", TipoTransaccion.TRANSFERENCIA, banco);
-        boolean registrada = banco.registrarTransaccion(transaccion, "12");
+        banco.registrarUsuario(cliente1, cuenta1);
+        banco.agregarCuentaCliente(cuenta2, cliente1);
+        boolean registrada = banco.registrarTransaccion(transaccion3, "145", "147");
 
         assertTrue(registrada);
         assertEquals(1, banco.getListTransacciones().size());
+    }
+
+    @Test
+    void testVerInfoTransaccion() throws Exception {
+        banco.verInfoTransaccion("145");
     }
 }

@@ -32,14 +32,26 @@ public class Reporte {
         this.fechaReporte = fechaReporte;
     }
 
-    public static String generarReporteMovimientos(List<Transaccion> transacciones) {
-        String reporte = "📋 Reporte de Movimientos - Fecha: " + LocalDate.now() + "\n";
+    public static String generarReporteTransacciones(List<Transaccion> transacciones) {
+        String reporte = "📋 Reporte de Transacciones - Generado: " + java.time.LocalDate.now() + "\n";
 
         if (transacciones.isEmpty()) {
             reporte += "⚠ No hay transacciones registradas.\n";
         } else {
             for (Transaccion transaccion : transacciones) {
                 reporte += "🔹 " + transaccion.getFecha() + " | " + transaccion.getTipoTransaccion() + " | $" + transaccion.getMonto() + "\n";
+            }
+        }
+
+        return reporte;
+    }
+
+    public static String generarReporteFraudes(List<Transaccion> transacciones) {
+        String reporte = "🚨 Reporte de Operaciones Sospechosas\n";
+
+        for (Transaccion transaccion : transacciones) {
+            if (transaccion.getMonto() > 10000) { // Ejemplo de transacción sospechosa
+                reporte += "⚠ ALERTA - Transacción de alto valor: $" + transaccion.getMonto() + " - Fecha: " + transaccion.getFecha() + "\n";
             }
         }
 

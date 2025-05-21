@@ -96,10 +96,10 @@ public class Banco{
         if(usuarioAux.isPresent()){
             throw new Exception("Ya existe un Cliente con ese ID");
         }
-        registrarCuenta(newCuentaBancaria);          // ✅ Se registra la cuenta en el banco
-        newCuentaBancaria.setCliente(newCliente);    // ✅ Se asigna el cliente a la cuenta
-        newCliente.agregarCuenta(newCuentaBancaria); // ✅ Cliente vincula la cuenta en su lista
-        listUsuarios.add(newCliente);                // ✅ Finalmente, agregamos el cliente al banco
+        agregarCuentaCliente(newCuentaBancaria, newCliente); // ✅ Se registra la cuenta en el banco
+                                                            // ✅ Se asigna el cliente a la cuenta
+                                                           // ✅ Cliente vincula la cuenta en su lista
+        listUsuarios.add(newCliente);                     // ✅ Finalmente, agregamos el cliente al banco
 
 
         return true;
@@ -137,8 +137,15 @@ public class Banco{
     // metodo para eliminar un usuario
     public boolean eliminarUsuario(String id){
         Optional<Usuario> usuarioAux = buscarUsuario(id);
+
         if(usuarioAux.isPresent()){
-            listUsuarios.remove(usuarioAux.get());
+            Usuario usuarioEncontrado = usuarioAux.get();
+
+            if (usuarioEncontrado instanceof Cliente) {
+                Cliente cliente = (Cliente) usuarioEncontrado;
+                cliente.getListCuentaBancaria().forEach(cuenta -> eliminarCuenta(cuenta.getNumeroCuenta()));
+            }
+            listUsuarios.remove(usuarioEncontrado);
         }else {
             return false;
         }
@@ -154,8 +161,8 @@ public class Banco{
     // CRUD relacionado de cuentas Bancarias
     // metodo para registrar una cuenta
     public boolean registrarCuenta(CuentaBancaria newCuenta) throws Exception {
-
-        if (buscarCuenta(newCuenta.getNumeroCuenta()).isPresent()) {
+        Optional<CuentaBancaria>  cuentaOptional = buscarCuenta(newCuenta.getNumeroCuenta());
+        if (cuentaOptional.isPresent()) {
             throw new Exception("❌ Ya existe una cuenta con ese número.");
         }
 
@@ -193,7 +200,7 @@ public class Banco{
 
 
     // metodo para eliminar una cuenta
-    public boolean eliminarCuenta(String numeroCuenta){
+    private boolean eliminarCuenta(String numeroCuenta){
         boolean eliminado = true;
         Optional<CuentaBancaria> cuentaAux = buscarCuenta(numeroCuenta);
         if(cuentaAux.isPresent()){
@@ -208,6 +215,22 @@ public class Banco{
     public Optional<CuentaBancaria> buscarCuenta(String numCuentaBancaria) {
         return listCuentasBancarias.stream().filter(cuenta -> cuenta.getNumeroCuenta().equals(numCuentaBancaria)).findFirst();
     }
+
+    public void agregarCuentaCliente(CuentaBancaria newCuentaBancaria, Cliente cliente) throws Exception {
+        if (newCuentaBancaria == null || cliente == null) {
+            throw new Exception("❌ La cuenta y el cliente no pueden ser nulos.");
+        }
+
+        boolean cuentaRegistrada = registrarCuenta(newCuentaBancaria);  // ✅ Se registra la cuenta en el banco
+
+        if (!cuentaRegistrada) {
+            throw new Exception("❌ No se pudo registrar la cuenta.");
+        }
+
+        newCuentaBancaria.setCliente(cliente);    // ✅ Se asigna el cliente a la cuenta
+        cliente.agregarCuenta(newCuentaBancaria); // ✅ Cliente vincula la cuenta en su lista
+    }
+
 
     // CRUD de transaccion
     // metodo para registrar una transaccion
@@ -231,13 +254,10 @@ public class Banco{
         listTransacciones.add(transaccion); // ✅ Guarda la transacción en la lista
 
         // 🔹 NOTIFICACIÓN OPCIONAL: Llamamos a `Reporte` después de registrar la transacción
-        System.out.println(Reporte.generarReporteMovimientos(listTransacciones));
+        System.out.println(Reporte.generarReporteTransacciones(listTransacciones));
 
         return true;
     }
-
-
-
 
     // metodo para ver la info de una transaccion
     public String verInfoTransaccion(String numeroTransaccion) throws Exception {
@@ -264,5 +284,38 @@ public class Banco{
         return null; // Retorna null si no encuentra coincidencias
     }
 
+
+    // metodo para monitorear transacciones
+    public void monitorearTransacciones(Transaccion transaccion) {
+        double montoLimite = 10000.0;
+
+        boolean esTransferenciaRapida = transaccion.getMonto() > montoLimite;
+
+        if (esTransferenciaRapida) {
+            System.out.println("⚠ ALERTA: Transacción sospechosa detectada!");
+
+
+            List<Transaccion> transaccionesSospechosas = new ArrayList<>();
+            transaccionesSospechosas.add(transaccion);
+
+            System.out.println(Reporte.generarReporteFraudes(transaccionesSospechosas));
+        }
+    }
+
+
+    public String generarReporteAvanzado(String tipoReporte) throws Exception {
+        if (listTransacciones.isEmpty()) {
+            return "⚠ No hay transacciones registradas.";
+        }
+
+        switch (tipoReporte.toLowerCase()) {
+            case "transacciones":
+                return Reporte.generarReporteTransacciones(listTransacciones);
+            case "fraudes":
+                return Reporte.generarReporteFraudes(listTransacciones);
+            default:
+                throw new Exception("❌ Tipo de reporte inválido.");
+        }
+    }
 }
 

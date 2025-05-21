@@ -10,7 +10,7 @@ class CuentaBancariaTest {
     // Subclase concreta para instanciar `CuentaBancaria`, ya que es abstracta
     static class CuentaBancariaDummy extends CuentaBancaria {
         public CuentaBancariaDummy(String numeroCuenta, double saldo, Cliente cliente) {
-            super(numeroCuenta, saldo, cliente);
+            super(numeroCuenta, saldo);
         }
     }
 
