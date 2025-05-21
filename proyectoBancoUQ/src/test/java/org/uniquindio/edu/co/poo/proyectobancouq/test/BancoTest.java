@@ -58,8 +58,8 @@ class BancoTest {
     @Test
     void testRegistrarCuenta() throws Exception {
         Cliente cliente = new Cliente("1004", "Ana", "@gmail", "1234");
-        CuentaAhorros cuenta = new CuentaAhorros("12345", 20000, cliente);
-        boolean registrada = banco.registrarCuenta(cuenta, cliente);
+        CuentaAhorros cuenta = new CuentaAhorros("12345", 20000);
+        boolean registrada = banco.registrarCuenta(cuenta);
 
         assertTrue(registrada);
         assertEquals(1, banco.getListCuentasBancarias().size());
@@ -68,8 +68,8 @@ class BancoTest {
     @Test
     void testEliminarCuenta() throws Exception {
         Cliente cliente = new Cliente("1005", "Ana", "@gmail", "1234");
-        CuentaAhorros cuenta = new CuentaAhorros("67890", 100000, cliente);
-        banco.registrarCuenta(cuenta, cliente);
+        CuentaAhorros cuenta = new CuentaAhorros("67890", 100000);
+        banco.registrarCuenta(cuenta);
         boolean eliminada = banco.eliminarCuenta("67890");
 
         assertTrue(eliminada);
@@ -83,15 +83,5 @@ class BancoTest {
 
         assertTrue(registrada);
         assertEquals(1, banco.getListTransacciones().size());
-    }
-
-    @Test
-    void testEliminarTransaccion() throws Exception {
-        Transaccion transaccion = new Transaccion("TX002", LocalDate.now(), "50.0", "Depostito", TipoTransaccion.TRANSFERENCIA, banco);
-        banco.registrarTransaccion(transaccion, "12");
-        boolean eliminada = banco.eliminarTransaccion("TX002");
-
-        assertTrue(eliminada);
-        assertTrue(banco.buscarTransaccion("TX002").isEmpty());
     }
 }

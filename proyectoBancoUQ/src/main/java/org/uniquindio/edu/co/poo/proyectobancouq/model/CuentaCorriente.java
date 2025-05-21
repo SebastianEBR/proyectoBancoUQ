@@ -4,7 +4,7 @@ public class CuentaCorriente extends CuentaBancaria{
 
 //    private double limiteSobreGiro;
 
-    public CuentaCorriente(String numeroCuenta, double saldo, Cliente cliente) {
-        super(numeroCuenta, saldo, cliente);
+    public CuentaCorriente(String numeroCuenta, double saldo) {
+        super(numeroCuenta, saldo);
     }
 }

@@ -19,12 +19,12 @@ class TransaccionTest {
         Cliente cliente = new Cliente("1000", "Sebas", "@gmail", "1234");
         Cliente cliente2 = new Cliente("1100", "Pao", "@gmail", "3210");
 
-        cuentaOrigen = new CuentaCorriente("1001", 5000f, cliente);
-        cuentaDestino = new CuentaCorriente("1002", 3000, cliente2);
+        cuentaOrigen = new CuentaCorriente("1001", 5000);
+        cuentaDestino = new CuentaCorriente("1002", 3000);
 
         try {
-            banco.registrarCuenta(cuentaOrigen, cliente);
-            banco.registrarCuenta(cuentaDestino, cliente2);
+            banco.registrarCuenta(cuentaOrigen);
+            banco.registrarCuenta(cuentaDestino);
         } catch (Exception e) {
             fail("Error al registrar cuentas: " + e.getMessage());
         }

@@ -17,8 +17,8 @@ public class ClienteController {
     }
 
     //Metodos relacionados a la gestion de cuentas
-    public boolean registrarCuenta(CuentaBancaria newCuenta , Cliente cliente) throws Exception {
-        return bancoAsociado.registrarCuenta(newCuenta, cliente);
+    public boolean registrarCuenta(CuentaBancaria newCuenta) throws Exception {
+        return bancoAsociado.registrarCuenta(newCuenta);
     }
 
 
@@ -29,10 +29,6 @@ public class ClienteController {
     //Metodos relacionados a las transacciones
     public boolean registrarTransaccion(Transaccion transaccion, String numeroCuenta, String... numeroCuenta2) throws Exception {
         return bancoAsociado.registrarTransaccion(transaccion, numeroCuenta, numeroCuenta2);
-    }
-
-    public boolean eliminarTransaccion(String numeroTransaccion) {
-        return bancoAsociado.eliminarTransaccion(numeroTransaccion);
     }
 
     public String verInfoTransaccion(String numeroTransaccion) throws Exception {
