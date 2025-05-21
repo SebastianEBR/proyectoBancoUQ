@@ -10,18 +10,6 @@ public class Reporte {
     private TipoTransaccion tipoReporte;
     private LocalDate fechaReporte;
 
-    // conexion con otras clases
-    private List<Transaccion> listTransacciones;
-
-    @Override
-    public String toString() {
-        return "Reporte{" +
-                "tipoReporte=" + tipoReporte +
-                ", fechaReporte=" + fechaReporte +
-                ", listTransacciones=" + listTransacciones +
-                '}';
-    }
-
     public TipoTransaccion getTipoReporte() {
         return tipoReporte;
     }
@@ -38,17 +26,23 @@ public class Reporte {
         this.fechaReporte = fechaReporte;
     }
 
-    public List<Transaccion> getListTransacciones() {
-        return listTransacciones;
-    }
-
-    public void setListTransacciones(List<Transaccion> listTransacciones) {
-        this.listTransacciones = listTransacciones;
-    }
 
     public Reporte(TipoTransaccion tipoReporte, LocalDate fechaReporte) {
         this.tipoReporte = tipoReporte;
         this.fechaReporte = fechaReporte;
-        this.listTransacciones = new ArrayList<>();
+    }
+
+    public static String generarReporteMovimientos(List<Transaccion> transacciones) {
+        String reporte = "📋 Reporte de Movimientos - Fecha: " + LocalDate.now() + "\n";
+
+        if (transacciones.isEmpty()) {
+            reporte += "⚠ No hay transacciones registradas.\n";
+        } else {
+            for (Transaccion transaccion : transacciones) {
+                reporte += "🔹 " + transaccion.getFecha() + " | " + transaccion.getTipoTransaccion() + " | $" + transaccion.getMonto() + "\n";
+            }
+        }
+
+        return reporte;
     }
 }

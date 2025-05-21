@@ -228,9 +228,14 @@ public class Banco{
             transaccion.retiro(numeroCuenta, transaccion.getMonto());
         }
 
-        listTransacciones.add(transaccion);
+        listTransacciones.add(transaccion); // ✅ Guarda la transacción en la lista
+
+        // 🔹 NOTIFICACIÓN OPCIONAL: Llamamos a `Reporte` después de registrar la transacción
+        System.out.println(Reporte.generarReporteMovimientos(listTransacciones));
+
         return true;
     }
+
 
 
 
