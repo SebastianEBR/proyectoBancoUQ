@@ -3,6 +3,7 @@ package org.uniquindio.edu.co.poo.proyectobancouq.model;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Optional;
+import java.util.Random;
 
 public class Transaccion implements IValidarDatos {
 
@@ -16,16 +17,21 @@ public class Transaccion implements IValidarDatos {
     // conexion con clase enum
     private TipoTransaccion tipoTransaccion;
 
-    public Transaccion(String codigo, LocalDate fecha, String monto, String descripcion, TipoTransaccion tipoTransaccion, Banco banco) throws Exception {
-        if (validarDatos(codigo, fecha, monto, descripcion, tipoTransaccion)) {
-            double montoDouble = Double.parseDouble(monto);
-            this.codigo = codigo;
+    public Transaccion(LocalDate fecha, String monto, String descripcion, TipoTransaccion tipoTransaccion, Banco banco) throws Exception {
+        if (validarDatos(generarCodigoUnico(), fecha, monto, descripcion, tipoTransaccion)) {
+            this.codigo = generarCodigoUnico();
             this.fecha = fecha;
-            this.monto = montoDouble;
+            this.monto = Double.parseDouble(monto);
             this.descripcion = descripcion;
             this.tipoTransaccion = tipoTransaccion;
             this.banco = banco;
         }
+    }
+
+    private String generarCodigoUnico() {
+        Random random = new Random();
+        int randomNum = random.nextInt(9000) + 1000; // ✅ Número aleatorio de 4 dígitos
+        return "TX-" + LocalDate.now().getYear() + "-" + randomNum;
     }
 
     // 🔹 Metodo auxiliar para validar que el monto es un número
