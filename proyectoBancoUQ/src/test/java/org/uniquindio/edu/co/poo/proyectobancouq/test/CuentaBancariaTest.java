@@ -2,6 +2,7 @@ package org.uniquindio.edu.co.poo.proyectobancouq.test;
 
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
+import org.uniquindio.edu.co.poo.proyectobancouq.model.Banco;
 import org.uniquindio.edu.co.poo.proyectobancouq.model.Cliente;
 import org.uniquindio.edu.co.poo.proyectobancouq.model.CuentaBancaria;
 
@@ -9,25 +10,28 @@ class CuentaBancariaTest {
 
     // Subclase concreta para instanciar `CuentaBancaria`, ya que es abstracta
     static class CuentaBancariaDummy extends CuentaBancaria {
-        public CuentaBancariaDummy(String numeroCuenta, double saldo, Cliente cliente) {
+        public CuentaBancariaDummy(String numeroCuenta, double saldo) {
             super(numeroCuenta, saldo);
         }
     }
 
     @Test
-    void testCreacionCuentaBancaria() {
+    void testCreacionCuentaBancaria() throws Exception {
+        Banco banco = new Banco("UQ", " 121");
         Cliente cliente = new Cliente("1234", "Juan Pérez", "juan@example.com", "clave123");
-        CuentaBancaria cuenta = new CuentaBancariaDummy("987654321", 5000.0, cliente);
-
+        CuentaBancaria cuenta = new CuentaBancariaDummy("987654321", 5000.0);
+        banco.registrarUsuario(cliente, cuenta);
         assertEquals("987654321", cuenta.getNumeroCuenta());
         assertEquals(5000.0, cuenta.getSaldo());
         assertEquals(cliente, cuenta.getCliente());
     }
 
     @Test
-    void testModificacionDatosCuenta() {
+    void testModificacionDatosCuenta() throws Exception {
+        Banco banco = new Banco("UQ", " 121");
         Cliente cliente = new Cliente("5678", "Ana Gómez", "ana@example.com", "pass456");
-        CuentaBancaria cuenta = new CuentaBancariaDummy("1122334455", 10000.0, cliente);
+        CuentaBancaria cuenta = new CuentaBancariaDummy("987654321", 5000.0);
+        banco.registrarUsuario(cliente, cuenta);
 
         cuenta.setSaldo(15000.0);
         cuenta.setNumeroCuenta("5566778899");
@@ -37,14 +41,16 @@ class CuentaBancariaTest {
     }
 
     @Test
-    void testToString() {
+    void testToString() throws Exception {
+        Banco banco = new Banco("UQ", " 121");
         Cliente cliente = new Cliente("9999", "Carlos López", "carlos@example.com", "abc789");
-        CuentaBancaria cuenta = new CuentaBancariaDummy("1234567890", 7500.0, cliente);
+        CuentaBancaria cuenta = new CuentaBancariaDummy("1234567890", 7500.0);
+        banco.registrarUsuario(cliente, cuenta);
 
         String esperado = "CuentaBancaria: " +
                 "\n numero de cuenta: 1234567890" +
                 "\n saldo: 7500.0" +
-                "\n cliente: " + cliente; // Esto depende del `toString()` de Cliente
+                "\n cliente: Carlos López";
 
         assertEquals(esperado, cuenta.toString());
     }

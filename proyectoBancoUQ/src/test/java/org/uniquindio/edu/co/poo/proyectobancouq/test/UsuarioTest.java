@@ -12,8 +12,7 @@ class UsuarioTest {
 
     @Test
     void testCreacionUsuario() {
-        // Instancia de Usuario (debe ser una subclase, ya que Usuario es abstracta)
-        Usuario usuario = new Cliente("Juan Pérez", "1234", "juan@example.com", "clave123");
+        Usuario usuario = new Cliente("1234", "Juan Pérez", "juan@example.com", "clave123");
 
         // Verificar que los valores iniciales son correctos
         assertEquals("Juan Pérez", usuario.getNombre());
@@ -39,9 +38,10 @@ class UsuarioTest {
 
     @Test
     void testToString() {
-        Usuario usuario = new Cliente("Carlos López", "9999", "carlos@example.com", "abc789");
+        Usuario usuario = new Cliente("9999", "Carlos López", "carlos@example.com", "abc789");
 
-        String esperado = "Cliente: " + "\n" +
+        String esperado = "Cliente: " +
+                "\n" +
                 "\n Nombre: Carlos López" +
                 "\n ID: 9999" +
                 "\n Email: carlos@example.com" +

@@ -26,11 +26,11 @@ class BancoTest {
         cliente1 = new Cliente("101", "Juan", "@gmail", "1234");
         cliente2 = new Admin("101", "Sebas", "@gmail", "1234", "02");
         cliente3 = new Cliente("102", "PP", "@gmail", "1234");
-        cuenta1 = new CuentaAhorros("147", 5000);
-        cuenta2 = new CuentaCorriente("145", 5000);
+        cuenta1 = new CuentaAhorros("147", 1000000);
+        cuenta2 = new CuentaCorriente("145", 10000000);
         transaccion1 = new Transaccion("TX001", LocalDate.now(), "2000", "Depostito", TipoTransaccion.DEPOSITO, banco);
         transaccion2 = new Transaccion("TX002", LocalDate.now(), "2000", "retirio", TipoTransaccion.RETIRO, banco);
-        transaccion3 = new Transaccion("TX001", LocalDate.now(), "2000", "trnasferencia", TipoTransaccion.TRANSFERENCIA, banco);
+        transaccion3 = new Transaccion("TX003", LocalDate.now(), "2000", "trnasferencia", TipoTransaccion.TRANSFERENCIA, banco);
     }
 
     @Test
@@ -98,6 +98,64 @@ class BancoTest {
 
     @Test
     void testVerInfoTransaccion() throws Exception {
-        banco.verInfoTransaccion("145");
+        banco.registrarUsuario(cliente1, cuenta1);
+        banco.agregarCuentaCliente(cuenta2, cliente1);
+        boolean registrada = banco.registrarTransaccion(transaccion3, "145", "147");
+        assertEquals(transaccion3.toString(), banco.verInfoTransaccion("TX003"));
     }
+
+    @Test
+    void testValidarCredencialesCorrectas() throws Exception {
+        banco.registrarUsuario(cliente1, cuenta1);
+
+        Usuario usuarioValidado = banco.validarCredenciales("101", "1234");
+        assertNotNull(usuarioValidado, "El usuario no debería ser null.");
+        assertEquals(cliente1, usuarioValidado, "Las credenciales deberían coincidir.");
+    }
+
+    @Test
+    void testValidarCredencialesIncorrectas() {
+        Usuario usuarioInvalido = banco.validarCredenciales("999", "wrongPass");
+        assertNull(usuarioInvalido, "Un usuario inválido debería devolver null.");
+    }
+
+    @Test
+    void testMonitoreoTransaccionSospechosa() throws Exception {
+        Transaccion transaccionFraudulenta = new Transaccion("FRAUDE001", LocalDate.now(), "150000", "Transferencia Sospechosa", TipoTransaccion.TRANSFERENCIA, banco);
+        banco.registrarUsuario(cliente1, cuenta1);
+        banco.agregarCuentaCliente(cuenta2, cliente1);
+        banco.registrarTransaccion(transaccionFraudulenta, "145", "147");
+        banco.monitorearTransacciones(transaccionFraudulenta);
+
+        String reporteFraudes = banco.generarReporteAvanzado("fraudes");
+        assertTrue(reporteFraudes.contains("FRAUDE001"), "La transacción fraudulenta no aparece en el reporte.");
+    }
+
+    @Test
+    void testGenerarReporteAvanzadoTransacciones() throws Exception {
+        banco.registrarTransaccion(transaccion1, "145");
+
+        String reporte = banco.generarReporteAvanzado("transacciones");
+        assertNotNull(reporte, "El reporte no debería ser null.");
+        assertTrue(reporte.contains("TX001"), "La transacción debería estar en el reporte.");
+    }
+
+    @Test
+    void testGenerarReporteAvanzadoFraudes() throws Exception {
+        banco.registrarUsuario(cliente1, cuenta1);
+        banco.agregarCuentaCliente(cuenta2, cliente1);
+        banco.registrarTransaccion(transaccion3, "145", "147");
+        banco.monitorearTransacciones(transaccion3);
+        String reporte = banco.generarReporteAvanzado("fraudes");
+        assertNotNull(reporte, "El reporte de fraudes no debería ser null.");
+        assertFalse(reporte.contains("TX003"), "La transacción no es sospechosa, no debería estar en el reporte.");
+    }
+
+    @Test
+    void testGenerarReporteAvanzadoSinDatos() throws Exception {
+        String reporte = banco.generarReporteAvanzado("transacciones");
+        assertEquals("⚠ No hay transacciones registradas.", reporte, "El mensaje debería indicar que no hay datos.");
+    }
+
+
 }

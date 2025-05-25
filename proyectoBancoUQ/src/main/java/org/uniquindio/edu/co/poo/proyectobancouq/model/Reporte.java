@@ -39,7 +39,7 @@ public class Reporte {
             reporte += "⚠ No hay transacciones registradas.\n";
         } else {
             for (Transaccion transaccion : transacciones) {
-                reporte += "🔹 " + transaccion.getFecha() + " | " + transaccion.getTipoTransaccion() + " | $" + transaccion.getMonto() + "\n";
+                reporte += "codigo: " + transaccion.getCodigo() + " | " + transaccion.getFecha() + " | " + transaccion.getTipoTransaccion() + " | $" + transaccion.getMonto() + "\n";
             }
         }
 
@@ -51,7 +51,8 @@ public class Reporte {
 
         for (Transaccion transaccion : transacciones) {
             if (transaccion.getMonto() > 10000) { // Ejemplo de transacción sospechosa
-                reporte += "⚠ ALERTA - Transacción de alto valor: $" + transaccion.getMonto() + " - Fecha: " + transaccion.getFecha() + "\n";
+                reporte += "⚠ ALERTA - Transacción de alto valor: $" + transaccion.getMonto() + " - Fecha: " +
+                        transaccion.getFecha() + "\n con codigo: " + transaccion.getCodigo() + "\n";
             }
         }
 
