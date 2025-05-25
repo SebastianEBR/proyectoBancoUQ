@@ -1,53 +1,82 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #1E1E1E;;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.uniquindio.edu.co.poo.proyectobancouq.IngresoDeCajero">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #1E1E1E;;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.uniquindio.edu.co.poo.proyectobancouq.viewController.IngresoAdmin">
    <children>
       <Pane prefHeight="79.0" prefWidth="600.0" style="-fx-background-color: #2C2C2E;;">
          <children>
-            <Label alignment="CENTER" layoutX="193.0" layoutY="21.0" prefHeight="38.0" prefWidth="215.0" text="Administrador" textFill="WHITE" underline="true">
+            <Label alignment="CENTER" layoutX="201.0" layoutY="21.0" prefHeight="38.0" prefWidth="198.0" text="Administrador" textFill="WHITE" underline="true">
                <font>
                   <Font name="Arial Bold" size="25.0" />
                </font>
             </Label>
          </children>
       </Pane>
-      <Label layoutX="81.0" layoutY="120.0" text="Usuario" textFill="WHITE" underline="true">
-         <font>
-            <Font name="System Bold" size="20.0" />
-         </font>
-      </Label>
-      <Label layoutX="81.0" layoutY="185.0" text="Contraceña" textFill="WHITE" underline="true">
-         <font>
-            <Font name="System Bold" size="20.0" />
-         </font>
-      </Label>
-      <PasswordField layoutX="224.0" layoutY="187.0" prefHeight="26.0" prefWidth="228.0" promptText="Ingrese su contraseña o Id unico" style="-fx-background-color: #2C2C2E; -fx-border-color: #2ECC71; -fx-background-radius: 5; -fx-border-radius: 5; -fx-text-fill: #2ECC71;;" />
-      <TextField layoutX="224.0" layoutY="122.0" prefHeight="26.0" prefWidth="228.0" promptText="Ingrese su Usuario" style="-fx-background-color: #2C2C2E; -fx-border-color: #2ECC71; -fx-border-radius: 5; -fx-background-radius: 5; -fx-text-fill: #2ECC71;;">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </TextField>
-      <Button layoutX="241.0" layoutY="245.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="118.0" style="-fx-background-color: #2ECC71;; -fx-text-fill: black; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, black, 5, 0, 2, 2);;" text="Ingresar">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </Button>
-      <Button layoutX="241.0" layoutY="310.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="118.0" style="-fx-background-color: #2ECC71;; -fx-text-fill: black; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, black, 5, 0, 2, 2);;" text="Regresar">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </Button>
+      <GridPane layoutX="38.0" layoutY="91.0" prefHeight="168.0" prefWidth="522.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Label text="Usuario" textFill="WHITE" underline="true">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label text="Codigo Unico de Cajero" textFill="WHITE" underline="true" GridPane.rowIndex="2">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtINgreseUsuario" prefHeight="26.0" prefWidth="228.0" promptText="Ingrese su Usuario" style="-fx-background-color: #2C2C2E; -fx-border-color: #2ECC71; -fx-border-radius: 5; -fx-background-radius: 5; -fx-text-fill: #2ECC71;;" GridPane.columnIndex="1">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </TextField>
+            <PasswordField fx:id="txtIngreseContraceña" prefHeight="26.0" prefWidth="228.0" promptText="Ingrese su contraceña" style="-fx-background-color: #2C2C2E; -fx-border-color: #2ECC71; -fx-background-radius: 5; -fx-border-radius: 5; -fx-text-fill: #2ECC71;;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <PasswordField fx:id="txtIngreseCigoUnico" prefHeight="26.0" prefWidth="228.0" promptText="Ingrese Codigo Unico de Empleado" style="-fx-background-color: #2C2C2E; -fx-border-color: #2ECC71; -fx-background-radius: 5; -fx-border-radius: 5; -fx-text-fill: #2ECC71;;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Label text="Contraceña" textFill="WHITE" underline="true" GridPane.rowIndex="1">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+         </children>
+      </GridPane>
+      <GridPane layoutX="110.0" layoutY="273.0" prefHeight="86.0" prefWidth="378.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="201.79998779296875" minWidth="10.0" prefWidth="188.20001220703125" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="206.60003662109375" minWidth="10.0" prefWidth="189.79998779296875" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Button fx:id="btnRegresar" mnemonicParsing="false" onAction="#RegresarAElccion" prefHeight="38.0" prefWidth="118.0" style="-fx-background-color: #2ECC71;; -fx-text-fill: black; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, black, 5, 0, 2, 2);;" text="Regresar" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnIngresar" mnemonicParsing="false" onAction="#IngresarComoCajero" prefHeight="38.0" prefWidth="118.0" style="-fx-background-color: #2ECC71;; -fx-text-fill: black; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, black, 5, 0, 2, 2);;" text="Ingresar" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
+         </children>
+      </GridPane>
    </children>
 </AnchorPane>

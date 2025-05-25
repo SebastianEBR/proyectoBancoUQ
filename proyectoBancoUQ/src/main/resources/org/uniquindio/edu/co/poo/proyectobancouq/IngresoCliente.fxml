@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="462.0" prefWidth="600.0" style="-fx-background-color: linear-gradient(to bottom, #2C2C2E 0%, #2C2C2E 35%, #2F4F3A 60%, #2ECC71 85%, #2ECC71 100%);;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.uniquindio.edu.co.poo.proyectobancouq.viewController.IngresoCliente">
+   <children>
+      <Pane prefHeight="79.0" prefWidth="600.0" style="-fx-background-color: black;">
+         <children>
+            <Label alignment="CENTER" layoutX="221.0" layoutY="21.0" prefHeight="38.0" prefWidth="158.0" text="Cliente" textFill="WHITE" underline="true">
+               <font>
+                  <Font name="Arial Bold" size="25.0" />
+               </font>
+            </Label>
+            <Button layoutX="40.0" layoutY="28.0" mnemonicParsing="false" onAction="#salirInicio" prefHeight="16.0" prefWidth="83.0" style="-fx-background-color: black; -fx-text-fill: #2ECC71; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, black, 5, 0, 2, 2); -fx-border-color: #2ECC71; -fx-border-radius: 10;" text="Salir">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
+         </children>
+      </Pane>
+      <GridPane layoutX="49.0" layoutY="79.0" prefHeight="102.0" prefWidth="501.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="201.79998779296875" minWidth="10.0" prefWidth="188.79996337890626" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="201.79998779296875" minWidth="10.0" prefWidth="188.79996337890626" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="201.79998779296875" minWidth="10.0" prefWidth="188.79996337890626" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Button mnemonicParsing="false" onAction="#desplegarDeposito" prefHeight="38.0" prefWidth="118.0" style="-fx-background-color: #2ECC71;; -fx-text-fill: black; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, black, 5, 0, 2, 2);;" text="Deposito" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#desplegarRetiro" prefHeight="38.0" prefWidth="118.0" style="-fx-background-color: #2ECC71;; -fx-text-fill: black; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, black, 5, 0, 2, 2);;" text="Retiro" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#desplegarTransferencia" prefHeight="38.0" prefWidth="118.0" style="-fx-background-color: #2ECC71;; -fx-text-fill: black; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, black, 5, 0, 2, 2);;" text="Transferencia" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
+         </children>
+      </GridPane>
+      <AnchorPane fx:id="PaneDeposito" layoutX="72.0" layoutY="180.0" prefHeight="244.0" prefWidth="456.0" style="-fx-background-color: #2C2C2E; -fx-border-color: #2ECC71;">
+         <children>
+            <Label alignment="CENTER" layoutX="164.0" layoutY="-1.0" prefHeight="38.0" prefWidth="127.0" text="Deposito" textFill="WHITE" underline="true">
+               <font>
+                  <Font name="System Bold" size="30.0" />
+               </font>
+            </Label>
+            <GridPane layoutX="15.0" layoutY="60.0" prefHeight="102.0" prefWidth="430.0">
+               <columnConstraints>
+                  <ColumnConstraints prefWidth="208.0" />
+                  <ColumnConstraints prefWidth="216.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <Label prefHeight="31.0" prefWidth="170.0" text="Numero de cuenta" textFill="WHITE" underline="true">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="txtNumeroCuentaDeposito" promptText="Ingrese el  numero de cuenta" style="-fx-background-color: #2C2C2E; -fx-text-fill: #2ECC71; -fx-border-color: #2ECC71; -fx-border-radius: 5; -fx-background-radius: 5;" GridPane.columnIndex="1">
+                     <cursor>
+                        <Cursor fx:constant="TEXT" />
+                     </cursor>
+                  </TextField>
+                  <Label prefHeight="31.0" prefWidth="170.0" text="Cantidad" textFill="WHITE" underline="true" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="txtCantidadDeposito" promptText="Cantidad a depositar" style="-fx-background-color: #2C2C2E; -fx-text-fill: #2ECC71; -fx-border-color: #2ECC71; -fx-border-radius: 5; -fx-background-radius: 5;" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <cursor>
+                        <Cursor fx:constant="TEXT" />
+                     </cursor>
+                  </TextField>
+               </children>
+            </GridPane>
+            <Button layoutX="163.0" layoutY="182.0" mnemonicParsing="false" onAction="#HecerDeposito" prefHeight="31.0" prefWidth="135.0" style="-fx-background-color: black; -fx-text-fill: #2ECC71; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, black, 5, 0, 2, 2); -fx-border-color: #2ECC71; -fx-border-radius: 10;" text="Hacer Deposito">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="PaneRetiro" layoutX="72.0" layoutY="217.0" prefHeight="200.0" prefWidth="456.0" style="-fx-background-color: #2C2C2E; -fx-border-color: #2ECC71;" visible="false">
+         <children>
+            <Label alignment="CENTER" layoutX="183.0" text="Retiro" textFill="WHITE" underline="true">
+               <font>
+                  <Font name="System Bold" size="30.0" />
+               </font>
+            </Label>
+            <GridPane layoutX="14.0" layoutY="46.0" prefHeight="96.0" prefWidth="424.0">
+               <columnConstraints>
+                  <ColumnConstraints prefWidth="208.0" />
+                  <ColumnConstraints prefWidth="216.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <Label prefHeight="31.0" prefWidth="170.0" text="Numero de cuenta" textFill="WHITE" underline="true">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="txtNumeroCuentaRetiro" promptText="Ingrese el  numero de cuenta" style="-fx-background-color: #2C2C2E; -fx-text-fill: #2ECC71; -fx-border-color: #2ECC71; -fx-border-radius: 5; -fx-background-radius: 5;" GridPane.columnIndex="1">
+                     <cursor>
+                        <Cursor fx:constant="TEXT" />
+                     </cursor>
+                  </TextField>
+                  <Label prefHeight="31.0" prefWidth="170.0" text="Cantidad" textFill="WHITE" underline="true" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="txtCantidadRetiro" promptText="Cantidad a retirar" style="-fx-background-color: #2C2C2E; -fx-text-fill: #2ECC71; -fx-border-color: #2ECC71; -fx-border-radius: 5; -fx-background-radius: 5;" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <cursor>
+                        <Cursor fx:constant="TEXT" />
+                     </cursor>
+                  </TextField>
+               </children>
+            </GridPane>
+            <Button layoutX="184.0" layoutY="154.0" mnemonicParsing="false" onAction="#HacerRetiro" prefHeight="16.0" prefWidth="83.0" style="-fx-background-color: black; -fx-text-fill: #2ECC71; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, black, 5, 0, 2, 2); -fx-border-color: #2ECC71; -fx-border-radius: 10;" text="Retirar">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="PaneTranferencia" layoutX="72.0" layoutY="181.0" prefHeight="264.0" prefWidth="456.0" style="-fx-background-color: #2C2C2E; -fx-border-color: #2ECC71;" visible="false">
+         <children>
+            <Label alignment="CENTER" layoutX="131.0" layoutY="14.0" text="Transferencia" textFill="WHITE" underline="true">
+               <font>
+                  <Font name="System Bold" size="30.0" />
+               </font>
+            </Label>
+            <GridPane layoutX="14.0" layoutY="69.0" prefHeight="129.0" prefWidth="424.0">
+               <columnConstraints>
+                  <ColumnConstraints maxWidth="294.4000244140625" minWidth="212.79998779296875" prefWidth="213.6000244140625" />
+                  <ColumnConstraints maxWidth="211.20001220703125" minWidth="129.5999755859375" prefWidth="211.19997558593747" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints maxHeight="43.4" minHeight="10.0" prefHeight="43.4" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="43.4" minHeight="10.0" prefHeight="43.4" vgrow="SOMETIMES" />
+                  <RowConstraints prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <Label prefHeight="31.0" prefWidth="170.0" text="Numero de cuenta" textFill="WHITE" underline="true">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="txtNumeroCuentaEnvia" promptText="Ingrese el  numero de cuenta" style="-fx-background-color: #2C2C2E; -fx-text-fill: #2ECC71; -fx-border-color: #2ECC71; -fx-border-radius: 5; -fx-background-radius: 5;" GridPane.columnIndex="1">
+                     <cursor>
+                        <Cursor fx:constant="TEXT" />
+                     </cursor>
+                  </TextField>
+                  <Label prefHeight="31.0" prefWidth="170.0" text="Cantidad" textFill="WHITE" underline="true" GridPane.rowIndex="2">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="txtCantidadTransferencia" promptText="Cantidad de tranferencia" style="-fx-background-color: #2C2C2E; -fx-text-fill: #2ECC71; -fx-border-color: #2ECC71; -fx-border-radius: 5; -fx-background-radius: 5;" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <cursor>
+                        <Cursor fx:constant="TEXT" />
+                     </cursor>
+                  </TextField>
+                  <Label prefHeight="31.0" prefWidth="226.0" text="Numero de cuenta destino" textFill="WHITE" underline="true" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="txtNumeroCuentaDestino" promptText="Ingrese Numero de cuenta de destino" style="-fx-background-color: #2C2C2E; -fx-text-fill: #2ECC71; -fx-border-color: #2ECC71; -fx-border-radius: 5; -fx-background-radius: 5;" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <cursor>
+                        <Cursor fx:constant="TEXT" />
+                     </cursor>
+                  </TextField>
+               </children>
+            </GridPane>
+            <Button layoutX="177.0" layoutY="218.0" mnemonicParsing="false" onAction="#HacerTransferencia" prefHeight="31.0" prefWidth="97.0" style="-fx-background-color: black; -fx-text-fill: #2ECC71; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, black, 5, 0, 2, 2); -fx-border-color: #2ECC71; -fx-border-radius: 10;" text="Transferir">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

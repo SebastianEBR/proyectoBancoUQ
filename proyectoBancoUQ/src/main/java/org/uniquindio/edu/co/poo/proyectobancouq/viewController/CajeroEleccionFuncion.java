@@ -8,7 +8,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
-public class Cajero {
+public class CajeroEleccionFuncion {
 
     @FXML
     private ResourceBundle resources;
@@ -40,10 +40,10 @@ public class Cajero {
 
     @FXML
     void initialize() {
-        assert btnIRaRegistrarCliente != null : "fx:id=\"btnIRaRegistrarCliente\" was not injected: check your FXML file 'Cajero.fxml'.";
-        assert btnIrAhacerTransaccion != null : "fx:id=\"btnIrAhacerTransaccion\" was not injected: check your FXML file 'Cajero.fxml'.";
-        assert btnIrAingresocomocajero != null : "fx:id=\"btnIrAingresocomocajero\" was not injected: check your FXML file 'Cajero.fxml'.";
-        assert btnIrListaDeclientes != null : "fx:id=\"btnIrListaDeclientes\" was not injected: check your FXML file 'Cajero.fxml'.";
+        assert btnIRaRegistrarCliente != null : "fx:id=\"btnIRaRegistrarCliente\" was not injected: check your FXML file 'CajeroElccionFuncion.fxml'.";
+        assert btnIrAhacerTransaccion != null : "fx:id=\"btnIrAhacerTransaccion\" was not injected: check your FXML file 'CajeroElccionFuncion.fxml'.";
+        assert btnIrAingresocomocajero != null : "fx:id=\"btnIrAingresocomocajero\" was not injected: check your FXML file 'CajeroElccionFuncion.fxml'.";
+        assert btnIrListaDeclientes != null : "fx:id=\"btnIrListaDeclientes\" was not injected: check your FXML file 'CajeroElccionFuncion.fxml'.";
 
     }
 

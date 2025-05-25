@@ -4,6 +4,7 @@
 
 package org.uniquindio.edu.co.poo.proyectobancouq.viewController;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -11,6 +12,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import org.uniquindio.edu.co.poo.proyectobancouq.app.App;
+import org.uniquindio.edu.co.poo.proyectobancouq.utills.Paths;
 
 public class IngresoDeCajero {
 
@@ -41,7 +44,8 @@ public class IngresoDeCajero {
     }
 
     @FXML
-    void RegresarAElccion(ActionEvent event) {
+    void RegresarAElccion(ActionEvent event) throws IOException {
+        App.app.setScene(Paths.ELECCION_USUARIO);
 
     }
 

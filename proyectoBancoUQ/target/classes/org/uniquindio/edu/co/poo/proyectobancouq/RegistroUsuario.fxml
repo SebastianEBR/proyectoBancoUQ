@@ -20,7 +20,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="784.0" prefWidth="871.0" style="-fx-background-color: #1E1E1E;;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.uniquindio.edu.co.poo.proyectobancouq.registroUsuario">
+<AnchorPane prefHeight="784.0" prefWidth="871.0" style="-fx-background-color: #1E1E1E;;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.uniquindio.edu.co.poo.proyectobancouq.viewController.RegistroUsuario">
    <children>
       <Pane prefHeight="113.0" prefWidth="871.0" style="-fx-background-color: #2C2C2E;;">
          <children>

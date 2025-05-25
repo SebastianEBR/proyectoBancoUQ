@@ -5,11 +5,14 @@
 
 package org.uniquindio.edu.co.poo.proyectobancouq.viewController;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import org.uniquindio.edu.co.poo.proyectobancouq.app.App;
+import org.uniquindio.edu.co.poo.proyectobancouq.utills.Paths;
 
 public class EleccionUsuario {
 
@@ -29,17 +32,18 @@ public class EleccionUsuario {
     private Button btnCliente; // Value injected by FXMLLoader
 
     @FXML
-    void IrAAdmin(ActionEvent event) {
-
+    void IrAAdmin(ActionEvent event) throws IOException {
+        App.app.setScene(Paths.INGRESO_COMO_ADMIN);
     }
 
     @FXML
-    void IrACaejro(ActionEvent event) {
-
+    void IrACaejro(ActionEvent event) throws IOException {
+        App.app.setScene(Paths.INGRESO_COMO_CAJERO);
     }
 
     @FXML
-    void irACLiente(ActionEvent event) {
+    void irACLiente(ActionEvent event) throws IOException {
+        App.app.setScene(Paths.INGRESO_COMO_CLIENTE);
 
     }
 
