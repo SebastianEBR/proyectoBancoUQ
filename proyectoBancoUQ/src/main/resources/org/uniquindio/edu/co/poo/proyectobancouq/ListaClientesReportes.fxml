@@ -14,46 +14,46 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="784.0" prefWidth="871.0" style="-fx-background-color: #1E1E1E;;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.uniquindio.edu.co.poo.proyectobancouq.registroUsuario">
+<AnchorPane prefHeight="784.0" prefWidth="871.0" style="-fx-background-color: #1E1E1E;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.uniquindio.edu.co.poo.proyectobancouq.controller.ListaClientesReportesController">
    <children>
-      <Pane prefHeight="113.0" prefWidth="871.0" style="-fx-background-color: #2C2C2E;;">
+      <Pane prefHeight="113.0" prefWidth="871.0" style="-fx-background-color: #2C2C2E;">
          <children>
             <Label alignment="CENTER" layoutX="324.0" layoutY="25.0" text="Lista de clientes" textFill="WHITE" underline="true">
                <font>
                   <Font name="System Bold" size="30.0" />
                </font>
             </Label>
-            <Label layoutX="98.0" layoutY="70.0" text="&quot;Listado de clientes registrados en el banco. Por favor, seleccione un cliente y, a continuación, elija la acción que desea realizar.&quot;" textFill="WHITE" />
+            <Label layoutX="98.0" layoutY="70.0" text="Listado de clientes registrados en el banco. Por favor, seleccione un cliente y, a continuación, elija la acción que desea realizar." textFill="WHITE" />
          </children>
       </Pane>
       <TableView fx:id="tableClientes" layoutX="32.0" layoutY="127.0" prefHeight="218.0" prefWidth="805.0" style="-fx-background-color: #1E1E1E; -fx-border-color: #2ECC71; -fx-border-width: 2; -fx-table-cell-border-color: transparent;">
          <columns>
-            <TableColumn fx:id="colID" prefWidth="202.40001678466797" text="Identificacion" />
-            <TableColumn fx:id="colNombres" prefWidth="271.2000427246094" text="Nombre" />
-            <TableColumn fx:id="colCorreo" prefWidth="329.5999755859375" text="Correo Electronico" />
+            <TableColumn fx:id="colID" prefWidth="202.4" text="Identificacion" />
+            <TableColumn fx:id="colNombres" prefWidth="271.2" text="Nombre" />
+            <TableColumn fx:id="colCorreo" prefWidth="329.6" text="Correo Electronico" />
          </columns>
       </TableView>
       <GridPane alignment="CENTER" layoutX="116.0" layoutY="345.0" prefHeight="68.0" prefWidth="652.0">
          <columnConstraints>
-            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" prefWidth="100.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" prefWidth="100.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" prefWidth="100.0" />
          </columnConstraints>
          <rowConstraints>
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <Button fx:id="btnBuscar" mnemonicParsing="false" onAction="#BuscarUsuario" prefHeight="31.0" prefWidth="154.0" style="-fx-background-color: #2ECC71;; -fx-text-fill: black; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, black, 5, 0, 2, 2);;" text="Busacar">
+            <Button fx:id="btnBuscar" mnemonicParsing="false" onAction="#BuscarUsuario" prefHeight="31.0" prefWidth="154.0" style="-fx-background-color: #2ECC71; -fx-text-fill: black; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, black, 5, 0, 2, 2);" text="Buscar">
                <font>
                   <Font name="System Bold" size="17.0" />
                </font>
             </Button>
-            <Button fx:id="btnNuevaCuenta" mnemonicParsing="false" onAction="#mostrarNuevaCuenta" prefHeight="31.0" prefWidth="154.0" style="-fx-background-color: #2ECC71;; -fx-text-fill: black; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, black, 5, 0, 2, 2);;" text="Nueva Cuenta" GridPane.columnIndex="2">
+            <Button fx:id="btnMostrarReporte" mnemonicParsing="false" onAction="#mostrarReporte" prefHeight="31.0" prefWidth="154.0" style="-fx-background-color: #2ECC71; -fx-text-fill: black; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, black, 5, 0, 2, 2);" text="Reporte" GridPane.columnIndex="1">
                <font>
                   <Font name="System Bold" size="17.0" />
                </font>
             </Button>
-            <Button fx:id="btnMostrarReporte" mnemonicParsing="false" onAction="#mostrarReporte" prefHeight="31.0" prefWidth="154.0" style="-fx-background-color: #2ECC71;; -fx-text-fill: black; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, black, 5, 0, 2, 2);;" text="Reporte" GridPane.columnIndex="1">
+            <Button fx:id="btnNuevaCuenta" mnemonicParsing="false" onAction="#mostrarNuevaCuenta" prefHeight="31.0" prefWidth="154.0" style="-fx-background-color: #2ECC71; -fx-text-fill: black; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, black, 5, 0, 2, 2);" text="Nueva Cuenta" GridPane.columnIndex="2">
                <font>
                   <Font name="System Bold" size="17.0" />
                </font>
@@ -62,65 +62,53 @@
       </GridPane>
       <AnchorPane fx:id="ReportePane" layoutX="109.0" layoutY="425.0" prefHeight="278.0" prefWidth="665.0" style="-fx-background-color: #2C2C2E; -fx-border-color: #2ECC71;" visible="false">
          <children>
-            <TableView fx:id="tableReporte" layoutX="7.0" layoutY="61.0" prefHeight="202.0" prefWidth="652.0" style="-fx-background-color: #1E1E1E; -fx-border-color: #2ECC71; -fx-border-width: 2; -fx-table-cell-border-color: transparent;">
-               <columns>
-                  <TableColumn fx:id="colFechaTransaccion" prefWidth="299.199951171875" text="Fecha" />
-                  <TableColumn fx:id="colTipoTransaccion" prefWidth="302.40008544921875" text="Tipo Transaccion" />
-               </columns>
-            </TableView>
             <Label alignment="CENTER" layoutX="277.0" text="Reporte" textFill="WHITE" underline="true">
                <font>
                   <Font name="System Bold" size="30.0" />
                </font>
             </Label>
+            <TableView fx:id="tableReporte" layoutX="7.0" layoutY="61.0" prefHeight="202.0" prefWidth="652.0" style="-fx-background-color: #1E1E1E; -fx-border-color: #2ECC71; -fx-border-width: 2; -fx-table-cell-border-color: transparent;">
+               <columns>
+                  <TableColumn fx:id="colFechaTransaccion" prefWidth="299.2" text="Fecha" />
+                  <TableColumn fx:id="colTipoTransaccion" prefWidth="302.4" text="Tipo Transaccion" />
+               </columns>
+            </TableView>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="PaneNuevaCUenta" layoutX="66.0" layoutY="435.0" prefHeight="289.0" prefWidth="715.0" style="-fx-background-color: #2C2C2E #2C2C2E; -fx-border-color: #2ECC71;" visible="false">
+      <AnchorPane fx:id="PaneNuevaCUenta" layoutX="66.0" layoutY="435.0" prefHeight="289.0" prefWidth="715.0" style="-fx-background-color: #2C2C2E; -fx-border-color: #2ECC71;" visible="false">
          <children>
-            <GridPane layoutX="146.0" layoutY="59.0" prefHeight="142.0" prefWidth="424.0">
-               <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="257.59999084472656" minWidth="10.0" prefWidth="208.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="270.3999938964844" minWidth="10.0" prefWidth="216.0" />
-               </columnConstraints>
-               <rowConstraints>
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-               </rowConstraints>
-               <children>
-                  <TextField fx:id="txtNuevoNumCuenta" promptText="Ingrese el nuevo numero de cuenta" style="-fx-background-color: #2C2C2E; -fx-text-fill: #2ECC71; -fx-border-color: #2ECC71; -fx-border-radius: 5; -fx-background-radius: 5;" GridPane.columnIndex="1">
-                     <cursor>
-                        <Cursor fx:constant="TEXT" />
-                     </cursor>
-                  </TextField>
-                  <Label prefHeight="31.0" prefWidth="170.0" text="Numero de cuenta" textFill="WHITE" underline="true">
-                     <font>
-                        <Font name="System Bold" size="18.0" />
-                     </font>
-                  </Label>
-                  <Label prefHeight="31.0" prefWidth="170.0" text="Salado" textFill="WHITE" underline="true" GridPane.rowIndex="1">
-                     <font>
-                        <Font name="System Bold" size="18.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="txtSaldoInicialCuenta" promptText="Ingrese el saldo inicial de la cuenta" style="-fx-background-color: #2C2C2E; -fx-text-fill: #2ECC71; -fx-border-color: #2ECC71; -fx-border-radius: 5; -fx-background-radius: 5;" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                     <cursor>
-                        <Cursor fx:constant="TEXT" />
-                     </cursor>
-                  </TextField>
-                  <Label prefHeight="31.0" prefWidth="170.0" text="Tipo de Cuenta" textFill="WHITE" underline="true" GridPane.rowIndex="2">
-                     <font>
-                        <Font name="System Bold" size="18.0" />
-                     </font>
-                  </Label>
-                  <ComboBox fx:id="SelcTipoCuenta" prefHeight="26.0" prefWidth="217.0" style="-fx-background-color: #2C2C2E; -fx-border-color: #2ECC71; -fx-text-fill: white;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-               </children>
-            </GridPane>
             <Label alignment="CENTER" layoutX="259.0" layoutY="14.0" text="Nueva Cuenta" textFill="WHITE" underline="true">
                <font>
                   <Font name="System Bold" size="30.0" />
                </font>
             </Label>
+            <GridPane layoutX="146.0" layoutY="59.0" prefHeight="142.0" prefWidth="424.0">
+               <columnConstraints>
+                  <ColumnConstraints prefWidth="208.0" />
+                  <ColumnConstraints prefWidth="216.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <Label prefHeight="31.0" prefWidth="170.0" text="Numero de cuenta" textFill="WHITE" underline="true" />
+                  <TextField fx:id="txtNuevoNumCuenta" promptText="Ingrese el nuevo numero de cuenta" style="-fx-background-color: #2C2C2E; -fx-text-fill: #2ECC71; -fx-border-color: #2ECC71; -fx-border-radius: 5; -fx-background-radius: 5;" GridPane.columnIndex="1">
+                     <cursor>
+                        <Cursor fx:constant="TEXT" />
+                     </cursor>
+                  </TextField>
+                  <Label prefHeight="31.0" prefWidth="170.0" text="Salado" textFill="WHITE" underline="true" GridPane.rowIndex="1" />
+                  <TextField fx:id="txtSaldoInicialCuenta" promptText="Ingrese el saldo inicial de la cuenta" style="-fx-background-color: #2C2C2E; -fx-text-fill: #2ECC71; -fx-border-color: #2ECC71; -fx-border-radius: 5; -fx-background-radius: 5;" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <cursor>
+                        <Cursor fx:constant="TEXT" />
+                     </cursor>
+                  </TextField>
+                  <Label prefHeight="31.0" prefWidth="170.0" text="Tipo de Cuenta" textFill="WHITE" underline="true" GridPane.rowIndex="2" />
+                  <ComboBox fx:id="SelcTipoCuenta" prefHeight="26.0" prefWidth="217.0" style="-fx-background-color: #2C2C2E; -fx-border-color: #2ECC71; -fx-text-fill: white;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+               </children>
+            </GridPane>
          </children>
       </AnchorPane>
    </children>
