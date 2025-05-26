@@ -5,35 +5,43 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import org.uniquindio.edu.co.poo.proyectobancouq.controller.CrudUsuarioController;
 import org.uniquindio.edu.co.poo.proyectobancouq.model.Admin;
 import org.uniquindio.edu.co.poo.proyectobancouq.model.Banco;
 import org.uniquindio.edu.co.poo.proyectobancouq.utills.Paths;
 import org.uniquindio.edu.co.poo.proyectobancouq.viewController.IngresoAdmin;
 import org.uniquindio.edu.co.poo.proyectobancouq.controller.AdminController;
+import org.uniquindio.edu.co.poo.proyectobancouq.viewController.RegistroUsuario;
 
 import java.io.IOException;
 
 public class App extends Application {
+
     public static App app;
     private Stage stageWindow;
-
-    public Banco banco = new Banco("Banco UQ", "03071022");
+    public final Banco banco = new Banco("Banco UQ", "03071022");
 
     public static void main(String[] args) {
         launch();
     }
 
     @Override
-    public void start(Stage stage) throws IOException {
+    public void start(Stage stage) {
         app = this;
         inicializarAdministrador();
         stageWindow = stage;
-        setScene(Paths.ELECCION_USUARIO);
+
+        try {
+            setScene(Paths.ELECCION_USUARIO);
+        } catch (IOException e) {
+            System.out.println("❌ Error al cargar la escena inicial: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 
     private void inicializarAdministrador() {
         try {
-            Admin admin = new Admin("123", "admin", "<EMAIL>", "001", "00001");
+            Admin admin = new Admin("123", "admin", "admin@bancouq.com", "001", "00001"); // ✅ Corregido EMAIL por un valor lógico
 
             if (banco.buscarUsuario(admin.getId()).isEmpty()) {
                 banco.registrarUsuario(admin);
@@ -50,20 +58,33 @@ public class App extends Application {
 
     public void setScene(String path) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(path));
-        try {
-            AnchorPane pane = loader.load();
-            Scene scene = new Scene(pane);
-            stageWindow.setScene(scene);
-            stageWindow.show();
+        AnchorPane pane = loader.load();
+        Scene scene = new Scene(pane);
+        stageWindow.setScene(scene);
+        stageWindow.show();
 
-            // Si cargamos la pantalla de ingreso del administrador, pasamos el controlador
-            if (path.equals(Paths.INGRESO_COMO_ADMIN)) {
-                IngresoAdmin ingresoAdminController = loader.getController();
-                ingresoAdminController.setAdminController(new AdminController(banco)); // Pasa la instancia correctamente
+        System.out.println("🛠 Cargando: " + path);
+        System.out.println("📌 Comprobando controlador...");
+
+        // Configurar controladores después de cargar la escena
+        if (path.equals(Paths.REGISTRO_USUARIO)) {
+            RegistroUsuario registroUsuarioController = loader.getController();
+
+            if (registroUsuarioController == null) {
+                System.out.println("❌ Error: `RegistroUsuario.fxml` no se está cargando correctamente.");
+                return;
             }
 
-        } catch (IOException e) {
-            e.printStackTrace();
+            registroUsuarioController.setCrudUsuarioController(new CrudUsuarioController(App.app.banco));
+        } else if (path.equals(Paths.INGRESO_COMO_ADMIN)) {
+            IngresoAdmin ingresoAdminController = loader.getController();
+
+            if (ingresoAdminController == null) {
+                System.out.println("❌ Error: `IngresoAdmin.fxml` no se está cargando correctamente.");
+                return;
+            }
+
+            ingresoAdminController.setAdminController(new AdminController(App.app.banco));
         }
     }
 }

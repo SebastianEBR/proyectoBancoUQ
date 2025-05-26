@@ -43,7 +43,7 @@
                   <Font name="System Bold" size="20.0" />
                </font>
             </Label>
-            <TextField fx:id="txtINgreseUsuario" prefHeight="26.0" prefWidth="228.0" promptText="Ingrese su Usuario" style="-fx-background-color: #2C2C2E; -fx-border-color: #2ECC71; -fx-border-radius: 5; -fx-background-radius: 5; -fx-text-fill: #2ECC71;;" GridPane.columnIndex="1">
+            <TextField fx:id="txtIngreseUsuario" prefHeight="26.0" prefWidth="228.0" promptText="Ingrese su Usuario" style="-fx-background-color: #2C2C2E; -fx-border-color: #2ECC71; -fx-border-radius: 5; -fx-background-radius: 5; -fx-text-fill: #2ECC71;;" GridPane.columnIndex="1">
                <font>
                   <Font size="14.0" />
                </font>

@@ -5,10 +5,45 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
-import org.uniquindio.edu.co.poo.proyectobancouq.controller.CajeroController;
-import org.uniquindio.edu.co.poo.proyectobancouq.model.Cliente;
-import org.uniquindio.edu.co.poo.proyectobancouq.model.Usuario;
+
+// ✅ Clase base: CuentaBancario
+abstract class CuentaBancario {
+    private String nombre;
+
+    public CuentaBancario(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    @Override
+    public String toString() {
+        return nombre; // Esto asegura que el ComboBox muestre el nombre correctamente
+    }
+}
+
+// ✅ Clases hijas
+class CuentaAhorros extends CuentaBancario {
+    public CuentaAhorros() {
+        super("Cuenta de Ahorros");
+    }
+}
+
+class CuentaCorriente extends CuentaBancario {
+    public CuentaCorriente() {
+        super("Cuenta Corriente");
+    }
+}
+
+class CuentaEmpresarial extends CuentaBancario {
+    public CuentaEmpresarial() {
+        super("Cuenta Empresarial");
+    }
+}
 
 public class RegistroDeCliente {
 
@@ -19,66 +54,64 @@ public class RegistroDeCliente {
     private URL location;
 
     @FXML
-    private Button btnLimpiar, btnRegistrar;
+    private ComboBox<CuentaBancario> SelcTipoCuenta; // ComboBox con clases hijas de CuentaBancario
 
     @FXML
-    private TextField txtClave, txtCorreoElectronico, txtNombre;
+    private Button btnLimpiar;
 
     @FXML
-    private TextField txtNuevoNumCuenta, txtNumIdentificacion, txtSaldoInicialCuenta;
+    private Button btnRegistrar;
 
-    private CajeroController cajeroController;
+    @FXML
+    private TextField txtClave;
 
-    // Método para configurar el controlador del Cajero
-    public void setCajeroController(CajeroController cajeroController) {
-        this.cajeroController = cajeroController;
-    }
+    @FXML
+    private TextField txtCorreoElectronico;
 
-    // Método para limpiar los campos del formulario
+    @FXML
+    private TextField txtNombre;
+
+    @FXML
+    private TextField txtNuevoNumCuenta;
+
+    @FXML
+    private TextField txtNumIdentificacion;
+
+    @FXML
+    private TextField txtSaldoInicialCuenta;
+
     @FXML
     void LimpiarUsuario(ActionEvent event) {
-        txtClave.setText("");
-        txtCorreoElectronico.setText("");
-        txtNombre.setText("");
-        txtNuevoNumCuenta.setText("");
-        txtNumIdentificacion.setText("");
-        txtSaldoInicialCuenta.setText("");
+        txtClave.clear();
+        txtCorreoElectronico.clear();
+        txtNombre.clear();
+        txtNuevoNumCuenta.clear();
+        txtNumIdentificacion.clear();
+        txtSaldoInicialCuenta.clear();
+        SelcTipoCuenta.getSelectionModel().clearSelection();
     }
 
-    // Método para registrar un nuevo usuario
     @FXML
     void RegistrarUsuario(ActionEvent event) {
-        try {
-            String id = txtNumIdentificacion.getText();
-            String nombre = txtNombre.getText();
-            String email = txtCorreoElectronico.getText();
-            String clave = txtClave.getText();
-            double saldo = Double.parseDouble(txtSaldoInicialCuenta.getText());
-
-            Cliente nuevoUsuario = new Cliente(id,nombre,email,clave);
-            boolean registrado = cajeroController.agregarCliente(nuevoUsuario);
-
-            if (registrado) {
-                System.out.println("Cliente registrado con éxito.");
-                LimpiarUsuario(null);
-            } else {
-                System.out.println("Error al registrar el cliente.");
-            }
-        } catch (Exception e) {
-            System.out.println("Error: " + e.getMessage());
+        CuentaBancario tipoSeleccionado = SelcTipoCuenta.getSelectionModel().getSelectedItem();
+        if (tipoSeleccionado != null) {
+            System.out.println("Cuenta seleccionada: " + tipoSeleccionado.getNombre());
+        } else {
+            System.out.println("No se ha seleccionado ningún tipo de cuenta.");
         }
     }
 
     @FXML
     void initialize() {
+        assert SelcTipoCuenta != null : "fx:id=\"SelcTipoCuenta\" was not injected: check your FXML file 'RegistroCliente.fxml'.";
         assert btnLimpiar != null : "fx:id=\"btnLimpiar\" was not injected: check your FXML file 'RegistroCliente.fxml'.";
         assert btnRegistrar != null : "fx:id=\"btnRegistrar\" was not injected: check your FXML file 'RegistroCliente.fxml'.";
-        assert txtClave != null : "fx:id=\"txtClave\" was not injected: check your FXML file 'RegistroCliente.fxml'.";
-        assert txtCorreoElectronico != null : "fx:id=\"txtCorreoElectronico\" was not injected: check your FXML file 'RegistroCliente.fxml'.";
-        assert txtNombre != null : "fx:id=\"txtNombre\" was not injected: check your FXML file 'RegistroCliente.fxml'.";
-        assert txtNuevoNumCuenta != null : "fx:id=\"txtNuevoNumCuenta\" was not injected: check your FXML file 'RegistroCliente.fxml'.";
-        assert txtNumIdentificacion != null : "fx:id=\"txtNumIdentificacion\" was not injected: check your FXML file 'RegistroCliente.fxml'.";
-        assert txtSaldoInicialCuenta != null : "fx:id=\"txtSaldoInicialCuenta\" was not injected: check your FXML file 'RegistroCliente.fxml'.";
+
+        // ✅ Poblar ComboBox con instancias de clases hijas de CuentaBancario
+        SelcTipoCuenta.getItems().addAll(
+                new CuentaAhorros(),
+                new CuentaCorriente(),
+                new CuentaEmpresarial()
+        );
     }
 }
-

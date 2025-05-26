@@ -1,11 +1,5 @@
-/**
- * Sample Skeleton for 'RegistroUsuario.fxml' Controller Class
- */
-
 package org.uniquindio.edu.co.poo.proyectobancouq.viewController;
 
-import java.net.URL;
-import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -13,99 +7,104 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import org.uniquindio.edu.co.poo.proyectobancouq.controller.CrudUsuarioController;
+import org.uniquindio.edu.co.poo.proyectobancouq.model.Admin;
+import org.uniquindio.edu.co.poo.proyectobancouq.model.Cajero;
+import org.uniquindio.edu.co.poo.proyectobancouq.model.Usuario;
 
 public class RegistroUsuario {
 
-    @FXML // ResourceBundle that was given to the FXMLLoader
-    private ResourceBundle resources;
+    private CrudUsuarioController usuarioController;
 
-    @FXML // URL location of the FXML file that was given to the FXMLLoader
-    private URL location;
+    // 🔹 Constructor vacío necesario para JavaFX
+    public RegistroUsuario() {}
 
-    @FXML // fx:id="btnBuscar"
-    private Button btnBuscar; // Value injected by FXMLLoader
-
-    @FXML // fx:id="btnEditar"
-    private Button btnEditar; // Value injected by FXMLLoader
-
-    @FXML // fx:id="btnEliminar"
-    private Button btnEliminar; // Value injected by FXMLLoader
-
-    @FXML // fx:id="btnLimpiar"
-    private Button btnLimpiar; // Value injected by FXMLLoader
-
-    @FXML // fx:id="btnRegistrar"
-    private Button btnRegistrar; // Value injected by FXMLLoader
-
-    @FXML // fx:id="cbCargo"
-    private ComboBox<?> cbCargo; // Value injected by FXMLLoader
-
-    @FXML // fx:id="colCorreo"
-    private TableColumn<?, ?> colCorreo; // Value injected by FXMLLoader
-
-    @FXML // fx:id="colID"
-    private TableColumn<?, ?> colID; // Value injected by FXMLLoader
-
-    @FXML // fx:id="colNombres"
-    private TableColumn<?, ?> colNombres; // Value injected by FXMLLoader
-
-    @FXML // fx:id="tableClientes"
-    private TableView<?> tableClientes; // Value injected by FXMLLoader
-
-    @FXML // fx:id="txtClave"
-    private TextField txtClave; // Value injected by FXMLLoader
-
-    @FXML // fx:id="txtCorreoElectronico"
-    private TextField txtCorreoElectronico; // Value injected by FXMLLoader
-
-    @FXML // fx:id="txtNombre"
-    private TextField txtNombre; // Value injected by FXMLLoader
-
-    @FXML // fx:id="txtNumIdentificacion"
-    private TextField txtNumIdentificacion; // Value injected by FXMLLoader
-
-    @FXML
-    void BuscarUsuario(ActionEvent event) {
-
+    // 🔹 Método para asignar el controlador después de la carga FXML
+    public void setCrudUsuarioController(CrudUsuarioController usuarioController) {
+        this.usuarioController = usuarioController;
     }
 
     @FXML
-    void EditarUsuario(ActionEvent event) {
-
-    }
+    private Button btnRegistrar;
 
     @FXML
-    void EliminarUsuario(ActionEvent event) {
+    private ComboBox<String> cbCargo;
 
+    @FXML
+    private TableView<Usuario> tableUsuarios;
+
+    @FXML
+    private TextField txtClave;
+    @FXML
+    private TextField txtCodigoUnico;
+    @FXML
+    private TextField txtCorreoElectronico;
+    @FXML
+    private TextField txtNombre;
+    @FXML
+    private TextField txtNumIdentificacion;
+
+    @FXML
+    void RegistrarUsuario(ActionEvent event) {
+        System.out.println("✅ Botón Registrar presionado."); // Verificación en consola
+
+        if (usuarioController == null) {
+            System.out.println("⚠️ usuarioController es NULL. No se puede registrar el usuario.");
+            return;
+        }
+
+        String nombre = txtNombre.getText().trim();
+        String correo = txtCorreoElectronico.getText().trim();
+        String clave = txtClave.getText().trim();
+        String numIdentificacion = txtNumIdentificacion.getText().trim();
+        String codigoUnico = txtCodigoUnico.getText().trim();
+        String cargoSeleccionado = cbCargo.getValue();
+
+        if (nombre.isEmpty() || correo.isEmpty() || clave.isEmpty() || numIdentificacion.isEmpty() || cargoSeleccionado == null) {
+            System.out.println("⚠️ Todos los campos deben estar llenos para registrar un usuario.");
+            return;
+        }
+
+        Usuario nuevoUsuario;
+
+        if ("Administrador".equalsIgnoreCase(cargoSeleccionado)) {
+            nuevoUsuario = new Admin(numIdentificacion, nombre, correo, clave, codigoUnico);
+        } else if ("Cajero".equalsIgnoreCase(cargoSeleccionado)) {
+            nuevoUsuario = new Cajero(numIdentificacion, nombre, correo, clave, codigoUnico);
+        } else {
+            System.out.println("❌ Cargo inválido. No se puede registrar el usuario.");
+            return;
+        }
+
+        if (usuarioController.registrarUsuario(nuevoUsuario)) {
+            tableUsuarios.getItems().add(nuevoUsuario);
+            System.out.println("✅ Usuario registrado correctamente.");
+        } else {
+            System.out.println("❌ Error al registrar usuario.");
+        }
     }
 
     @FXML
     void LimpiarUsuario(ActionEvent event) {
-
+        txtNombre.clear();
+        txtCorreoElectronico.clear();
+        txtClave.clear();
+        txtNumIdentificacion.clear();
+        txtCodigoUnico.clear();
+        cbCargo.getSelectionModel().clearSelection();
+        System.out.println("✅ Campos limpiados correctamente.");
+    }
+    @FXML
+    void EliminarUsuario(ActionEvent event) {
+        System.out.println("✅ Método EliminarUsuario ejecutado.");
+    }
+    @FXML
+    void EditarUsuario(ActionEvent event) {
+        System.out.println("✅ Método EditarUsuario ejecutado.");
     }
 
     @FXML
-    void RegistrarUsuario(ActionEvent event) {
-
-    }
-
-    @FXML // This method is called by the FXMLLoader when initialization is complete
     void initialize() {
-        assert btnBuscar != null : "fx:id=\"btnBuscar\" was not injected: check your FXML file 'RegistroUsuario.fxml'.";
-        assert btnEditar != null : "fx:id=\"btnEditar\" was not injected: check your FXML file 'RegistroUsuario.fxml'.";
-        assert btnEliminar != null : "fx:id=\"btnEliminar\" was not injected: check your FXML file 'RegistroUsuario.fxml'.";
-        assert btnLimpiar != null : "fx:id=\"btnLimpiar\" was not injected: check your FXML file 'RegistroUsuario.fxml'.";
-        assert btnRegistrar != null : "fx:id=\"btnRegistrar\" was not injected: check your FXML file 'RegistroUsuario.fxml'.";
-        assert cbCargo != null : "fx:id=\"cbCargo\" was not injected: check your FXML file 'RegistroUsuario.fxml'.";
-        assert colCorreo != null : "fx:id=\"colCorreo\" was not injected: check your FXML file 'RegistroUsuario.fxml'.";
-        assert colID != null : "fx:id=\"colID\" was not injected: check your FXML file 'RegistroUsuario.fxml'.";
-        assert colNombres != null : "fx:id=\"colNombres\" was not injected: check your FXML file 'RegistroUsuario.fxml'.";
-        assert tableClientes != null : "fx:id=\"tableClientes\" was not injected: check your FXML file 'RegistroUsuario.fxml'.";
-        assert txtClave != null : "fx:id=\"txtClave\" was not injected: check your FXML file 'RegistroUsuario.fxml'.";
-        assert txtCorreoElectronico != null : "fx:id=\"txtCorreoElectronico\" was not injected: check your FXML file 'RegistroUsuario.fxml'.";
-        assert txtNombre != null : "fx:id=\"txtNombre\" was not injected: check your FXML file 'RegistroUsuario.fxml'.";
-        assert txtNumIdentificacion != null : "fx:id=\"txtNumIdentificacion\" was not injected: check your FXML file 'RegistroUsuario.fxml'.";
-
+        cbCargo.getItems().addAll("Administrador", "Cajero");
     }
-
 }

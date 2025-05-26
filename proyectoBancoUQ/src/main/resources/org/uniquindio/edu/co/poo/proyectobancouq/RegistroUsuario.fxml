@@ -1,10 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
@@ -20,7 +15,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="784.0" prefWidth="871.0" style="-fx-background-color: #1E1E1E;;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.uniquindio.edu.co.poo.proyectobancouq.viewController.RegistroUsuario">
+<AnchorPane prefHeight="784.0" prefWidth="871.0" style="-fx-background-color: #1E1E1E;;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.uniquindio.edu.co.poo.proyectobancouq.viewController.RegistroUsuario">
    <children>
       <Pane prefHeight="113.0" prefWidth="871.0" style="-fx-background-color: #2C2C2E;;">
          <children>
@@ -29,7 +24,7 @@
                   <Font name="System Bold" size="30.0" />
                </font>
             </Label>
-            <Label layoutX="210.0" layoutY="71.0" text="Ingresa los datos necesarios proporcionados por el cliente para su registro en el sistema" textFill="WHITE" />
+            <Label layoutX="242.0" layoutY="73.0" text="Ingresa los datos necesarios proporcionados  para su registro en el sistema" textFill="WHITE" />
          </children>
       </Pane>
       <GridPane layoutX="55.0" layoutY="134.0" prefHeight="238.0" prefWidth="482.0">
@@ -42,6 +37,7 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
@@ -91,6 +87,16 @@
                </font>
             </Label>
             <ComboBox fx:id="cbCargo" prefHeight="26.0" prefWidth="199.0" style="-fx-background-color: #2C2C2E; -fx-border-color: #2ECC71; -fx-border-radius: 6; -fx-background-radius: 6;" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <Label prefHeight="31.0" prefWidth="170.0" text="CodigoUnico" textFill="WHITE" underline="true" GridPane.rowIndex="5">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtCodigoUnico" promptText="CodigoUnico" style="-fx-background-color: #2C2C2E; -fx-text-fill: #2ECC71; -fx-border-color: #2ECC71; -fx-border-radius: 5; -fx-background-radius: 5;" GridPane.columnIndex="1" GridPane.rowIndex="5">
+               <cursor>
+                  <Cursor fx:constant="TEXT" />
+               </cursor>
+            </TextField>
          </children>
       </GridPane>
       <GridPane layoutX="584.0" layoutY="179.0" prefHeight="169.0" prefWidth="170.0">
@@ -115,7 +121,7 @@
          </children>
       </GridPane>
       <Separator layoutY="402.0" opacity="0.25" prefHeight="1.0" prefWidth="871.0" style="-fx-background-color: #2ECC71 #2ECC71;" />
-      <TableView fx:id="tableClientes" layoutX="42.0" layoutY="417.0" prefHeight="218.0" prefWidth="805.0" style="-fx-background-color: #1E1E1E; -fx-border-color: #2ECC71; -fx-border-width: 2; -fx-table-cell-border-color: transparent;">
+      <TableView fx:id="tableUs" layoutX="42.0" layoutY="417.0" prefHeight="218.0" prefWidth="805.0" style="-fx-background-color: #1E1E1E; -fx-border-color: #2ECC71; -fx-border-width: 2; -fx-table-cell-border-color: transparent;">
         <columns>
           <TableColumn fx:id="colID" prefWidth="202.40001678466797" text="Identificacion" />
           <TableColumn fx:id="colNombres" prefWidth="271.2000427246094" text="Nombre" />
@@ -132,17 +138,12 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button fx:id="btnBuscar" mnemonicParsing="false" onAction="#BuscarUsuario" prefHeight="31.0" prefWidth="154.0" style="-fx-background-color: #2ECC71;; -fx-text-fill: black; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, black, 5, 0, 2, 2);;" text="Busacar">
-               <font>
-                  <Font name="System Bold" size="17.0" />
-               </font>
-            </Button>
             <Button fx:id="btnEliminar" mnemonicParsing="false" onAction="#EliminarUsuario" prefHeight="31.0" prefWidth="154.0" style="-fx-background-color: #2ECC71;; -fx-text-fill: black; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, black, 5, 0, 2, 2);;" text="Eliminar" GridPane.columnIndex="2">
                <font>
                   <Font name="System Bold" size="17.0" />
                </font>
             </Button>
-            <Button fx:id="btnEditar" mnemonicParsing="false" onAction="#EditarUsuario" prefHeight="31.0" prefWidth="154.0" style="-fx-background-color: #2ECC71;; -fx-text-fill: black; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, black, 5, 0, 2, 2);;" text="Editar" GridPane.columnIndex="1">
+            <Button fx:id="btnEditar" mnemonicParsing="false" onAction="#EditarUsuario" prefHeight="31.0" prefWidth="154.0" style="-fx-background-color: #2ECC71;; -fx-text-fill: black; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, black, 5, 0, 2, 2);;" text="Editar">
                <font>
                   <Font name="System Bold" size="17.0" />
                </font>
