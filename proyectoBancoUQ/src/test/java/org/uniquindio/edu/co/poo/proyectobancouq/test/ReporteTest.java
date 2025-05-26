@@ -24,9 +24,9 @@ public class ReporteTest {
         banco = new Banco("UQ", "12");
         transacciones = new ArrayList<>();
 
-        transaccion1 = new Transaccion("TX001", LocalDate.now(), "5000", "Depósito normal", TipoTransaccion.DEPOSITO, banco);
-        transaccion2 = new Transaccion("TX002", LocalDate.now(), "7000", "Retiro normal", TipoTransaccion.RETIRO, banco);
-        transaccionFraudulenta = new Transaccion("TXFRAUDE", LocalDate.now(), "15000", "Transferencia sospechosa", TipoTransaccion.TRANSFERENCIA, banco);
+        transaccion1 = new Transaccion( LocalDate.now(), "5000", "Depósito normal", TipoTransaccion.DEPOSITO, banco);
+        transaccion2 = new Transaccion( LocalDate.now(), "7000", "Retiro normal", TipoTransaccion.RETIRO, banco);
+        transaccionFraudulenta = new Transaccion( LocalDate.now(), "15000", "Transferencia sospechosa", TipoTransaccion.TRANSFERENCIA, banco);
 
         transacciones.add(transaccion1);
         transacciones.add(transaccion2);

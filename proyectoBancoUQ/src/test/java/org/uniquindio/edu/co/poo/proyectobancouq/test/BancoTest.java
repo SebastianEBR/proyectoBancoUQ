@@ -101,7 +101,7 @@ class BancoTest {
         banco.registrarUsuario(cliente1, cuenta1);
         banco.agregarCuentaCliente(cuenta2, cliente1);
         boolean registrada = banco.registrarTransaccion(transaccion3, "145", "147");
-        assertEquals(transaccion3.toString(), banco.verInfoTransaccion("TX003"));
+        assertEquals(transaccion3.toString(), banco.verInfoTransaccion(transaccion3.getCodigo()));
     }
 
     @Test
