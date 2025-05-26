@@ -90,6 +90,8 @@ public class IngresoAdmin {
 
         if (adminController == null) {
             System.out.println("⚠️ adminController es NULL. Verifica que se asigna en App.java.");
+        }else{
+            System.out.println("✅ adminController fue inicializado correctamente.");
         }
 
 

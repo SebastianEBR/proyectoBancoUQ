@@ -11,16 +11,12 @@ public class CrudUsuarioController {
 
     public CrudUsuarioController(Banco banco) {
         this.banco = banco;
-    }
+        throw new IllegalStateException("⚠️ Banco no ha sido inicializado correctamente.");
+}
 
     // Registrar Usuario (Admins/Cajeros)
-    public boolean registrarUsuario(Usuario usuario) {
-        try {
-            return banco.registrarUsuario(usuario);
-        } catch (Exception e) {
-            System.out.println("❌ Error al registrar usuario: " + e.getMessage());
-            return false;
-        }
+    public boolean registrarUsuario(Usuario usuario) throws Exception {
+        return banco.registrarUsuario(usuario);
     }
 
     public List<Usuario> obtenerUsuarios() {
@@ -35,11 +31,16 @@ public class CrudUsuarioController {
 
     // Eliminar Usuario
     public boolean eliminarUsuario(String id) {
-        return banco.eliminarUsuario(id);
+        Optional<Usuario> usuarioEncontrado = banco.buscarUsuario(id);
+        return usuarioEncontrado.isPresent() && banco.eliminarUsuario(id);
     }
 
     // Buscar Usuario
     public Optional<Usuario> buscarUsuario(String id) {
-        return banco.buscarUsuario(id);
+        Optional<Usuario> usuario = banco.buscarUsuario(id);
+        if (usuario.isEmpty()) {
+            System.out.println("⚠️ No se encontró usuario con ID: " + id);
+        }
+        return usuario;
     }
 }

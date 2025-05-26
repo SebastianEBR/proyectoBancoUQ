@@ -11,7 +11,11 @@ public class AdminController {
     private final Banco banco;
 
     public AdminController(Banco banco) {
+        if (banco == null) {
+            throw new IllegalArgumentException("Banco no puede ser null");
+        }
         this.banco = banco;
+        System.out.println("AdminController iniciado");
     }
 
     // Método de autenticación del administrador con validación de nombre, ID único y contraseña

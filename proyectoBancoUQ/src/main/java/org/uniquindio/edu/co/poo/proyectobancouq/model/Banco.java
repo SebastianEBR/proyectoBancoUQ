@@ -72,6 +72,7 @@ public class Banco {
             throw new Exception("❌ Ya existe un usuario con ese ID.");
         }
         listUsuarios.add(newUsuario);
+        System.out.println("usuario registrado" + listUsuarios);
         return true;
     }
 
