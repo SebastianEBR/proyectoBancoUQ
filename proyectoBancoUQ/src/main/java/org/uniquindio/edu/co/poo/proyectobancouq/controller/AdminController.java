@@ -1,43 +1,25 @@
 package org.uniquindio.edu.co.poo.proyectobancouq.controller;
 
 import org.uniquindio.edu.co.poo.proyectobancouq.model.Banco;
-import org.uniquindio.edu.co.poo.proyectobancouq.model.Transaccion;
 import org.uniquindio.edu.co.poo.proyectobancouq.model.Usuario;
 
 public class AdminController {
-    private Banco bancoAsociado;
+    private final Banco banco;
 
-    public AdminController(Banco bancoAsociado) {
-        this.bancoAsociado = bancoAsociado;
+    public AdminController(Banco banco) {
+        this.banco = banco;
     }
 
-    //Metodo para que el Administrador pueda iniciar sesion.
-    //Sebas, no hay necesidad de que el controller imprima algo,
-    //eso lo hace el viewcontroller.
-    public Usuario AdmininiciarSesion(String id, String password) {
-        return bancoAsociado.validarCredenciales(id, password);
-    }
+    // Método de autenticación del administrador con validación de nombre, ID único y contraseña
+    public Usuario iniciarSesionAdmin(String nombre, String idUnico, String password) {
+        Usuario usuario = banco.buscarUsuario(idUnico).orElse(null);
 
-    //Metodos relacionados a la gestion de cajeros
-    public boolean registrarCajero(Usuario nuevoCajero) throws Exception {
-        return bancoAsociado.registrarUsuario(nuevoCajero);
-    }
+        if (usuario != null && usuario.getNombre().equals(nombre)
+                && usuario.getId().equals(idUnico)
+                && usuario.getPassword().equals(password)) {
+            return usuario;
+        }
 
-    public boolean eliminarCajero(Usuario cajero) {
-        return bancoAsociado.eliminarUsuario(cajero.getId());
+        return null;
     }
-
-    public boolean actualizarCajero(Usuario cajero) {
-        return bancoAsociado.actualizarUsuario(cajero);
-    }
-
-    //Metodos relacionados a la gestion de transacciones
-    public void monitorearTransacciones(Transaccion transaccion){
-        bancoAsociado.monitorearTransacciones(transaccion);
-    }
-
-    public String generarReporteAvanzado(String tipoReporte) throws Exception {
-        return bancoAsociado.generarReporteAvanzado(tipoReporte);
-    }
-
 }

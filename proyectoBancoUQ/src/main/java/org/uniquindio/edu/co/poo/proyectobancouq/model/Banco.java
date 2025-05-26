@@ -200,7 +200,7 @@ public class Banco{
 
 
     // metodo para eliminar una cuenta
-    private boolean eliminarCuenta(String numeroCuenta){
+    public boolean eliminarCuenta(String numeroCuenta){
         boolean eliminado = true;
         Optional<CuentaBancaria> cuentaAux = buscarCuenta(numeroCuenta);
         if(cuentaAux.isPresent()){
@@ -244,11 +244,11 @@ public class Banco{
             if (numeroCuenta2.length == 0) {
                 throw new Exception("❌ Se requiere una cuenta destino para la transferencia.");
             }
-            transaccion.transferir(numeroCuenta, numeroCuenta2[0], transaccion.getMonto());
+            transaccion.transferir(numeroCuenta, numeroCuenta2[0], Double.parseDouble(transaccion.getMonto()));
         } else if (transaccion.getTipoTransaccion().equals(TipoTransaccion.DEPOSITO)) {
-            transaccion.deposito(numeroCuenta, transaccion.getMonto());
+            transaccion.deposito(numeroCuenta, Double.parseDouble(transaccion.getMonto()));
         } else if (transaccion.getTipoTransaccion().equals(TipoTransaccion.RETIRO)) {
-            transaccion.retiro(numeroCuenta, transaccion.getMonto());
+            transaccion.retiro(numeroCuenta, Double.parseDouble(transaccion.getMonto()));
         }
 
         listTransacciones.add(transaccion); // ✅ Guarda la transacción en la lista
@@ -275,9 +275,9 @@ public class Banco{
     }
 
     // metodo para validad las credenciales en el login
-    public Usuario validarCredenciales(String id, String password) {
+    public Usuario validarCredenciales(String nombre,String id, String password) {
         for (Usuario usuario : listUsuarios) {
-            if (usuario.getId().equals(id) && usuario.getPassword().equals(password)) {
+            if (usuario.getNombre().equals(nombre) && usuario.getId().equals(id) && usuario.getPassword().equals(password)) {
                 return usuario; // Devuelve el usuario si las credenciales son correctas
             }
         }
@@ -289,7 +289,7 @@ public class Banco{
     public void monitorearTransacciones(Transaccion transaccion) {
         double montoLimite = 10000.0;
 
-        boolean esTransferenciaRapida = transaccion.getMonto() > montoLimite;
+        boolean esTransferenciaRapida = Double.parseDouble(transaccion.getMonto()) > montoLimite;
 
         if (esTransferenciaRapida) {
             System.out.println("⚠ ALERTA: Transacción sospechosa detectada!");

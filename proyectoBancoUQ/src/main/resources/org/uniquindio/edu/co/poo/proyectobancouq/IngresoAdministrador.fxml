@@ -38,7 +38,7 @@
                   <Font name="System Bold" size="20.0" />
                </font>
             </Label>
-            <Label text="Codigo Unico de Cajero" textFill="WHITE" underline="true" GridPane.rowIndex="2">
+            <Label text="Codigo Unico de Usuario" textFill="WHITE" underline="true" GridPane.rowIndex="2">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
@@ -71,7 +71,7 @@
                   <Font name="System Bold" size="14.0" />
                </font>
             </Button>
-            <Button fx:id="btnIngresar" mnemonicParsing="false" onAction="#IngresarComoCajero" prefHeight="38.0" prefWidth="118.0" style="-fx-background-color: #2ECC71;; -fx-text-fill: black; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, black, 5, 0, 2, 2);;" text="Ingresar" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+            <Button fx:id="btnIngresar" mnemonicParsing="false" onAction="#IngresarComoAdmin" prefHeight="38.0" prefWidth="118.0" style="-fx-background-color: #2ECC71;; -fx-text-fill: black; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, black, 5, 0, 2, 2);;" text="Ingresar" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>

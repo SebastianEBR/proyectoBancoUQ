@@ -1,6 +1,5 @@
 package org.uniquindio.edu.co.poo.proyectobancouq.model;
 
-import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Optional;
 
@@ -9,7 +8,7 @@ public class Transaccion implements IValidarDatos {
     // atributos de la clase
     private String    codigo;
     private LocalDate fecha;
-    private double    monto;
+    private String    monto;
     private String    descripcion;
 
     private Banco banco; // referencia al banco que administra las cuentas
@@ -18,7 +17,7 @@ public class Transaccion implements IValidarDatos {
 
     public Transaccion(String codigo, LocalDate fecha, String monto, String descripcion, TipoTransaccion tipoTransaccion, Banco banco) throws Exception {
         if (validarDatos(codigo, fecha, monto, descripcion, tipoTransaccion)) {
-            double montoDouble = Double.parseDouble(monto);
+            String montoDouble = String.valueOf(Double.parseDouble(monto));
             this.codigo = codigo;
             this.fecha = fecha;
             this.monto = montoDouble;
@@ -54,11 +53,11 @@ public class Transaccion implements IValidarDatos {
         this.fecha = fecha;
     }
 
-    public double getMonto() {
+    public String getMonto() {
         return monto;
     }
 
-    public void setMonto(float monto) {
+    public void setMonto(String monto) {
         this.monto = monto;
     }
 

@@ -37,7 +37,7 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button fx:id="btnCliente" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#irACLiente" prefHeight="58.0" prefWidth="157.0" style="-fx-background-color: #2ECC71;; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, black, 5, 0, 2, 2);;" text="Cliente" textOverrun="CLIP">
+            <Button fx:id="btnCliente" alignment="CENTER" mnemonicParsing="false" onAction="#irACLiente" prefHeight="58.0" prefWidth="157.0" style="-fx-background-color: #2ECC71;; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, black, 5, 0, 2, 2);;" text="Cliente" textOverrun="CLIP">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
@@ -51,6 +51,9 @@
                      </cursor>
                   </ImageView>
                </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Button>
             <Button fx:id="btnAdmin" mnemonicParsing="false" onAction="#IrAAdmin" prefHeight="78.0" prefWidth="226.0" style="-fx-background-color: #2ECC71;; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, black, 5, 0, 2, 2);;" text="Administrador" GridPane.rowIndex="2">
                <font>
@@ -63,6 +66,9 @@
                      </image>
                   </ImageView>
                </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Button>
             <Button fx:id="btnCajero" mnemonicParsing="false" onAction="#IrACaejro" prefHeight="66.0" prefWidth="158.0" style="-fx-background-color: #2ECC71;; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, black, 5, 0, 2, 2);;" text="Cajero" GridPane.rowIndex="1">
                <font>
@@ -75,6 +81,9 @@
                      </image>
                   </ImageView>
                </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Button>
          </children>
       </GridPane>
