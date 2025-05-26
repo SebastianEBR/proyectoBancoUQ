@@ -7,104 +7,104 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import org.uniquindio.edu.co.poo.proyectobancouq.controller.CrudUsuarioController;
-import org.uniquindio.edu.co.poo.proyectobancouq.model.Admin;
+import org.uniquindio.edu.co.poo.proyectobancouq.app.App;
+import org.uniquindio.edu.co.poo.proyectobancouq.model.Banco;
 import org.uniquindio.edu.co.poo.proyectobancouq.model.Cajero;
 import org.uniquindio.edu.co.poo.proyectobancouq.model.Usuario;
 
 public class RegistroUsuario {
 
-    private CrudUsuarioController usuarioController;
+    App app;
 
-    // 🔹 Constructor vacío necesario para JavaFX
-    public RegistroUsuario() {}
 
-    // 🔹 Método para asignar el controlador después de la carga FXML
-    public void setCrudUsuarioController(CrudUsuarioController usuarioController) {
-        this.usuarioController = usuarioController;
-    }
+    @FXML
+    private Button btnEditar;
+
+    @FXML
+    private Button btnEliminar;
+
+    @FXML
+    private Button btnLimpiar;
 
     @FXML
     private Button btnRegistrar;
 
     @FXML
-    private ComboBox<String> cbCargo;
+    private ComboBox<?> cbCargo;
 
     @FXML
-    private TableView<Usuario> tableUsuarios;
+    private TableColumn<?, ?> colCorreo;
+
+    @FXML
+    private TableColumn<?, ?> colID;
+
+    @FXML
+    private TableColumn<?, ?> colNombres;
+
+    @FXML
+    private TableView<Usuario> tableUs;
 
     @FXML
     private TextField txtClave;
+
     @FXML
     private TextField txtCodigoUnico;
+
     @FXML
     private TextField txtCorreoElectronico;
+
     @FXML
     private TextField txtNombre;
+
     @FXML
     private TextField txtNumIdentificacion;
 
+    private Banco banco;
+
+
+
     @FXML
-    void RegistrarUsuario(ActionEvent event) {
-        System.out.println("✅ Botón Registrar presionado."); // Verificación en consola
+    void EditarUsuario(ActionEvent event) {
 
-        if (usuarioController == null) {
-            System.out.println("⚠️ usuarioController es NULL. No se puede registrar el usuario.");
-            return;
-        }
+    }
 
-        String nombre = txtNombre.getText().trim();
-        String correo = txtCorreoElectronico.getText().trim();
-        String clave = txtClave.getText().trim();
-        String numIdentificacion = txtNumIdentificacion.getText().trim();
-        String codigoUnico = txtCodigoUnico.getText().trim();
-        String cargoSeleccionado = cbCargo.getValue();
+    @FXML
+    void EliminarUsuario(ActionEvent event) {
 
-        if (nombre.isEmpty() || correo.isEmpty() || clave.isEmpty() || numIdentificacion.isEmpty() || cargoSeleccionado == null) {
-            System.out.println("⚠️ Todos los campos deben estar llenos para registrar un usuario.");
-            return;
-        }
-
-        Usuario nuevoUsuario;
-
-        if ("Administrador".equalsIgnoreCase(cargoSeleccionado)) {
-            nuevoUsuario = new Admin(numIdentificacion, nombre, correo, clave, codigoUnico);
-        } else if ("Cajero".equalsIgnoreCase(cargoSeleccionado)) {
-            nuevoUsuario = new Cajero(numIdentificacion, nombre, correo, clave, codigoUnico);
-        } else {
-            System.out.println("❌ Cargo inválido. No se puede registrar el usuario.");
-            return;
-        }
-
-        if (usuarioController.registrarUsuario(nuevoUsuario)) {
-            tableUsuarios.getItems().add(nuevoUsuario);
-            System.out.println("✅ Usuario registrado correctamente.");
-        } else {
-            System.out.println("❌ Error al registrar usuario.");
-        }
     }
 
     @FXML
     void LimpiarUsuario(ActionEvent event) {
-        txtNombre.clear();
-        txtCorreoElectronico.clear();
-        txtClave.clear();
-        txtNumIdentificacion.clear();
-        txtCodigoUnico.clear();
-        cbCargo.getSelectionModel().clearSelection();
-        System.out.println("✅ Campos limpiados correctamente.");
-    }
-    @FXML
-    void EliminarUsuario(ActionEvent event) {
-        System.out.println("✅ Método EliminarUsuario ejecutado.");
-    }
-    @FXML
-    void EditarUsuario(ActionEvent event) {
-        System.out.println("✅ Método EditarUsuario ejecutado.");
+
     }
 
     @FXML
-    void initialize() {
-        cbCargo.getItems().addAll("Administrador", "Cajero");
+    void RegistrarUsuario(ActionEvent event) throws Exception {
+        String nombre = txtNombre.getText();
+        String correo = txtCorreoElectronico.getText();
+        String idUnico = txtCodigoUnico.getText();
+        String contraseña = txtClave.getText();
+        String numIdentificacion = txtNumIdentificacion.getText();
+
+        Usuario usuario = new Cajero(numIdentificacion, nombre,correo,contraseña,idUnico);
+        banco.registrarUsuario(usuario);
+
+        ActualizaTabla();
+
+        }
+
+
+        private void ActualizaTabla() {
+        tableUs.getItems().clear();
+        tableUs.getItems().addAll(banco.getListUsuarios());
+        tableUs.refresh();
+    }
+
+
+    public void setBanco(Banco uq) {
+        this.banco = uq;
     }
 }
+
+
+
