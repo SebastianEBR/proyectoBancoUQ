@@ -28,9 +28,9 @@ class BancoTest {
         cliente3 = new Cliente("102", "PP", "@gmail", "1234");
         cuenta1 = new CuentaAhorros("147", 1000000);
         cuenta2 = new CuentaCorriente("145", 10000000);
-        transaccion1 = new Transaccion("TX001", LocalDate.now(), "2000", "Depostito", TipoTransaccion.DEPOSITO, banco);
-        transaccion2 = new Transaccion("TX002", LocalDate.now(), "2000", "retirio", TipoTransaccion.RETIRO, banco);
-        transaccion3 = new Transaccion("TX003", LocalDate.now(), "2000", "trnasferencia", TipoTransaccion.TRANSFERENCIA, banco);
+        transaccion1 = new Transaccion( LocalDate.now(), "2000", "Depostito", TipoTransaccion.DEPOSITO, banco);
+        transaccion2 = new Transaccion( LocalDate.now(), "2000", "retirio", TipoTransaccion.RETIRO, banco);
+        transaccion3 = new Transaccion( LocalDate.now(), "2000", "trnasferencia", TipoTransaccion.TRANSFERENCIA, banco);
     }
 
     @Test
@@ -101,7 +101,7 @@ class BancoTest {
         banco.registrarUsuario(cliente1, cuenta1);
         banco.agregarCuentaCliente(cuenta2, cliente1);
         boolean registrada = banco.registrarTransaccion(transaccion3, "145", "147");
-        assertEquals(transaccion3.toString(), banco.verInfoTransaccion("TX003"));
+        assertEquals(transaccion3.toString(), banco.verInfoTransaccion(transaccion3.getCodigo()));
     }
 
     @Test
@@ -121,7 +121,7 @@ class BancoTest {
 
     @Test
     void testMonitoreoTransaccionSospechosa() throws Exception {
-        Transaccion transaccionFraudulenta = new Transaccion("FRAUDE001", LocalDate.now(), "150000", "Transferencia Sospechosa", TipoTransaccion.TRANSFERENCIA, banco);
+        Transaccion transaccionFraudulenta = new Transaccion(LocalDate.now(), "150000", "Transferencia Sospechosa", TipoTransaccion.TRANSFERENCIA, banco);
         banco.registrarUsuario(cliente1, cuenta1);
         banco.agregarCuentaCliente(cuenta2, cliente1);
         banco.registrarTransaccion(transaccionFraudulenta, "145", "147");
