@@ -195,11 +195,11 @@ public class Banco {
             if (numeroCuenta2.length == 0) {
                 throw new Exception("❌ Se requiere una cuenta destino para la transferencia.");
             }
-            transaccion.transferir(numeroCuenta, numeroCuenta2[0], Double.parseDouble(transaccion.getMonto()));
+            transaccion.transferir(numeroCuenta, numeroCuenta2[0], (transaccion.getMonto()));
         } else if (transaccion.getTipoTransaccion().equals(TipoTransaccion.DEPOSITO)) {
-            transaccion.deposito(numeroCuenta, Double.parseDouble(transaccion.getMonto()));
+            transaccion.deposito(numeroCuenta, (transaccion.getMonto()));
         } else if (transaccion.getTipoTransaccion().equals(TipoTransaccion.RETIRO)) {
-            transaccion.retiro(numeroCuenta, Double.parseDouble(transaccion.getMonto()));
+            transaccion.retiro(numeroCuenta, (transaccion.getMonto()));
         }
 
         listTransacciones.add(transaccion);
