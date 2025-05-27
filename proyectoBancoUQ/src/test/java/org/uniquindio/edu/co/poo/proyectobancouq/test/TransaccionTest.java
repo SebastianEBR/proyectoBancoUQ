@@ -24,8 +24,8 @@ class TransaccionTest {
         cuentaOrigen = new CuentaCorriente("1001", 5000);
         cuentaDestino = new CuentaCorriente("1002", 3000);
 
-        banco.registrarUsuario(cliente, cuentaOrigen);
-        banco.registrarUsuario(cliente2, cuentaDestino);
+        banco.registrarCliente(cliente, cuentaOrigen);
+        banco.registrarCliente(cliente2, cuentaDestino);
     }
 
     @Test

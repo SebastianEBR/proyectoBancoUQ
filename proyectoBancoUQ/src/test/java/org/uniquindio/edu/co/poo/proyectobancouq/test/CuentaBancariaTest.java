@@ -20,7 +20,7 @@ class CuentaBancariaTest {
         Banco banco = new Banco("UQ", " 121");
         Cliente cliente = new Cliente("1234", "Juan Pérez", "juan@example.com", "clave123");
         CuentaBancaria cuenta = new CuentaBancariaDummy("987654321", 5000.0);
-        banco.registrarUsuario(cliente, cuenta);
+        banco.registrarCliente(cliente, cuenta);
         assertEquals("987654321", cuenta.getNumeroCuenta());
         assertEquals(5000.0, cuenta.getSaldo());
         assertEquals(cliente, cuenta.getCliente());
@@ -31,7 +31,7 @@ class CuentaBancariaTest {
         Banco banco = new Banco("UQ", " 121");
         Cliente cliente = new Cliente("5678", "Ana Gómez", "ana@example.com", "pass456");
         CuentaBancaria cuenta = new CuentaBancariaDummy("987654321", 5000.0);
-        banco.registrarUsuario(cliente, cuenta);
+        banco.registrarCliente(cliente, cuenta);
 
         cuenta.setSaldo(15000.0);
         cuenta.setNumeroCuenta("5566778899");
@@ -45,7 +45,7 @@ class CuentaBancariaTest {
         Banco banco = new Banco("UQ", " 121");
         Cliente cliente = new Cliente("9999", "Carlos López", "carlos@example.com", "abc789");
         CuentaBancaria cuenta = new CuentaBancariaDummy("1234567890", 7500.0);
-        banco.registrarUsuario(cliente, cuenta);
+        banco.registrarCliente(cliente, cuenta);
 
         String esperado = "CuentaBancaria: " +
                 "\n numero de cuenta: 1234567890" +
