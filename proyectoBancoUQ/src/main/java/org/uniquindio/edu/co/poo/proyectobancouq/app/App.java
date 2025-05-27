@@ -10,10 +10,7 @@ import org.uniquindio.edu.co.poo.proyectobancouq.controller.CrudClienteControlle
 import org.uniquindio.edu.co.poo.proyectobancouq.model.Admin;
 import org.uniquindio.edu.co.poo.proyectobancouq.model.Banco;
 import org.uniquindio.edu.co.poo.proyectobancouq.utills.Paths;
-import org.uniquindio.edu.co.poo.proyectobancouq.viewController.IngresoAdmin;
-import org.uniquindio.edu.co.poo.proyectobancouq.viewController.IngresoDeCajero;
-import org.uniquindio.edu.co.poo.proyectobancouq.viewController.RegistroDeCliente;
-import org.uniquindio.edu.co.poo.proyectobancouq.viewController.RegistroUsuario;
+import org.uniquindio.edu.co.poo.proyectobancouq.viewController.*;
 
 import java.io.IOException;
 
@@ -77,7 +74,7 @@ public class App extends Application {
                 RegistroDeCliente registroCliente = (RegistroDeCliente) controller;
                 registroCliente.setBanco(banco);
 
-                // 🔥 Validar si crudClienteController ya tiene una referencia asignada
+                // 🔎 Validar si crudClienteController ya tiene una referencia asignada
                 System.out.println("🔎 Valor de crudClienteController antes de asignar: " + crudClienteController);
 
                 if (crudClienteController != null) {
@@ -86,6 +83,10 @@ public class App extends Application {
                 } else {
                     System.out.println("⚠️ Advertencia: CrudClienteController es NULL y no fue asignado.");
                 }
+            } else if (controller instanceof TransaccionView) { // 🔥 Agregado soporte para TransaccionView
+                TransaccionView transaccionView = (TransaccionView) controller;
+                transaccionView.setBanco(banco); // 🔥 Asegurar que TransaccionView reciba Banco
+                System.out.println("✅ Banco asignado correctamente a TransaccionView.");
             } else {
                 System.out.println("⚠️ El controlador obtenido no es de tipo esperado. Es: " + controller.getClass().getName());
             }

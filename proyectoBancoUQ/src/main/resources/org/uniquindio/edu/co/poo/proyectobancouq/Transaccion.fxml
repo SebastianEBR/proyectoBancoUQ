@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="462.0" prefWidth="600.0" style="-fx-background-color: linear-gradient(to bottom, #2C2C2E 0%, #2C2C2E 35%, #2F4F3A 60%, #2ECC71 85%, #2ECC71 100%);;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.uniquindio.edu.co.poo.proyectobancouq.viewController.Transaccion">
+<AnchorPane prefHeight="462.0" prefWidth="600.0" style="-fx-background-color: linear-gradient(to bottom, #2C2C2E 0%, #2C2C2E 35%, #2F4F3A 60%, #2ECC71 85%, #2ECC71 100%);;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.uniquindio.edu.co.poo.proyectobancouq.viewController.TransaccionView">
    <children>
       <Pane prefHeight="79.0" prefWidth="600.0" style="-fx-background-color: black;">
          <children>

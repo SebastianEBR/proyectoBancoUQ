@@ -7,8 +7,10 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import org.uniquindio.edu.co.poo.proyectobancouq.app.App;
 import org.uniquindio.edu.co.poo.proyectobancouq.controller.CrudClienteController;
 import org.uniquindio.edu.co.poo.proyectobancouq.model.*;
+import org.uniquindio.edu.co.poo.proyectobancouq.utills.Paths;
 
 public class RegistroDeCliente {
 
@@ -40,6 +42,12 @@ public class RegistroDeCliente {
     private TextField txtClave, txtCorreoElectronico, txtNombre, txtNuevoNumCuenta, txtNumIdentificacion, txtSaldoInicialCuenta;
 
     private ObservableList<Cliente> listaClientes = FXCollections.observableArrayList();
+
+    @FXML
+    void Salir(ActionEvent event) {
+        App.app.setScene(Paths.ELECCION_USUARIO);
+
+    }
 
     @FXML
     void initialize() {

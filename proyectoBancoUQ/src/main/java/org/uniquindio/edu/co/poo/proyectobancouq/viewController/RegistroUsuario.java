@@ -205,6 +205,11 @@ public class RegistroUsuario {
         tableUs.refresh();
         System.out.println("📌 Usuarios en banco antes de actualizar tabla: " + banco.getListUsuarios());
     }
+    @FXML
+    void IraReportes(ActionEvent event) {
+        App.app.setScene(Paths.REPORTES_CLIENTE);
+
+    }
 
     @FXML
     void seleccionarUsuario() {

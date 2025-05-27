@@ -2,6 +2,7 @@ package org.uniquindio.edu.co.poo.proyectobancouq.viewController;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -52,6 +53,7 @@ public class IngresoDeCajero {
             // Aquí puedes cambiar de escena o cargar la interfaz del cajero
         } else {
             System.out.println("❌ Error: Credenciales incorrectas o el usuario no es un cajero.");
+            mostrarAlerta("❌ Credenciales incorrectas. Intente nuevamente.");
         }
 
     }
@@ -60,8 +62,15 @@ public class IngresoDeCajero {
     @FXML
     void RegresarAElccion(ActionEvent event) {
         App.app.setScene(Paths.ELECCION_USUARIO);
+    }
 
 
+    private void mostrarAlerta(String mensaje) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Inicio de Sesión");
+        alert.setHeaderText(null);
+        alert.setContentText(mensaje);
+        alert.showAndWait();
     }
 
 }

@@ -34,6 +34,12 @@ public class CajeroEleccionFuncion {
     }
 
     @FXML
+    void IrAcClientesReportes(ActionEvent event) {
+        App.app.setScene(Paths.REPORTES_CLIENTE);
+
+    }
+
+    @FXML
     void initialize() {
 
     }

@@ -9,5 +9,6 @@ public class Paths {
     public static final String REGISTRO_USUARIO = "/org/uniquindio/edu/co/poo/proyectobancouq/RegistroUsuario.fxml";
     public static final String REGISTRO_CLIENTES = "/org/uniquindio/edu/co/poo/proyectobancouq/RegistroCliente.fxml";
     public static final String TRANSACCION = "/org/uniquindio/edu/co/poo/proyectobancouq/Transaccion.fxml";
+    public static final String REPORTES_CLIENTE = "/org/uniquindio/edu/co/poo/proyectobancouq/ListaClientesReportes.fxml";
 }
 

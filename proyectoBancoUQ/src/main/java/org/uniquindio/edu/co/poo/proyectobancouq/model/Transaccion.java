@@ -106,32 +106,49 @@ public class Transaccion implements IValidarDatos {
     // metodos para movimientos financieros en las cuentas bancarias
     //metodo para deposito
     public boolean deposito(String numeroCuentaBancaria, double cantidad) throws Exception {
+        // 🔥 1️⃣ Verificar que el monto a depositar sea positivo
         if (cantidad <= 0) {
             throw new Exception("❌ El monto a depositar debe ser positivo.");
         }
-        Optional<CuentaBancaria> cuenta = banco.buscarCuenta(numeroCuentaBancaria);
-        cuenta.ifPresent(cuentaBancaria -> cuentaBancaria.setSaldo(cuentaBancaria.getSaldo() + cantidad));
+
+        // 🔎 2️⃣ Buscar la cuenta en Banco
+        Optional<CuentaBancaria> cuentaOpt = banco.buscarCuenta(numeroCuentaBancaria);
+
+        // ❌ 3️⃣ Validar que la cuenta exista antes de modificar el saldo
+        if (cuentaOpt.isEmpty()) {
+            throw new Exception("❌ Error: La cuenta bancaria no está registrada.");
+        }
+
+        // ✅ 4️⃣ Si la cuenta existe, realizar el depósito
+        CuentaBancaria cuenta = cuentaOpt.get();
+        cuenta.setSaldo(cuenta.getSaldo() + cantidad);
 
         return true; // Depósito exitoso
-
     }
 
 
     // metodo para retiro
     public boolean retiro(String numCuentaBancaria, double cantidad) throws Exception {
         if (cantidad <= 0) {
-            throw new Exception("❌ El monto a depositar debe ser positivo.");
+            throw new Exception("❌ El monto a retirar debe ser positivo.");
         }
 
-        Optional<CuentaBancaria> cBancariaEncontrada = banco.buscarCuenta(numCuentaBancaria);
+        Optional<CuentaBancaria> cuentaOpt = banco.buscarCuenta(numCuentaBancaria);
 
-        if(cBancariaEncontrada.isPresent()){
-            CuentaBancaria cBancaria = cBancariaEncontrada.get();
-            cBancaria.setSaldo(cBancaria.getSaldo() - cantidad);
-            return true;
-        } else {
+        if (cuentaOpt.isEmpty()) {
             throw new Exception("❌ No se encontró una cuenta con ese número.");
         }
+
+        CuentaBancaria cuenta = cuentaOpt.get();
+
+        // 🔥 Nueva validación: Saldo insuficiente
+        if (cuenta.getSaldo() < cantidad) {
+            throw new Exception("❌ Error: Saldo insuficiente. Saldo actual: " + cuenta.getSaldo());
+        }
+
+        // ✅ Si hay saldo suficiente, procesar el retiro
+        cuenta.setSaldo(cuenta.getSaldo() - cantidad);
+        return true;
     }
 
     // metodo para consultar el saldo disponible en mi cuenta
