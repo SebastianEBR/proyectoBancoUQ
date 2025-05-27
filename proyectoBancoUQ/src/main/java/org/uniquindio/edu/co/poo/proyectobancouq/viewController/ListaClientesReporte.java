@@ -25,7 +25,7 @@ public class ListaClientesReporte {
     @FXML private TableView<Transaccion> tableReporte;
     @FXML private TextField txtNuevoNumCuenta, txtSaldoInicialCuenta;
 
-    private Banco banco; // 🔥 Banco para obtener los datos
+    private Banco banco;
 
     public void setBanco(Banco banco) {
         this.banco = banco;
@@ -35,16 +35,13 @@ public class ListaClientesReporte {
     void initialize() {
         System.out.println("🔍 Cargando ListaClientesReporte...");
 
-        // 🔥 Configurar columnas de clientes
         colID.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getId()));
         colNombres.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getNombre()));
         colCorreo.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getEmail()));
 
-        // 🔥 Configurar columnas de transacciones
         colFechaTransaccion.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getFecha().toString()));
         colTipoTransaccion.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getTipoTransaccion().name()));
 
-        // 🔥 Vincular ComboBox con tipos de cuenta
         SelcTipoCuenta.getItems().addAll("Cuenta Ahorros", "Cuenta Corriente", "Cuenta Empresarial");
 
         System.out.println("✅ Configuración inicial completada.");
@@ -57,9 +54,24 @@ public class ListaClientesReporte {
             return;
         }
 
-        System.out.println("🔎 Cargando lista de clientes...");
+        // 🔍 Diagnóstico: Verificar clientes antes de asignar a la tabla
+        System.out.println("🔎 Verificando clientes: " + banco.getListClientes());
+
+        if (banco.getListClientes().isEmpty()) {
+            System.out.println("⚠️ No hay clientes registrados en el banco.");
+            mostrarAlerta("⚠️ No hay clientes disponibles.");
+            return;
+        }
+
+        // 🔥 Limpia tabla antes de asignar datos
+        tableClientes.getItems().clear();
+
+        // 🔥 Asignar clientes a la tabla
         ObservableList<Cliente> listaClientes = FXCollections.observableArrayList(banco.getListClientes());
         tableClientes.setItems(listaClientes);
+        tableClientes.refresh();
+
+        System.out.println("✅ Clientes asignados a la tabla: " + listaClientes);
     }
 
     @FXML
@@ -69,9 +81,11 @@ public class ListaClientesReporte {
             return;
         }
 
-        System.out.println("📊 Mostrando reporte de transacciones...");
+        System.out.println("📊 Transacciones registradas: " + banco.getListTransacciones());
+
         ObservableList<Transaccion> listaTransacciones = FXCollections.observableArrayList(banco.getListTransacciones());
         tableReporte.setItems(listaTransacciones);
+        tableReporte.refresh();
     }
 
     @FXML

@@ -74,7 +74,6 @@ public class App extends Application {
                 RegistroDeCliente registroCliente = (RegistroDeCliente) controller;
                 registroCliente.setBanco(banco);
 
-                // 🔎 Validar si crudClienteController ya tiene una referencia asignada
                 System.out.println("🔎 Valor de crudClienteController antes de asignar: " + crudClienteController);
 
                 if (crudClienteController != null) {
@@ -83,10 +82,14 @@ public class App extends Application {
                 } else {
                     System.out.println("⚠️ Advertencia: CrudClienteController es NULL y no fue asignado.");
                 }
-            } else if (controller instanceof TransaccionView) { // 🔥 Agregado soporte para TransaccionView
+            } else if (controller instanceof TransaccionView) {
                 TransaccionView transaccionView = (TransaccionView) controller;
-                transaccionView.setBanco(banco); // 🔥 Asegurar que TransaccionView reciba Banco
+                transaccionView.setBanco(banco);
                 System.out.println("✅ Banco asignado correctamente a TransaccionView.");
+            } else if (controller instanceof ListaClientesReporte) { // 🔥 Agregado soporte para ListaClientesReporte
+                ListaClientesReporte listaClientesReporte = (ListaClientesReporte) controller;
+                listaClientesReporte.setBanco(banco); // ✅ Asignar banco
+                System.out.println("✅ Banco asignado correctamente a ListaClientesReporte.");
             } else {
                 System.out.println("⚠️ El controlador obtenido no es de tipo esperado. Es: " + controller.getClass().getName());
             }
