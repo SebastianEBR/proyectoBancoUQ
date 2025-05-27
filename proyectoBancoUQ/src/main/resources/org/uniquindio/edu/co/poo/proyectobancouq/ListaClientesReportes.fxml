@@ -43,7 +43,7 @@
             <RowConstraints prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <Button fx:id="btnBuscar" mnemonicParsing="false" onAction="#BuscarUsuario" prefHeight="31.0" prefWidth="154.0" style="-fx-background-color: #2ECC71; -fx-text-fill: black; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, black, 5, 0, 2, 2);" text="Buscar">
+            <Button fx:id="btnBuscar" mnemonicParsing="false" onAction="#BuscarUsuario" prefHeight="31.0" prefWidth="154.0" style="-fx-background-color: #2ECC71; -fx-text-fill: black; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, black, 5, 0, 2, 2);" text="Mostrar">
                <font>
                   <Font name="System Bold" size="17.0" />
                </font>

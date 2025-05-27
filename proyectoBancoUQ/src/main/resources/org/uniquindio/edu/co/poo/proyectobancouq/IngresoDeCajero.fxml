@@ -48,9 +48,9 @@
                   <Font size="14.0" />
                </font>
             </TextField>
-            <PasswordField fx:id="txtIngreseContraceña" prefHeight="26.0" prefWidth="228.0" promptText="Ingrese su contraceña" style="-fx-background-color: #2C2C2E; -fx-border-color: #2ECC71; -fx-background-radius: 5; -fx-border-radius: 5; -fx-text-fill: #2ECC71;;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <PasswordField fx:id="txtIngreseContraceña" prefHeight="26.0" prefWidth="228.0" promptText="Ingrese su contraseña" style="-fx-background-color: #2C2C2E; -fx-border-color: #2ECC71; -fx-background-radius: 5; -fx-border-radius: 5; -fx-text-fill: #2ECC71;;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <PasswordField fx:id="txtIngreseCigoUnico" prefHeight="26.0" prefWidth="228.0" promptText="Ingrese Codigo Unico de Empleado" style="-fx-background-color: #2C2C2E; -fx-border-color: #2ECC71; -fx-background-radius: 5; -fx-border-radius: 5; -fx-text-fill: #2ECC71;;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Label text="Contraceña" textFill="WHITE" underline="true" GridPane.rowIndex="1">
+            <Label text="Contraseña" textFill="WHITE" underline="true" GridPane.rowIndex="1">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
