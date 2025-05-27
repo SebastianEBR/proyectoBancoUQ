@@ -25,6 +25,11 @@
                </font>
             </Label>
             <Label layoutX="242.0" layoutY="73.0" text="Ingresa los datos necesarios proporcionados  para su registro en el sistema" textFill="WHITE" />
+            <Button fx:id="btnsalir" layoutX="50.0" layoutY="38.0" mnemonicParsing="false" onAction="#salir" prefHeight="16.0" prefWidth="83.0" style="-fx-background-color: #1E1E1E; -fx-text-fill: #2ECC71; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, black, 5, 0, 2, 2); -fx-border-color: #2ECC71; -fx-border-radius: 10;" text="Salir">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
          </children>
       </Pane>
       <GridPane layoutX="55.0" layoutY="134.0" prefHeight="238.0" prefWidth="482.0">

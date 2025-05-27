@@ -67,6 +67,7 @@ public class Banco {
 
     // CRUD de Usuarios (Admins/Cajeros)
     public boolean registrarUsuario(Usuario newUsuario) throws Exception {
+
         Optional<Usuario> usuarioAux = buscarUsuario(newUsuario.getId());
         if (usuarioAux.isPresent()) {
             throw new Exception("❌ Ya existe un usuario con ese ID.");
@@ -76,8 +77,22 @@ public class Banco {
         return true;
     }
 
-    public Optional<Usuario> buscarUsuario(String id) {
-        return listUsuarios.stream().filter(usuario -> usuario.getId().equals(id)).findFirst();
+    public Optional<Usuario> buscarUsuario(String idUnico) {
+        Optional<Usuario> usuarioOpt = listUsuarios.stream()
+                .filter(usuario -> usuario.getId().equals(idUnico))
+                .findFirst();
+
+        if (usuarioOpt.isPresent()) {
+            Usuario usuario = usuarioOpt.get();
+            System.out.println("🔍 Usuario encontrado en búsqueda: " + usuario);
+            System.out.println("📌 ID recuperado: " + usuario.getId() + ", ID buscado: " + idUnico);
+            System.out.println("📌 Contraseña almacenada: " + usuario.getPassword());
+            System.out.println("📌 Tipo de usuario encontrado: " + usuario.getClass().getSimpleName());
+        } else {
+            System.out.println("❌ No se encontró ningún usuario con ID: " + idUnico);
+        }
+
+        return usuarioOpt;
     }
 
     public boolean actualizarUsuario(Usuario usuario) {

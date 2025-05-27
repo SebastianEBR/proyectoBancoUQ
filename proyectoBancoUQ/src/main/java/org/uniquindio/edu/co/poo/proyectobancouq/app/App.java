@@ -10,6 +10,7 @@ import org.uniquindio.edu.co.poo.proyectobancouq.model.Admin;
 import org.uniquindio.edu.co.poo.proyectobancouq.model.Banco;
 import org.uniquindio.edu.co.poo.proyectobancouq.utills.Paths;
 import org.uniquindio.edu.co.poo.proyectobancouq.viewController.IngresoAdmin;
+import org.uniquindio.edu.co.poo.proyectobancouq.viewController.IngresoDeCajero;
 import org.uniquindio.edu.co.poo.proyectobancouq.viewController.RegistroUsuario;
 
 import java.io.IOException;
@@ -56,15 +57,19 @@ public class App extends Application {
             Object controller = loader.getController();
             System.out.println("🔍 Controlador obtenido desde FXMLLoader: " + controller.getClass().getName());
 
-            // Si el controlador es RegistroUsuario, asignar el banco
+            // 🔥 Asignar datos según el controlador detectado
             if (controller instanceof RegistroUsuario) {
                 RegistroUsuario registroUsuario = (RegistroUsuario) controller;
-                registroUsuario.setBanco(banco); // 🔥 Asignar banco aquí
+                registroUsuario.setBanco(banco); // Asignar banco
                 System.out.println("✅ Banco asignado a RegistroUsuario.");
             } else if (controller instanceof IngresoAdmin) {
                 IngresoAdmin ingresoAdmin = (IngresoAdmin) controller;
                 ingresoAdmin.setAdminController(adminController);
                 System.out.println("✅ adminController asignado correctamente a IngresoAdmin.");
+            } else if (controller instanceof IngresoDeCajero) {  // 🔥 Nueva verificación
+                IngresoDeCajero ingresoCajero = (IngresoDeCajero) controller;
+                ingresoCajero.setAdminController(adminController); // Asignar AdminController
+                System.out.println("✅ AdminController asignado a IngresoDeCajero.");
             } else {
                 System.out.println("⚠️ El controlador obtenido no es de tipo esperado. Es: " + controller.getClass().getName());
             }

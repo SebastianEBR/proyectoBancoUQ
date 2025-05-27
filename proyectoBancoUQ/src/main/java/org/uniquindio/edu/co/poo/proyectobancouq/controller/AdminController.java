@@ -1,9 +1,6 @@
 package org.uniquindio.edu.co.poo.proyectobancouq.controller;
 
-import org.uniquindio.edu.co.poo.proyectobancouq.model.Banco;
-import org.uniquindio.edu.co.poo.proyectobancouq.model.Cliente;
-import org.uniquindio.edu.co.poo.proyectobancouq.model.CuentaBancaria;
-import org.uniquindio.edu.co.poo.proyectobancouq.model.Usuario;
+import org.uniquindio.edu.co.poo.proyectobancouq.model.*;
 
 import java.util.Optional;
 
@@ -31,6 +28,26 @@ public class AdminController {
         return null;
     }
 
+    public Usuario iniciarSesionCajero(String idUnico, String password) {
+        Optional<Usuario> usuarioOpt = banco.buscarUsuario(idUnico);
+
+        if (usuarioOpt.isPresent()) {
+            Usuario usuario = usuarioOpt.get();
+            System.out.println("🔍 Usuario encontrado al iniciar sesión: " + usuario);
+            System.out.println("📌 Tipo de usuario recuperado: " + usuario.getClass().getSimpleName());
+
+            if (usuario instanceof Cajero && usuario.getPassword().equals(password)) {
+                System.out.println("✅ Usuario autenticado correctamente.");
+                return usuario;
+            } else {
+                System.out.println("❌ Error: Contraseña incorrecta o el usuario no es un cajero.");
+            }
+        } else {
+            System.out.println("❌ Error: Usuario no encontrado.");
+        }
+
+        return null;
+    }
 
 
 }

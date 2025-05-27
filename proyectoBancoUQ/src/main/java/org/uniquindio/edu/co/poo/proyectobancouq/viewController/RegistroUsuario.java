@@ -4,10 +4,12 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import org.uniquindio.edu.co.poo.proyectobancouq.app.App;
 import org.uniquindio.edu.co.poo.proyectobancouq.model.Admin;
 import org.uniquindio.edu.co.poo.proyectobancouq.model.Banco;
 import org.uniquindio.edu.co.poo.proyectobancouq.model.Cajero;
 import org.uniquindio.edu.co.poo.proyectobancouq.model.Usuario;
+import org.uniquindio.edu.co.poo.proyectobancouq.utills.Paths;
 
 import java.util.Optional;
 
@@ -57,42 +59,66 @@ public class RegistroUsuario {
     }
 
     @FXML
-    void RegistrarUsuario(ActionEvent event) throws Exception {
-        if (banco == null) {
-            mostrarAlerta("⚠️ Error: Banco no ha sido asignado.");
-            return;
+    void RegistrarUsuario(ActionEvent event) {
+        try {
+            if (banco == null) {
+                mostrarAlerta("⚠️ Error: Banco no ha sido asignado.");
+                return;
+            }
+
+            String nombre = txtNombre.getText();
+            String correo = txtCorreoElectronico.getText();
+            String idUnico = txtCodigoUnico.getText();
+            String contraseña = txtClave.getText();
+            String numIdentificacion = txtNumIdentificacion.getText();
+            String cargo = cbCargo.getValue();
+
+            // 🔍 Imprimir datos antes de validarlos
+            System.out.println("📌 Datos ingresados:");
+            System.out.println("- Nombre: " + nombre);
+            System.out.println("- Correo: " + correo);
+            System.out.println("- ID Único: " + idUnico);
+            System.out.println("- Contraseña: " + contraseña);
+            System.out.println("- Identificación: " + numIdentificacion);
+            System.out.println("- Cargo seleccionado: " + cargo);
+
+            if (nombre.isEmpty() || correo.isEmpty() || idUnico.isEmpty() || contraseña.isEmpty() || numIdentificacion.isEmpty() || cargo == null) {
+                mostrarAlerta("⚠️ Error: Todos los campos deben estar completos.");
+                return;
+            }
+
+            if (banco.buscarUsuario(idUnico).isPresent()) {
+                mostrarAlerta("⚠️ Error: Ya existe un usuario con ese ID.");
+                return;
+            }
+
+            // 🔥 Asegurar que se crea correctamente según el cargo seleccionado
+            Usuario usuario;
+            if ("Admin".equals(cargo)) {
+                usuario = new Admin(numIdentificacion, nombre, correo, contraseña, idUnico);
+            } else if ("Cajero".equals(cargo)) {
+                usuario = new Cajero(numIdentificacion, nombre, correo, contraseña, idUnico);
+            } else {
+                mostrarAlerta("⚠️ Error: Debes seleccionar un cargo válido (Admin o Cajero).");
+                return;
+            }
+
+            // 🔍 Imprimir el usuario antes de registrarlo
+            System.out.println("✅ Registrando usuario: " + usuario);
+
+            if (banco.registrarUsuario(usuario)) {
+                System.out.println("✅ Usuario registrado correctamente.");
+                ActualizaTabla();
+            } else {
+                mostrarAlerta("❌ Error al registrar el usuario.");
+            }
+
+        } catch (Exception e) {
+            System.out.println("❌ Error en `RegistrarUsuario()`: " + e.getMessage());
+            e.printStackTrace();
+            mostrarAlerta("❌ Error inesperado al registrar el usuario.");
         }
-
-        String nombre = txtNombre.getText();
-        String correo = txtCorreoElectronico.getText();
-        String idUnico = txtCodigoUnico.getText();
-        String contraseña = txtClave.getText();
-        String numIdentificacion = txtNumIdentificacion.getText();
-        String cargo = cbCargo.getValue();
-
-        if (nombre.isEmpty() || correo.isEmpty() || idUnico.isEmpty() || contraseña.isEmpty() || numIdentificacion.isEmpty() || cargo == null) {
-            mostrarAlerta("⚠️ Error: Todos los campos deben estar completos.");
-            return;
-        }
-
-        if (banco.buscarUsuario(idUnico).isPresent()) {
-            mostrarAlerta("⚠️ Error: Ya existe un usuario con ese ID.");
-            return;
-        }
-
-        Usuario usuario = cargo.equals("Admin") ? new Admin(numIdentificacion, nombre, correo, contraseña, idUnico)
-                : new Cajero(numIdentificacion, nombre, correo, contraseña, idUnico);
-
-        if (banco.registrarUsuario(usuario)) {
-            System.out.println("lista usuarios: " + banco.getListUsuarios());
-            System.out.println("✅ Usuario registrado correctamente.");
-        } else {
-            mostrarAlerta("❌ Error al registrar el usuario.");
-        }
-
-        ActualizaTabla();
     }
-
     @FXML
     void EliminarUsuario(ActionEvent event) {
         if (banco == null) {
@@ -165,6 +191,12 @@ public class RegistroUsuario {
         cbCargo.setValue(null);
 
         System.out.println("✅ Campos limpiados correctamente.");
+    }
+
+    @FXML
+    void salir(ActionEvent event) {
+        App.app.setScene(Paths.ELECCION_USUARIO);
+
     }
 
     private void ActualizaTabla() {
