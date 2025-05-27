@@ -53,7 +53,7 @@ public class ClienteTest {
 
     @Test
     void testToString() throws Exception {
-        banco.registrarUsuario(cliente, cuenta1);
+        banco.registrarCliente(cliente, cuenta1);
         String textoCliente = cliente.toString();
 
         assertTrue(textoCliente.contains("Cliente:"), "`toString()` no incluye 'Cliente:'.");

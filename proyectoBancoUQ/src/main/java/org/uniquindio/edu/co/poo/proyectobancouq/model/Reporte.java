@@ -50,7 +50,7 @@ public class Reporte {
         String reporte = "🚨 Reporte de Operaciones Sospechosas\n";
 
         for (Transaccion transaccion : transacciones) {
-            if (Double.parseDouble(transaccion.getMonto()) > 10000) { // Ejemplo de transacción sospechosa
+            if (transaccion.getMonto() > 10000) { // Ejemplo de transacción sospechosa
                 reporte += "⚠ ALERTA - Transacción de alto valor: $" + transaccion.getMonto() + " - Fecha: " +
                         transaccion.getFecha() + "\n con codigo: " + transaccion.getCodigo() + "\n";
             }
