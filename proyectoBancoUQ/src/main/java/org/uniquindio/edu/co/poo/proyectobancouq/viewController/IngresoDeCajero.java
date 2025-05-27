@@ -48,12 +48,12 @@ public class IngresoDeCajero {
 
         if (usuario != null) {
             System.out.println("✅ Acceso concedido: " + usuario.getNombre());
+            App.app.setScene(Paths.FUNCIONNES_CAJERO);
             // Aquí puedes cambiar de escena o cargar la interfaz del cajero
         } else {
             System.out.println("❌ Error: Credenciales incorrectas o el usuario no es un cajero.");
         }
 
-        App.app.setScene(Paths.FUNCIONNES_CAJERO);
     }
 
 
