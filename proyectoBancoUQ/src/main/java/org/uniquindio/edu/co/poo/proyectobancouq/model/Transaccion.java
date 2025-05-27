@@ -2,29 +2,35 @@ package org.uniquindio.edu.co.poo.proyectobancouq.model;
 
 import java.time.LocalDate;
 import java.util.Optional;
+import java.util.Random;
 
 public class Transaccion implements IValidarDatos {
 
     // atributos de la clase
     private String    codigo;
     private LocalDate fecha;
-    private String    monto;
+    private double    monto;
     private String    descripcion;
 
     private Banco banco; // referencia al banco que administra las cuentas
     // conexion con clase enum
     private TipoTransaccion tipoTransaccion;
 
-    public Transaccion(String codigo, LocalDate fecha, String monto, String descripcion, TipoTransaccion tipoTransaccion, Banco banco) throws Exception {
-        if (validarDatos(codigo, fecha, monto, descripcion, tipoTransaccion)) {
-            String montoDouble = String.valueOf(Double.parseDouble(monto));
-            this.codigo = codigo;
+    public Transaccion(LocalDate fecha, String monto, String descripcion, TipoTransaccion tipoTransaccion, Banco banco) throws Exception {
+        if (validarDatos(generarCodigoUnico(), fecha, monto, descripcion, tipoTransaccion)) {
+            this.codigo = generarCodigoUnico();
             this.fecha = fecha;
-            this.monto = montoDouble;
+            this.monto = Double.parseDouble(monto);
             this.descripcion = descripcion;
             this.tipoTransaccion = tipoTransaccion;
             this.banco = banco;
         }
+    }
+
+    private String generarCodigoUnico() {
+        Random random = new Random();
+        int randomNum = random.nextInt(9000) + 1000; // ✅ Número aleatorio de 4 dígitos
+        return "TX-" + LocalDate.now().getYear() + "-" + randomNum;
     }
 
     // 🔹 Metodo auxiliar para validar que el monto es un número
@@ -53,11 +59,11 @@ public class Transaccion implements IValidarDatos {
         this.fecha = fecha;
     }
 
-    public String getMonto() {
+    public double getMonto() {
         return monto;
     }
 
-    public void setMonto(String monto) {
+    public void setMonto(double monto) {
         this.monto = monto;
     }
 
