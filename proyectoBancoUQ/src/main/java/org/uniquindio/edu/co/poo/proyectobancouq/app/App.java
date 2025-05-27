@@ -7,8 +7,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import org.uniquindio.edu.co.poo.proyectobancouq.controller.AdminController;
 import org.uniquindio.edu.co.poo.proyectobancouq.controller.CrudClienteController;
-import org.uniquindio.edu.co.poo.proyectobancouq.model.Admin;
-import org.uniquindio.edu.co.poo.proyectobancouq.model.Banco;
+import org.uniquindio.edu.co.poo.proyectobancouq.model.*;
 import org.uniquindio.edu.co.poo.proyectobancouq.utills.Paths;
 import org.uniquindio.edu.co.poo.proyectobancouq.viewController.*;
 
@@ -31,7 +30,35 @@ public class App extends Application {
 
         // Registro del usuario correctamente dentro del constructor
         Admin usuario = new Admin("001", "Admin", "<EMAIL>", "admin", "1234");
+        Cajero cajero = new Cajero("002", "Cajero", "<EMAIL>", "cajero", "1234");
         banco.registrarUsuario(usuario);
+        banco.registrarUsuario(cajero);
+
+
+        Cliente cliente = new Cliente("003", "Cliente", "<EMAIL>", "cliente");
+        CuentaCorriente cuentaCorriente = new CuentaCorriente("123456789", 1000);
+        banco.registrarCliente(cliente,cuentaCorriente);
+
+        Cliente cliente1 = new Cliente("004", "Ana Martínez", "ana.martinez@email.com", "cliente");
+        CuentaCorriente cuenta1 = new CuentaCorriente("987654321", 1500);
+        banco.registrarCliente(cliente1, cuenta1);
+
+        Cliente cliente2 = new Cliente("005", "Luis Fernández", "luis.fernandez@email.com", "cliente");
+        CuentaCorriente cuenta2 = new CuentaCorriente("112233445", 2000);
+        banco.registrarCliente(cliente2, cuenta2);
+
+        Cliente cliente3 = new Cliente("006", "María Gómez", "maria.gomez@email.com", "cliente");
+        CuentaCorriente cuenta3 = new CuentaCorriente("998877665", 1200);
+        banco.registrarCliente(cliente3, cuenta3);
+
+        Cliente cliente4 = new Cliente("007", "Carlos Ruiz", "carlos.ruiz@email.com", "cliente");
+        CuentaCorriente cuenta4 = new CuentaCorriente("443322110", 1800);
+        banco.registrarCliente(cliente4, cuenta4);
+
+        Cliente cliente5 = new Cliente("008", "Laura Torres", "laura.torres@email.com", "cliente");
+        CuentaCorriente cuenta5 = new CuentaCorriente("556677889", 1700);
+        banco.registrarCliente(cliente5, cuenta5);
+
     }
 
     public static void main(String[] args) {
