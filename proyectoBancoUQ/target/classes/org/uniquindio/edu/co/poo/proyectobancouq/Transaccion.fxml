@@ -11,16 +11,16 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="462.0" prefWidth="600.0" style="-fx-background-color: linear-gradient(to bottom, #2C2C2E 0%, #2C2C2E 35%, #2F4F3A 60%, #2ECC71 85%, #2ECC71 100%);;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.uniquindio.edu.co.poo.proyectobancouq.viewController.IngresoCliente">
+<AnchorPane prefHeight="462.0" prefWidth="600.0" style="-fx-background-color: linear-gradient(to bottom, #2C2C2E 0%, #2C2C2E 35%, #2F4F3A 60%, #2ECC71 85%, #2ECC71 100%);;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.uniquindio.edu.co.poo.proyectobancouq.viewController.Transaccion">
    <children>
       <Pane prefHeight="79.0" prefWidth="600.0" style="-fx-background-color: black;">
          <children>
-            <Label alignment="CENTER" layoutX="221.0" layoutY="21.0" prefHeight="38.0" prefWidth="158.0" text="Cliente" textFill="WHITE" underline="true">
+            <Label alignment="CENTER" layoutX="195.0" layoutY="21.0" prefHeight="38.0" prefWidth="210.0" text="Transacciones" textFill="WHITE" underline="true">
                <font>
                   <Font name="Arial Bold" size="25.0" />
                </font>
             </Label>
-            <Button layoutX="40.0" layoutY="28.0" mnemonicParsing="false" onAction="#salirInicio" prefHeight="16.0" prefWidth="83.0" style="-fx-background-color: black; -fx-text-fill: #2ECC71; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, black, 5, 0, 2, 2); -fx-border-color: #2ECC71; -fx-border-radius: 10;" text="Salir">
+            <Button alignment="CENTER" layoutX="40.0" layoutY="28.0" mnemonicParsing="false" onAction="#salirInicio" prefHeight="16.0" prefWidth="83.0" style="-fx-background-color: black; -fx-text-fill: #2ECC71; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, black, 5, 0, 2, 2); -fx-border-color: #2ECC71; -fx-border-radius: 10;" text="Salir">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
@@ -37,17 +37,17 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <Button mnemonicParsing="false" onAction="#desplegarDeposito" prefHeight="38.0" prefWidth="118.0" style="-fx-background-color: #2ECC71;; -fx-text-fill: black; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, black, 5, 0, 2, 2);;" text="Deposito" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+            <Button alignment="CENTER" mnemonicParsing="false" onAction="#desplegarDeposito" prefHeight="38.0" prefWidth="118.0" style="-fx-background-color: #2ECC71;; -fx-text-fill: black; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, black, 5, 0, 2, 2);;" text="Deposito" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" onAction="#desplegarRetiro" prefHeight="38.0" prefWidth="118.0" style="-fx-background-color: #2ECC71;; -fx-text-fill: black; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, black, 5, 0, 2, 2);;" text="Retiro" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+            <Button alignment="CENTER" mnemonicParsing="false" onAction="#desplegarRetiro" prefHeight="38.0" prefWidth="118.0" style="-fx-background-color: #2ECC71;; -fx-text-fill: black; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, black, 5, 0, 2, 2);;" text="Retiro" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" onAction="#desplegarTransferencia" prefHeight="38.0" prefWidth="118.0" style="-fx-background-color: #2ECC71;; -fx-text-fill: black; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, black, 5, 0, 2, 2);;" text="Transferencia" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+            <Button alignment="CENTER" mnemonicParsing="false" onAction="#desplegarTransferencia" prefHeight="38.0" prefWidth="118.0" style="-fx-background-color: #2ECC71;; -fx-text-fill: black; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, black, 5, 0, 2, 2);;" text="Transferencia" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>

@@ -2,50 +2,21 @@ package org.uniquindio.edu.co.poo.proyectobancouq.viewController;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;
-
-// ✅ Clase base: CuentaBancario
-abstract class CuentaBancario {
-    private String nombre;
-
-    public CuentaBancario(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    @Override
-    public String toString() {
-        return nombre; // Esto asegura que el ComboBox muestre el nombre correctamente
-    }
-}
-
-// ✅ Clases hijas
-class CuentaAhorros extends CuentaBancario {
-    public CuentaAhorros() {
-        super("Cuenta de Ahorros");
-    }
-}
-
-class CuentaCorriente extends CuentaBancario {
-    public CuentaCorriente() {
-        super("Cuenta Corriente");
-    }
-}
-
-class CuentaEmpresarial extends CuentaBancario {
-    public CuentaEmpresarial() {
-        super("Cuenta Empresarial");
-    }
-}
+import javafx.scene.control.*;
+import org.uniquindio.edu.co.poo.proyectobancouq.controller.CrudClienteController;
+import org.uniquindio.edu.co.poo.proyectobancouq.model.*;
 
 public class RegistroDeCliente {
+
+    private CrudClienteController crudClienteController;
+
+    public void setCrudClienteController(CrudClienteController crudClienteController) {
+        this.crudClienteController = crudClienteController;
+    }
 
     @FXML
     private ResourceBundle resources;
@@ -54,64 +25,136 @@ public class RegistroDeCliente {
     private URL location;
 
     @FXML
-    private ComboBox<CuentaBancario> SelcTipoCuenta; // ComboBox con clases hijas de CuentaBancario
+    private ComboBox<String> SelcTipoCuenta;  // 🔥 Ahora contiene las subclases de CuentaBancaria
 
     @FXML
-    private Button btnLimpiar;
+    private Button btnLimpiar, btnRegistrar;
 
     @FXML
-    private Button btnRegistrar;
+    private TableColumn<Cliente, String> colNombreCliente, colNumeroCuenta, colTipoCuenta;
 
     @FXML
-    private TextField txtClave;
+    private TableView<Cliente> tlbClientes;
 
     @FXML
-    private TextField txtCorreoElectronico;
+    private TextField txtClave, txtCorreoElectronico, txtNombre, txtNuevoNumCuenta, txtNumIdentificacion, txtSaldoInicialCuenta;
+
+    private ObservableList<Cliente> listaClientes = FXCollections.observableArrayList();
 
     @FXML
-    private TextField txtNombre;
+    void initialize() {
+        // 🔥 Opciones de cuentas según la herencia de CuentaBancaria
+        SelcTipoCuenta.getItems().addAll("Cuenta Ahorros", "Cuenta Corriente", "Cuenta Empresarial");
 
-    @FXML
-    private TextField txtNuevoNumCuenta;
+        // 🔥 Configurar columnas con cellValueFactory
+        colNombreCliente.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getNombre()));
+        colNumeroCuenta.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getListCuentaBancaria().get(0).getNumeroCuenta()));
+        colTipoCuenta.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getListCuentaBancaria().get(0).getClass().getSimpleName()));
 
-    @FXML
-    private TextField txtNumIdentificacion;
-
-    @FXML
-    private TextField txtSaldoInicialCuenta;
+        // 🔥 Vincular la lista de clientes a la tabla
+        tlbClientes.setItems(listaClientes);
+        ActualizaTabla();
+    }
 
     @FXML
     void LimpiarUsuario(ActionEvent event) {
-        txtClave.clear();
-        txtCorreoElectronico.clear();
         txtNombre.clear();
+        txtCorreoElectronico.clear();
         txtNuevoNumCuenta.clear();
+        txtClave.clear();
         txtNumIdentificacion.clear();
         txtSaldoInicialCuenta.clear();
-        SelcTipoCuenta.getSelectionModel().clearSelection();
+        SelcTipoCuenta.setValue(null);
+
+        System.out.println("✅ Campos limpiados correctamente.");
     }
 
     @FXML
     void RegistrarUsuario(ActionEvent event) {
-        CuentaBancario tipoSeleccionado = SelcTipoCuenta.getSelectionModel().getSelectedItem();
-        if (tipoSeleccionado != null) {
-            System.out.println("Cuenta seleccionada: " + tipoSeleccionado.getNombre());
+        if (crudClienteController == null) {
+            mostrarAlerta("⚠️ Error: CrudClienteController no ha sido asignado.");
+            System.out.println("❌ Error: CrudClienteController es NULL, no se puede cargar");
+            return;
+        }
+
+        String nombre = txtNombre.getText();
+        String correo = txtCorreoElectronico.getText();
+        String numIdentificacion = txtNumIdentificacion.getText();  // 🔥 ID único del cliente
+        String contraseña = txtClave.getText();
+        String numeroCuenta = txtNuevoNumCuenta.getText();  // 🔥 Número de cuenta bancaria
+        String saldoInicialTexto = txtSaldoInicialCuenta.getText();
+        String tipoCuenta = SelcTipoCuenta.getValue();
+
+        if (nombre.isEmpty() || correo.isEmpty() || numIdentificacion.isEmpty() || contraseña.isEmpty() ||
+                numeroCuenta.isEmpty() || saldoInicialTexto.isEmpty() || tipoCuenta == null) {
+            mostrarAlerta("⚠️ Error: Todos los campos deben estar completos.");
+            return;
+        }
+
+        double saldoInicial;
+        try {
+            saldoInicial = Double.parseDouble(saldoInicialTexto);
+        } catch (NumberFormatException e) {
+            mostrarAlerta("⚠️ Error: Saldo inicial debe ser un número válido.");
+            return;
+        }
+
+        if (crudClienteController.buscarCliente(numIdentificacion).isPresent()) {
+            mostrarAlerta("⚠️ Error: Ya existe un cliente con esa identificación.");
+            return;
+        }
+
+        Cliente cliente = new Cliente(numIdentificacion, nombre, correo, contraseña);
+
+        // 🔥 Crear la cuenta según el tipo seleccionado
+        CuentaBancaria cuenta;
+        switch (tipoCuenta) {
+            case "Cuenta Ahorros":
+                cuenta = new CuentaAhorros(numeroCuenta, saldoInicial);
+                break;
+            case "Cuenta Corriente":
+                cuenta = new CuentaCorriente(numeroCuenta, saldoInicial);
+                break;
+            case "Cuenta Empresarial":
+                cuenta = new CuentaEmpresarial(numeroCuenta, saldoInicial);
+                break;
+            default:
+                mostrarAlerta("⚠️ Error: Tipo de cuenta no válido.");
+                return;
+        }
+
+        if (crudClienteController.registrarCliente(cliente, cuenta)) {
+            System.out.println("✅ Cliente registrado correctamente con cuenta: " + tipoCuenta);
+            ActualizaTabla();
         } else {
-            System.out.println("No se ha seleccionado ningún tipo de cuenta.");
+            mostrarAlerta("❌ Error al registrar el cliente.");
         }
     }
 
-    @FXML
-    void initialize() {
-        assert SelcTipoCuenta != null : "fx:id=\"SelcTipoCuenta\" was not injected: check your FXML file 'RegistroCliente.fxml'.";
-        assert btnLimpiar != null : "fx:id=\"btnLimpiar\" was not injected: check your FXML file 'RegistroCliente.fxml'.";
-        assert btnRegistrar != null : "fx:id=\"btnRegistrar\" was not injected: check your FXML file 'RegistroCliente.fxml'.";
+    private void mostrarAlerta(String mensaje) {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Registro de Cliente");
+        alert.setHeaderText(null);
+        alert.setContentText(mensaje);
+        alert.showAndWait();
+    }
 
-        // ✅ Poblar ComboBox con instancias de clases hijas de CuentaBancario
-        SelcTipoCuenta.getItems().addAll(
-                new CuentaAhorros(),
-                new CuentaCorriente(),
-                new CuentaEmpresarial()
-        );
+    private void ActualizaTabla() {
+        if (banco == null) {
+            System.out.println("❌ Error: Banco no está asignado.");
+            return;
+        }
+
+        System.out.println("🔍 Actualizando tabla de clientes...");
+
+        listaClientes.setAll(banco.getListClientes()); // 🔥 Ahora usamos ObservableList
+        tlbClientes.refresh();
+
+        System.out.println("📌 Lista de clientes después de la actualización: " + banco.getListClientes());
+    }
+
+    private Banco banco;
+    public void setBanco(Banco banco) {
+        this.banco = banco;
     }
 }

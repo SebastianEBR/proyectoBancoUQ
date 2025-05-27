@@ -30,27 +30,22 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <Button fx:id="btnIRaRegistrarCliente" mnemonicParsing="false" onAction="#RegresarAElccion" prefHeight="38.0" prefWidth="217.0" style="-fx-background-color: #2ECC71;; -fx-text-fill: black; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, black, 5, 0, 2, 2);;" text="Registrar Nuevo Cliente" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+            <Button mnemonicParsing="false" onAction="#irARegistrarCliente" prefHeight="38.0" prefWidth="217.0" style="-fx-background-color: #2ECC71;; -fx-text-fill: black; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, black, 5, 0, 2, 2);;" text="Registrar Nuevo Cliente" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Button>
-            <Button fx:id="btnIrAhacerTransaccion" mnemonicParsing="false" onAction="#IngresarComoCajero" prefHeight="38.0" prefWidth="118.0" style="-fx-background-color: #2ECC71;; -fx-text-fill: black; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, black, 5, 0, 2, 2);;" text="Transacciones" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+            <Button mnemonicParsing="false" onAction="#IrAtransacciones" prefHeight="38.0" prefWidth="118.0" style="-fx-background-color: #2ECC71;; -fx-text-fill: black; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, black, 5, 0, 2, 2);;" text="Transacciones" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Button>
-            <Button fx:id="btnIrListaDeclientes" mnemonicParsing="false" onAction="#RegresarAElccion" prefHeight="38.0" prefWidth="147.0" style="-fx-background-color: #2ECC71;; -fx-text-fill: black; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, black, 5, 0, 2, 2);;" text="LIsta De Clientes" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+            <Button mnemonicParsing="false" onAction="#SalirElccion" prefHeight="16.0" prefWidth="83.0" style="-fx-background-color: #1E1E1E; -fx-text-fill: #2ECC71; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, black, 5, 0, 2, 2); -fx-border-color: #2ECC71; -fx-border-radius: 10;" text="Salir" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Button>
          </children>
       </GridPane>
-      <Button fx:id="btnIrAingresocomocajero" layoutX="24.0" layoutY="340.0" mnemonicParsing="false" onAction="#IngresarComoCajero" prefHeight="16.0" prefWidth="83.0" style="-fx-background-color: #1E1E1E; -fx-text-fill: #2ECC71; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, black, 5, 0, 2, 2); -fx-border-color: #2ECC71; -fx-border-radius: 10;" text="Salir">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </Button>
    </children>
 </AnchorPane>

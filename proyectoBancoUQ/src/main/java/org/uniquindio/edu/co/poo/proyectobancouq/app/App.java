@@ -6,11 +6,13 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import org.uniquindio.edu.co.poo.proyectobancouq.controller.AdminController;
+import org.uniquindio.edu.co.poo.proyectobancouq.controller.CrudClienteController;
 import org.uniquindio.edu.co.poo.proyectobancouq.model.Admin;
 import org.uniquindio.edu.co.poo.proyectobancouq.model.Banco;
 import org.uniquindio.edu.co.poo.proyectobancouq.utills.Paths;
 import org.uniquindio.edu.co.poo.proyectobancouq.viewController.IngresoAdmin;
 import org.uniquindio.edu.co.poo.proyectobancouq.viewController.IngresoDeCajero;
+import org.uniquindio.edu.co.poo.proyectobancouq.viewController.RegistroDeCliente;
 import org.uniquindio.edu.co.poo.proyectobancouq.viewController.RegistroUsuario;
 
 import java.io.IOException;
@@ -21,12 +23,14 @@ public class App extends Application {
     private Stage stageWindow;
     public Banco banco;
     private AdminController adminController;
+    private CrudClienteController crudClienteController;
 
     public App() throws Exception {
         banco = new Banco("Uq", "5156");
         System.out.println("Banco iniciado: " + banco);
         this.adminController = new AdminController(banco);
         System.out.println("AdminController iniciado: " + adminController);
+        this.crudClienteController = new CrudClienteController(banco);
 
         // Registro del usuario correctamente dentro del constructor
         Admin usuario = new Admin("001", "Admin", "<EMAIL>", "admin", "1234");
@@ -43,7 +47,6 @@ public class App extends Application {
         stageWindow = stage;
         setScene(Paths.ELECCION_USUARIO);
     }
-
     public void setScene(String path) {
         try {
             System.out.println("📌 Intentando cargar FXML desde: " + path);
@@ -60,22 +63,35 @@ public class App extends Application {
             // 🔥 Asignar datos según el controlador detectado
             if (controller instanceof RegistroUsuario) {
                 RegistroUsuario registroUsuario = (RegistroUsuario) controller;
-                registroUsuario.setBanco(banco); // Asignar banco
+                registroUsuario.setBanco(banco);
                 System.out.println("✅ Banco asignado a RegistroUsuario.");
             } else if (controller instanceof IngresoAdmin) {
                 IngresoAdmin ingresoAdmin = (IngresoAdmin) controller;
                 ingresoAdmin.setAdminController(adminController);
                 System.out.println("✅ adminController asignado correctamente a IngresoAdmin.");
-            } else if (controller instanceof IngresoDeCajero) {  // 🔥 Nueva verificación
+            } else if (controller instanceof IngresoDeCajero) {
                 IngresoDeCajero ingresoCajero = (IngresoDeCajero) controller;
-                ingresoCajero.setAdminController(adminController); // Asignar AdminController
+                ingresoCajero.setAdminController(adminController);
                 System.out.println("✅ AdminController asignado a IngresoDeCajero.");
+            } else if (controller instanceof RegistroDeCliente) {
+                RegistroDeCliente registroCliente = (RegistroDeCliente) controller;
+                registroCliente.setBanco(banco);
+
+                // 🔥 Validar si crudClienteController ya tiene una referencia asignada
+                System.out.println("🔎 Valor de crudClienteController antes de asignar: " + crudClienteController);
+
+                if (crudClienteController != null) {
+                    registroCliente.setCrudClienteController(crudClienteController);
+                    System.out.println("✅ CrudClienteController asignado correctamente.");
+                } else {
+                    System.out.println("⚠️ Advertencia: CrudClienteController es NULL y no fue asignado.");
+                }
             } else {
                 System.out.println("⚠️ El controlador obtenido no es de tipo esperado. Es: " + controller.getClass().getName());
             }
 
         } catch (IOException e) {
-            e.printStackTrace(); // Puedes mejorar esto con un Logger
+            e.printStackTrace();
         }
     }
 }

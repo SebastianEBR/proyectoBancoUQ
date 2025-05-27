@@ -8,7 +8,7 @@ import org.uniquindio.edu.co.poo.proyectobancouq.model.CuentaBancaria;
 import java.util.Optional;
 
 public class CrudClienteController {
-    private final Banco banco;
+    private final Banco banco;  // ✅ Mantén solo el atributo Banco
 
     public CrudClienteController(Banco banco) {
         this.banco = banco;
@@ -23,7 +23,6 @@ public class CrudClienteController {
             return false;
         }
     }
-
 
     // Actualizar Cliente
     public boolean actualizarCliente(Cliente cliente) {
